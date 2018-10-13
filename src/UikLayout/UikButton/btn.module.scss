@@ -144,10 +144,10 @@ a.base:hover {
   }
 
   &:disabled {
-    color: #bdbdbd;
+    color: #ffffff;
     box-shadow: none;
-    background: #f0f0f0;
-    border: 1px solid #f0f0f0;
+    background: #c5c5c6;
+    border: 0px solid #c5c5c6;
     cursor: not-allowed;
     &.icon {
       opacity: 0.3;

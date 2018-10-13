@@ -4,7 +4,6 @@ import Root from './components/root'
 import * as serviceWorker from './serviceWorker';
 import configureStore from './configureStore'
 
-
 const store = configureStore();
 
 

@@ -1,4 +1,4 @@
-import App from "./app";
-import About from "./about";
+import Login from "./login";
+import Profile from "./profile";
 
-export { App, About }
+export { Login, Profile }

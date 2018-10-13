@@ -7,11 +7,16 @@ const login = (state = initState, action) => {
 
     switch (action.type) {
         case 'LOGIN':
-        console.log("reducer",action)
             return {
                 ...state,
                 user: action.user,
                 pass: action.pass
+            }
+        case 'LOGOUT':
+            return {
+                ...state,
+                user: "",
+                pass: ""
             }
 
         default:
