@@ -1,8 +1,8 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { logoutAction } from '../actions';
+import { logoutAction } from '../../actions';
 import { connect } from 'react-redux';
-import { UikButton } from "../UikLayout";
+import { UikButton } from "../../UikLayout";
 
 class Profile extends React.Component {
     render() {

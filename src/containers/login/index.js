@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import { connect } from "react-redux";
-import { loginAction } from "../actions"
-import { UikInput, UikButton } from '../UikLayout';
+import { loginAction } from "../../actions"
+import { UikInput, UikButton } from '../../UikLayout';
 
 class Login extends Component {
   constructor(props) {
@@ -32,7 +32,8 @@ class Login extends Component {
     }
     return (
       <div className="">
-        <div className="container col-lg-4 jumbotron shadow p-3 mb-5 bg-white rounded" style={{
+        <div  className="container jumbotron shadow mb-5 bg-white rounded" style={{
+          width: '500px',
           marginTop: "10%",
           backgroundColor: "#ffffff",
         }}>
