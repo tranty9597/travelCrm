@@ -1,10 +1,26 @@
 import React, { Component } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import { connect } from "react-redux";
-import { loginAction } from "../../actions"
-import { UikInput, UikButton } from '../../UikLayout';
+import { loginAction } from "../../actions/authentication"
 
-class Login extends Component {
+import {
+  CommonInput,
+  CommonForm,
+  CommonFooter
+} from "../../common";
+
+const dataTest = [
+  {
+    name: "SOS Heating and Cooling, LLC",
+    address: "32415 Abshire Rapid, South Nicklaushaven DE 04850-8005"
+  },
+  {
+    name: "SOS Constractor",
+    address: "79685 Reed Ranch Suite 989, West Odellside, VT 54065-4909"
+  }
+]
+
+class LogIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,7 +30,7 @@ class Login extends Component {
     }
   }
 
-  onSubmit(e) {
+  onSubmit = () => {
     this.setState({ isLoading: true })
     setTimeout(
       () => {
@@ -26,53 +42,51 @@ class Login extends Component {
   }
 
   render() {
-    let disabled = this.state.user === "" || this.state.pass === "";
+    let {
+      user,
+      pass,
+      isLoading
+    } = this.state;
+    let disabled = user === "" || pass === "";
     if (this.props.login.user) {
-      return <Redirect to="/profile" />
+      return <Redirect to="/register" />
     }
     return (
-      <div className="">
-        <div  className="container jumbotron shadow mb-5 bg-white rounded" style={{
-          width: '500px',
-          marginTop: "10%",
-          backgroundColor: "#ffffff",
-        }}>
-          <div className="justify-content-center">
-            <h2>Login</h2>
-          </div>
+      <div>
+        <CommonForm
+          formTitle="Log In"
+          buttonTitle="Log In"
+          onSubmit={this.onSubmit}
+          disabled={disabled}
+          isLoading={isLoading}
+          afterButton={
+            <div className="text-center">
+              Don't have an account? <Link to="/signup"><b>Sign up now</b></Link>
+            </div>
+          }
+        >
           <div className="form-group">
-            <UikInput
-              onChange={(e) => { this.setState({ user: e.target.value }) }}
+            <CommonInput
+              onChange={(value) => { this.setState({ user: value }) }}
               label="Username"
+              showHint
+              hintData={dataTest}
             />
           </div>
           <div className="form-group">
-            <UikInput
+            <CommonInput
               label="Password"
               type="password"
-              onChange={(e) => { this.setState({ pass: e.target.value }) }}
+              onChange={(value) => { this.setState({ pass: value }) }}
             />
           </div>
-
-          <div className="form-group" style={{ marginTop: "35px" }}>
-            <UikButton
-              className={!disabled ? "btn-block btn-primary" : "btn-block"}
-              contentClassName="justify-content-center"
-              onClick={this.onSubmit.bind(this)}
-              disabled={disabled}
-              isLoading={this.state.isLoading}
-            >
-              Login
-            </UikButton>
-          </div>
-        </ div>
-        <div className="text-center">
-          Don't have an account? <Link to="/"><b>Sign up now</b></Link>
-        </div>
+        </CommonForm>
+        <CommonFooter />
       </div>
     );
   }
 }
+
 
 const mapStateToProps = state => {
   return {
@@ -90,4 +104,4 @@ const mapDispatchToProps = dispatch => {
 
 export default connect(
   mapStateToProps, mapDispatchToProps
-)(Login);
+)(LogIn);
