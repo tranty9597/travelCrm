@@ -38,7 +38,7 @@ class CommonSideBar extends PureComponent {
                     </div>
                     <div className="collapse navbar-collapse flex-column" id="navbarNav">
                         <ul className="navbar-nav flex-column">
-
+                            
                         </ul>
                     </div>
                 </div>

@@ -16,6 +16,8 @@ import {
   CompanyInformation,
   CompanyContact,
   Dashboard, 
+  Appoinment,
+  Dashboard
 } from './containers'
 
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -33,6 +35,7 @@ const Root = ({ store }) => (
             <Route exact path={PATH.DASH_BOARD} component={Dashboard} />
             <Route exact path={PATH.LOG_IN} component={LogIn} />
             <Route exact path={PATH.SIGN_UP} component={SignUp} />
+            <Route exact path="/appoinemt" component={Appoinment} />
             <Route exact path={PATH.COMPANY_INFORMATION} component={CompanyInformation} />
             <Route exact path={PATH.COMPANY_CONTACT} component={CompanyContact} />
           </Switch>
