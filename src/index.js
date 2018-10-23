@@ -15,10 +15,11 @@ import {
   SignUp,
   CompanyInformation,
   CompanyContact,
-  Dashboard, 
   Appoinment,
   Dashboard
 } from './containers'
+
+import { NavBar } from "./layout"
 
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import cls from "./styles/layout.module.scss";
@@ -27,20 +28,29 @@ import { PATH } from './constant';
 
 const store = configureStore();
 
+const Router = () => (
+  <div>
+    <NavBar />
+    <Switch>
+
+      <Route exact path={PATH.DASH_BOARD} component={Dashboard} />
+      <Route exact path={PATH.LOG_IN} component={LogIn} />
+      <Route exact path={PATH.SIGN_UP} component={SignUp} />
+      <Route exact path="/appoinment" component={Appoinment} />
+      <Route exact path={PATH.COMPANY_INFORMATION} component={CompanyInformation} />
+      <Route exact path={PATH.COMPANY_CONTACT} component={CompanyContact} />
+    </Switch>
+  </div>
+
+)
+
 const Root = ({ store }) => (
-    <div className={classnames(cls.text, cls.bg)}>
-      <Provider store={store}>
-        <BrowserRouter>
-          <Switch>
-            <Route exact path={PATH.DASH_BOARD} component={Dashboard} />
-            <Route exact path={PATH.LOG_IN} component={LogIn} />
-            <Route exact path={PATH.SIGN_UP} component={SignUp} />
-            <Route exact path="/appoinemt" component={Appoinment} />
-            <Route exact path={PATH.COMPANY_INFORMATION} component={CompanyInformation} />
-            <Route exact path={PATH.COMPANY_CONTACT} component={CompanyContact} />
-          </Switch>
-        </BrowserRouter>
-      </Provider>
+  <div className={classnames('container', cls.text, cls.bg)}>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
+    </Provider>
   </div>
 )
 

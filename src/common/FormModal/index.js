@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 
-import { UikButton } from "../../UikLayout"
+import { UikButton, UikDivider } from "../../UikLayout"
 
 import classnames from 'classnames'
 
@@ -28,30 +28,30 @@ class FormModal extends PureComponent<FormModalProps> {
     }
 
     render() {
-        let { isVisible, children, isEditForm, formTitle, onClose, loading, onDelete, onCreate, onSave} = this.props;
+        let { isVisible, children, isEditForm, formTitle, onClose, loading, onDelete, onCreate, onSave } = this.props;
         if (isVisible) {
             return (
                 <div onClick={onClose} className={classnames(cls.modalWrapper)}>
                     <React.Fragment>
                         <div
                             onClick={(e) => e.stopPropagation()}
-                            className={classnames("shadow bg-white rounded form-div ", cls.formModal)}
+                            className={classnames("shadow bg-white rounded", cls.formModal)}
                         >
                             <div className={classnames("container", cls.footHeadontainer, cls.header)}>
-                                <h4>{formTitle}</h4>
+                                <h5>{formTitle}</h5>
                                 <FontAwesome
                                     name='rocket'
                                     size='2x'
                                     spin
                                 />
                             </div>
-                            <hr />
-                            <div className='container'>
+                            <UikDivider />
+                            <div className={classnames('container', cls.child)}>
                                 {children}
                             </div>
 
-                            <hr />
-                            <div className={classnames("container row", cls.footHeadontainer)}>
+                            <UikDivider />
+                            <div className={classnames("container align-items-center row ", cls.footHeadontainer)}>
                                 <div className="col-9">
                                     {
                                         isEditForm && <UikButton
