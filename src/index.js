@@ -15,27 +15,29 @@ import {
   SignUp,
   CompanyInformation,
   Appoinment
+  Dashboard
 } from './containers'
 
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import cls from "./styles/layout.module.scss";
+import classnames from 'classnames';
+import { PATH } from './constant';
 
 const store = configureStore();
 
 const Root = ({ store }) => (
-  <div className={[
-    cls.text, 
-    cls.bg]}>
-    <Provider store={store}>
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={LogIn} />
-          <Route exact path="/signup/" component={SignUp} />
-          <Route exact path="/appoinment/" component={Appoinment} />
-          <Route exact path="/signup/companyInformation/" component={CompanyInformation} />
-        </Switch>
-      </BrowserRouter>
-    </Provider>
+    <div className={classnames(cls.text, cls.bg)}>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path={PATH.DASH_BOARD} component={Dashboard} />
+            <Route exact path={PATH.LOG_IN} component={LogIn} />
+            <Route exact path={PATH.SIGN_UP} component={SignUp} />
+            <Route exact path="/appoinemt" component={Appoinment} />
+            <Route exact path={PATH.COMPANY_INFORMATION} component={CompanyInformation} />
+          </Switch>
+        </BrowserRouter>
+      </Provider>
   </div>
 )
 

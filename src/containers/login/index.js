@@ -9,6 +9,8 @@ import {
   CommonFooter
 } from "../../common";
 
+import { PATH } from '../../constant';
+
 const dataTest = [
   {
     name: "SOS Heating and Cooling, LLC",
@@ -49,7 +51,7 @@ class LogIn extends Component {
     } = this.state;
     let disabled = user === "" || pass === "";
     if (this.props.login.user) {
-      return <Redirect to="/register" />
+      return <Redirect to={PATH.DASH_BOARD} />
     }
     return (
       <div>
@@ -61,7 +63,7 @@ class LogIn extends Component {
           isLoading={isLoading}
           afterButton={
             <div className="text-center">
-              Don't have an account? <Link to="/signup"><b>Sign up now</b></Link>
+              Don't have an account? <Link to={PATH.SIGN_UP}><b>Sign up now</b></Link>
             </div>
           }
         >

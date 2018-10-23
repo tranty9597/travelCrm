@@ -3,7 +3,8 @@
 }
 
 .form-div {
-    width: 450px !important;
+    width: 70% !important;
+    max-width: 450px !important;
     padding-top: 0 !important;
     padding-bottom: 20px !important;
 }
