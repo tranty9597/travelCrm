@@ -73,8 +73,7 @@ class CommonInput extends PureComponent {
     render() {
         let {
             error,
-            label,
-            type
+            ...rest
         } = this.props;
         let { focused, value } = this.state;
         let data = this.getHintData();
@@ -83,12 +82,11 @@ class CommonInput extends PureComponent {
 
             <div className={cls["common_input-div-container"]}>
                 <UikInput
-                    label={label}
                     onChange={(e) => this.onChange(e.target.value)}
                     onFocus={this.handleToggleFocus.bind(this, false)}
                     onBlur={this.handleToggleFocus.bind(this, true)}
-                    type={type}
                     value={value}
+                    {...rest}
                 />
                 {
                     focused && data.length > 0 && (

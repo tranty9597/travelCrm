@@ -8,6 +8,8 @@ import {
     CommonFooter
 } from "../../common";
 
+import { PATH, LINK } from '../../constant';
+
 class SignUp extends Component {
     constructor(props) {
         super(props);
@@ -45,7 +47,7 @@ class SignUp extends Component {
             cfPass === "";
 
         if (clicked) {
-            return <Redirect to="/signup/companyInformation" />
+            return <Redirect to={PATH.COMPANY_INFORMATION} />
         }
 
         return (
@@ -57,7 +59,7 @@ class SignUp extends Component {
                     disabled={disabled}
                     afterButton={
                         <div className="text-center">
-                            Already have an account? <Link to="/"><b>Log in</b></Link>
+                            Already have an account? <Link to={PATH.LOG_IN}><b>Log in</b></Link>
                         </div>
                     }
                 >
@@ -103,7 +105,8 @@ class SignUp extends Component {
                     </div>
 
                     <div className="form-group">
-                        By register an account, you agree to our <a href="google.com" target="_blank">
+                        By register an account, you agree to our <a href={LINK.TERMS} 
+                        target="_blank" rel="noopener noreferrer">
                             <b>Terms and Conditions</b>
                         </a>
                     </div>
@@ -121,9 +124,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        logoutAction: () => {
-            dispatch()
-        }
     }
 };
 
