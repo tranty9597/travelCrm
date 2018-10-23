@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import {
     CommonInput,
     CommonForm,
     CommonFooter
 } from "../../../common";
+
+import {
+    PATH
+} from "../../../constant";
 
 class CompanyInformation extends Component {
     constructor(props) {
@@ -21,7 +26,9 @@ class CompanyInformation extends Component {
     };
 
     onSubmit = () => {
-
+        this.setState({
+            clicked: true
+        })
     }
 
     render() {
@@ -30,7 +37,8 @@ class CompanyInformation extends Component {
             address,
             city,
             state,
-            zCode
+            zCode,
+            clicked
         } = this.state;
         let disabled =
             cName === "" ||
@@ -38,6 +46,13 @@ class CompanyInformation extends Component {
             city === "" ||
             state === "" ||
             zCode === "";
+        if (clicked) {
+            return <Link to={
+                PATH.COMPANY_CONTACT
+            }
+            />
+        }
+
 
         return (
             <div>
