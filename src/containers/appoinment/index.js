@@ -68,7 +68,7 @@ class Appoinment extends React.Component {
                 <ProcessLayout>
 
                     {this.renderToolbar()}
-                    <Table onEdit={this.showEditForm} />
+                    <Table type={1} onEdit={this.showEditForm} />
                 </ProcessLayout>
             </div>
         )
