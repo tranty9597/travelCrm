@@ -1,6 +1,6 @@
 import React from "react"
 
-import {  CommonInput, Table } from "../../common"
+import {  Input, Table } from "../../common"
 
 import { UikButton } from "../../UikLayout"
 
@@ -37,10 +37,10 @@ class Appoinment extends React.Component {
                 <Col md={6} lg={6}>
                     <Row>
                         <Col lg={7}>
-                            <CommonInput />
+                            <Input />
                         </Col>
                         <Col lg={5}>
-                            <CommonInput />
+                            <Input />
                         </Col>
                     </Row>
                 </Col>
