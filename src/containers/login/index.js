@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import {
+  Redirect,
+  Link
+} from 'react-router-dom';
 import { connect } from "react-redux";
 import { loginAction } from "../../actions/authentication"
 
 import {
-  CommonInput,
-  CommonForm,
-  CommonFooter
+  Input,
+  Form
 } from "../../common";
+
+import classnames from 'classnames';
 
 import { PATH } from '../../constant';
 
@@ -54,37 +58,35 @@ class LogIn extends Component {
       return <Redirect to={PATH.DASH_BOARD} />
     }
     return (
-      <div>
-        <CommonForm
-          formTitle="Log In"
-          buttonTitle="Log In"
-          onSubmit={this.onSubmit}
-          disabled={disabled}
-          isLoading={isLoading}
-          afterButton={
-            <div className="text-center">
-              Don't have an account? <Link to={PATH.SIGN_UP}><b>Sign up now</b></Link>
-            </div>
-          }
-        >
-          <div className="form-group">
-            <CommonInput
-              onChange={(value) => { this.setState({ user: value }) }}
-              label="Username"
-              showHint
-              hintData={dataTest}
-            />
+      <Form
+        footer
+        formTitle="Log In"
+        buttonTitle="Log In"
+        onSubmit={this.onSubmit}
+        disabled={disabled}
+        isLoading={isLoading}
+        afterButton={
+          <div className={classnames("text-center")}>
+            Don't have an account? <Link to={PATH.SIGN_UP}><b>Sign up now</b></Link>
           </div>
-          <div className="form-group">
-            <CommonInput
-              label="Password"
-              type="password"
-              onChange={(value) => { this.setState({ pass: value }) }}
-            />
-          </div>
-        </CommonForm>
-        <CommonFooter />
-      </div>
+        }
+      >
+        <div className={classnames("form-group")}>
+          <Input
+            onChange={(value) => { this.setState({ user: value }) }}
+            label="Username"
+            showHint
+            hintData={dataTest}
+          />
+        </div>
+        <div className={classnames("form-group")}>
+          <Input
+            label="Password"
+            type="password"
+            onChange={(value) => { this.setState({ pass: value }) }}
+          />
+        </div>
+      </Form>
     );
   }
 }

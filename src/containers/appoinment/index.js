@@ -1,6 +1,9 @@
 import React from "react"
 
-import { FormModal, CommonInput } from "../../common"
+import {
+    FormModal,
+    Input
+} from "../../common"
 
 class Appoinment extends React.Component {
     constructor(props) {
@@ -25,24 +28,23 @@ class Appoinment extends React.Component {
                     isEditForm={isEditForm}
                     formTitle={isEditForm ? "Edit Appoinment" : "New Appoinment"}
                     onClose={this.toggleModal}
-                    sdfsdaf
                 >
-                    <CommonInput label="Customer" />
-                    <CommonInput label="Facility" />
+                    <Input label="Customer" />
+                    <Input label="Facility" />
                     <div className='row'>
                         <div className='col-5'>
-                            <CommonInput label="Date" />
+                            <Input label="Date" />
                         </div>
                         <div className='col-3'>
-                            <CommonInput label="From" />
+                            <Input label="From" />
                         </div>
                         <div className='col-3'>
-                            <CommonInput label="To" />
+                            <Input label="To" />
                         </div>
 
                     </div>
-                    <CommonInput label="Technician" />
-                    <CommonInput type="textArea" label="Description" />
+                    <Input label="Technician" />
+                    <Input type="textArea" label="Description" />
 
                 </FormModal>
                 <button onClick={this.toggleModal}>sss</button>

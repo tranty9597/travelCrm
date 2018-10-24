@@ -1,0 +1,43 @@
+@import "../../_vars.scss";
+.footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    line-height: 60px;
+    margin-top: 30px;
+    color: $textSecondary;
+    white-space: nowrap;
+    @media screen and (max-width: 1230px) {
+        line-height: 30px;
+    }
+}
+
+.menu {
+    border-top: 1px solid $borderColor;
+    background-color: $bg;
+}
+
+.responsive_flex {
+    width: inherit;
+    @media screen and (max-width: 1230px) {
+        display: inherit;
+        div {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            border-bottom: 1px solid $borderColor;
+        }
+    }
+    @media screen and (min-width: 1230px) {
+        display: inline-flex;
+    }
+}
+
+.item {
+    padding-left: 10px;
+    padding-right: 10px;
+    @media screen and (min-width: 1230px) {
+        padding-left: 30px;
+        padding-right: 0px;
+    }
+
+}

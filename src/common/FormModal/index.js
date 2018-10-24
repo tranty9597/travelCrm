@@ -35,7 +35,7 @@ class FormModal extends PureComponent<FormModalProps> {
                     <React.Fragment>
                         <div
                             onClick={(e) => e.stopPropagation()}
-                            className={classnames("shadow bg-white rounded form-div ", cls.formModal)}
+                            className={classnames("shadow", "bg-white", "rounded", "form-div", cls.formModal)}
                         >
                             <div className={classnames("container", cls.footHeadontainer, cls.header)}>
                                 <h4>{formTitle}</h4>
@@ -51,7 +51,7 @@ class FormModal extends PureComponent<FormModalProps> {
                             </div>
 
                             <hr />
-                            <div className={classnames("container row", cls.footHeadontainer)}>
+                            <div className={classnames("container", "row", cls.footHeadontainer)}>
                                 <div className="col-9">
                                     {
                                         isEditForm && <UikButton

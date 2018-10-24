@@ -14,19 +14,21 @@ import {
   LogIn,
   SignUp,
   CompanyInformation,
-  Appoinment
+  Appoinment,
   Dashboard
 } from './containers'
 
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import cls from "./styles/layout.module.scss";
-import classnames from 'classnames';
+import {
+  UikPageFade,
+} from './UikLayout'
+
 import { PATH } from './constant';
+import cls from './App.module.scss'
 
 const store = configureStore();
 
 const Root = ({ store }) => (
-    <div className={classnames(cls.text, cls.bg)}>
+  <UikPageFade className={ cls.app }>
       <Provider store={store}>
         <BrowserRouter>
           <Switch>
@@ -38,7 +40,7 @@ const Root = ({ store }) => (
           </Switch>
         </BrowserRouter>
       </Provider>
-  </div>
+  </UikPageFade>
 )
 
 render(
