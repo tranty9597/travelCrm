@@ -32,7 +32,6 @@ import cls from './App.module.scss'
 const store = configureStore();
 
 const Router = () => (
-
   <Switch>
     <Route exact path={PATH.DASH_BOARD} component={Dashboard} />
     <Route exact path={PATH.LOG_IN} component={LogIn} />
@@ -41,8 +40,6 @@ const Router = () => (
     <Route exact path={PATH.COMPANY_INFORMATION} component={CompanyInformation} />
     <Route exact path={PATH.COMPANY_CONTACT} component={CompanyContact} />
   </Switch>
-
-
 )
 
 const Root = ({ store }) => (
