@@ -21,7 +21,7 @@ class Input extends PureComponent<InputProps> {
     constructor(props) {
         super(props);
         this.state = {
-            value: "",
+            value: this.props.value,
             focused: false,
         };
     }

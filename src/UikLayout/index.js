@@ -11,6 +11,7 @@ export { default as UikStarRating } from './UikStarRating'
 export { default as UikTag } from './UikTag'
 export { default as UikProgressBar } from './UikProgressBar'
 
+
 /* Composed */
 export { default as UikAvatarMenuContainer } from './UikAvatarMenuContainer'
 export { default as UikEmojiHeadline } from './UikEmojiHeadline'

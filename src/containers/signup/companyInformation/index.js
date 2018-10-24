@@ -7,13 +7,10 @@ import {
     Form
 } from "../../../common";
 
-<<<<<<< HEAD
 import classnames from 'classnames';
-=======
 import {
     PATH
 } from "../../../constant";
->>>>>>> 67fb2d070cc8f805ad76eb031fdc378b8fc40d4b
 
 class CompanyInformation extends Component {
     constructor(props) {
