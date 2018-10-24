@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Row, Col } from "react-bootstrap"
-import { FormModal, CommonInput, } from "../../../../common"
+import { FormModal, Input, } from "../../../../common"
 
 
 type ApptFormModalProps = {
@@ -28,23 +28,23 @@ class ApptFormModal extends React.Component<ApptFormModalProps> {
                 formTitle={isEditForm ? "Edit Appoinment" : "New Appoinment"}
                 onClose={onClose}
             >
-                <CommonInput label="Customer" />
-                <CommonInput label="Facility" />
+                <Input label="Customer" />
+                <Input label="Facility" />
                 <Row>
                     <Col lg={5}>
-                        <CommonInput value={""} label="Date" />
+                        <Input value={""} label="Date" />
                     </Col>
                     <Col lg={3}>
-                        <CommonInput label="From" />
+                        <Input label="From" />
                     </Col>
                     <Col lg={3}>
-                        <CommonInput label="To" />
+                        <Input label="To" />
                     </Col>
                 </Row>
 
 
-                <CommonInput label="Technician" />
-                <CommonInput type="textArea" label="Description" />
+                <Input label="Technician" />
+                <Input type="textArea" label="Description" />
 
             </FormModal >
         )

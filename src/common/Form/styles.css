@@ -11,4 +11,5 @@
 
 .form_div_container {
     min-height: 100%;
+    flex-grow: 1;
 }

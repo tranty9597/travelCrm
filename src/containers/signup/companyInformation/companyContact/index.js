@@ -2,7 +2,6 @@ import React, {
     Component
 } from 'react';
 import {
-    Redirect,
     Link
 } from 'react-router-dom';
 import {
@@ -10,9 +9,9 @@ import {
 } from "react-redux";
 
 import {
-    CommonInput,
-    CommonForm,
-    CommonFooter
+    Input,
+    Form,
+    Footer
 } from "../../../../common";
 
 import {
@@ -58,14 +57,14 @@ class ConpanyContact extends Component {
 
         return (
             <div>
-                <CommonForm
+                <Form
                     formTitle="Company Contact"
                     buttonTitle="Next"
                     onSubmit={this.onSubmit}
                     disabled={disabled}
                 >
                     <div className="form-group">
-                        <CommonInput
+                        <Input
                             onChange={
                                 (value) => {
                                     this.setState({
@@ -76,7 +75,7 @@ class ConpanyContact extends Component {
                             label="Company Contact" />
                     </div>
                     <div className="form-group" >
-                        <CommonInput
+                        <Input
                             onChange={
                                 (value) => {
                                     this.setState({
@@ -88,7 +87,7 @@ class ConpanyContact extends Component {
                         />
                     </div>
                     <div className="form-group" >
-                        <CommonInput
+                        <Input
                             onChange={
                                 (value) => {
                                     this.setState({
@@ -99,8 +98,8 @@ class ConpanyContact extends Component {
                             label="Company Email Address"
                         />
                     </div>
-                </CommonForm >
-                <CommonFooter />
+                </Form >
+                <Footer />
             </div>
         )
     }

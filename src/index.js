@@ -20,12 +20,11 @@ import {
 } from './containers'
 
 import {
-  UikPageFade,
+  UikPageFade, UikContainerVertical, UikContainerHorizontal
 } from './UikLayout'
 
 import { NavBar } from "./layout"
 
-import cls from "./styles/layout.module.scss";
 import classnames from 'classnames';
 import { PATH } from './constant';
 import cls from './App.module.scss'
@@ -33,18 +32,16 @@ import cls from './App.module.scss'
 const store = configureStore();
 
 const Router = () => (
-  <div>
-    <NavBar />
-    <Switch>
 
-      <Route exact path={PATH.DASH_BOARD} component={Dashboard} />
-      <Route exact path={PATH.LOG_IN} component={LogIn} />
-      <Route exact path={PATH.SIGN_UP} component={SignUp} />
-      <Route exact path="/appoinment" component={Appoinment} />
-      <Route exact path={PATH.COMPANY_INFORMATION} component={CompanyInformation} />
-      <Route exact path={PATH.COMPANY_CONTACT} component={CompanyContact} />
-    </Switch>
-  </div>
+  <Switch>
+    <Route exact path={PATH.DASH_BOARD} component={Dashboard} />
+    <Route exact path={PATH.LOG_IN} component={LogIn} />
+    <Route exact path={PATH.SIGN_UP} component={SignUp} />
+    <Route exact path="/appoinment" component={Appoinment} />
+    <Route exact path={PATH.COMPANY_INFORMATION} component={CompanyInformation} />
+    <Route exact path={PATH.COMPANY_CONTACT} component={CompanyContact} />
+  </Switch>
+
 
 )
 
@@ -52,9 +49,12 @@ const Root = ({ store }) => (
   <UikPageFade className={classnames(cls.app)}>
     <Provider store={store}>
       <BrowserRouter>
-        <Switch>
-          <Router />
-        </Switch>
+        <UikContainerVertical>
+          <NavBar />
+          <UikContainerHorizontal>
+            <Router />
+          </UikContainerHorizontal>
+        </UikContainerVertical>
       </BrowserRouter>
     </Provider>
   </UikPageFade>

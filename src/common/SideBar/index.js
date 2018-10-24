@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import MediaQuery from 'react-responsive';
 
 import {
     UikNavPanel,
