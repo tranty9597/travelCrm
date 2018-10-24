@@ -1,8 +1,8 @@
 import React from "react"
 
-import {  Input, Table } from "../../common"
+import { Input, Table } from "../../common"
 
-import { UikButton, UikContainerVertical } from "../../UikLayout"
+import { UikButton } from "../../UikLayout"
 
 import { Row, Col } from "react-bootstrap"
 import { ProcessLayout } from "../../layout";
@@ -30,27 +30,27 @@ class Appoinment extends React.Component {
     }
     renderToolbar = () => {
         return (
-            <Row>
-                <Col md={6} lg={3}>
-                    <h5 style={{ lineHeight: '2.2rem' }}>Appoinment</h5>
-                </Col>
-                <Col md={6} lg={6}>
-                    <Row>
-                        <Col lg={7}>
-                            <Input />
-                        </Col>
-                        <Col lg={5}>
-                            <Input />
-                        </Col>
-                    </Row>
-                </Col>
+            <div className='container-fluid'>
+                <Row>
+                    <Col md={6} lg={3}>
+                        <h5 style={{ lineHeight: '2.2rem' }}>Appoinment</h5>
+                    </Col>
+                    <Col md={6} lg={6}>
+                        <Row>
+                            <Col lg={7}>
+                                <Input />
+                            </Col>
+                            <Col lg={5}>
+                                <Input />
+                            </Col>
+                        </Row>
+                    </Col>
 
-                <Col md={12} lg={3} className='d-flex justify-content-end'>
-                    <UikButton onClick={this.showCreateForm} success>New Appoinment</UikButton>
-                </Col>
-
-            </Row>
-
+                    <Col md={12} lg={3} className='d-flex justify-content-end'>
+                        <UikButton onClick={this.showCreateForm} success>New Appoinment</UikButton>
+                    </Col>
+                </Row>
+            </div>
         )
     }
 
@@ -59,7 +59,7 @@ class Appoinment extends React.Component {
         let { isEditForm, showModal } = this.state
         return (
             <div className='container-fluid '>
-           
+
                 <ApptFormModal
                     isVisible={showModal}
                     isEditForm={isEditForm}

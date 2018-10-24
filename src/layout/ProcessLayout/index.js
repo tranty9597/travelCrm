@@ -3,6 +3,7 @@ import React from "react"
 import { SideBar } from "../../common";
 import { UikContainerHorizontal, UikContainerVertical } from "../../UikLayout";
 
+import cls from "./styles.module.scss"
 const menuLinks = [
     {
         text: "Appointments"
@@ -18,14 +19,16 @@ const menuLinks = [
     },
 ]
 
-function ProcessLayout({ children, sidebar }) {
+function ProcessLayout({ children }) {
     return (
         <UikContainerHorizontal>
             <SideBar
                 listMenu={menuLinks}
                 title="MENU"
             />
-            <UikContainerVertical className='p-5'>
+
+            <UikContainerVertical className={cls.childrenWraper} >
+            
                 {children}
 
             </UikContainerVertical>

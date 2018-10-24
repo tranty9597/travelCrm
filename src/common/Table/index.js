@@ -41,7 +41,7 @@ const HEADERS = [
 
 function RenderHeader({ headers }) {
     return (
-        <thead>
+        <thead style={{ minWidth: 570 }}>
             <tr>
                 {headers.map((item, index) => {
                     return <th key={index} style={{ minWidth: item.size }}>{item.name}</th>
