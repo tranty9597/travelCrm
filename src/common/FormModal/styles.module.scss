@@ -11,12 +11,19 @@
 
     .formModal{
         margin: auto;
+        width: 90%;
+        max-width: 450px;
     }
     .header{
         padding-top: 20px;
         padding-bottom: 20px;
     }
+    .child{
+        padding: 25px;
+    }
     .footHeadontainer{
-        height: 40px;
+        margin: 0;
+        padding: 25px;
+        height: 60px;
     }
 }
