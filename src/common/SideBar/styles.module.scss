@@ -1,6 +1,7 @@
 @import "../../vars";
 .nav_panel {
     min-height: 100%;
+    flex-basis: auto;
     @media screen and (max-width: 1200px) {
         width: 15%;
         -webkit-transition: .4s;
