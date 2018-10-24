@@ -3,14 +3,25 @@ import React, { PureComponent } from 'react';
 import { UikInput } from "../../UikLayout";
 
 import cls from "./styles.module.scss";
+import classNames from 'classnames';
+
+type InputProps = {
+    error: String,
+    label: String,
+    showHint: Boolean,
+    hintData: Array,
+    filterFieldName: Array,
+    type: String,
+    value: String
+}
 
 const ONBLUR_DELAY_TIME = 220;
 
-class CommonInput extends PureComponent {
+class Input extends PureComponent<InputProps> {
     constructor(props) {
         super(props);
         this.state = {
-            value: "",
+            value: this.props.value,
             focused: false,
         };
     }
@@ -44,7 +55,7 @@ class CommonInput extends PureComponent {
                             <HintItem
                                 key={indx}
                                 item={dt}
-                                className={hintData.length > 1 && cls["common_input-div-list-item"]}
+                                className={hintData.length > 1 && classNames(cls["common_input-div-list-item"])}
                                 onClick={(value) => { this.onChange(value) }}
                             />);
                         flag = true;
@@ -73,31 +84,35 @@ class CommonInput extends PureComponent {
     render() {
         let {
             error,
-            label,
-            type
+            hintData,
+            filterFieldName,
+            showHint,
+            value,
+            onChange,
+            ...rest
         } = this.props;
-        let { focused, value } = this.state;
+        let { focused } = this.state;
+        value = value !== "" ? value : this.state.value;
         let data = this.getHintData();
 
         return (
 
-            <div className={cls["common_input-div-container"]}>
+            <div className={classNames(cls["common_input-div-container"])}>
                 <UikInput
-                    label={label}
                     onChange={(e) => this.onChange(e.target.value)}
                     onFocus={this.handleToggleFocus.bind(this, false)}
                     onBlur={this.handleToggleFocus.bind(this, true)}
-                    type={type}
                     value={value}
+                    {...rest}
                 />
                 {
                     focused && data.length > 0 && (
-                        <div className={cls["common_input-div-list-container"]}>
+                        <div className={classNames(cls["common_input-div-list-container"])}>
                             {data}
                         </div>
                     )
                 }
-                <div className={cls["common_input-div-error"]}>
+                <div className={classNames(cls["common_input-div-error"])}>
                     {error}
                 </div>
             </div>
@@ -105,7 +120,7 @@ class CommonInput extends PureComponent {
     }
 }
 
-CommonInput.defaultProps = {
+Input.defaultProps = {
     error: "",
     label: "",
     showHint: false,
@@ -115,7 +130,7 @@ CommonInput.defaultProps = {
     value: ""
 }
 
-export default CommonInput;
+export default Input;
 
 
 //===================== HintItem ====================//
@@ -125,7 +140,10 @@ export class HintItem extends PureComponent {
         this.state = {};
     }
     render() {
-        let { item, className } = this.props;
+        let {
+            item,
+            className
+        } = this.props;
         let renderData = [];
         let title = "";
         Object.values(item).forEach((value, indx) => {
@@ -133,7 +151,7 @@ export class HintItem extends PureComponent {
             renderData.push(
                 <div
                     key={indx}
-                    className={indx === 0 ? cls["common_input-div-list-item-title"] : ""}
+                    className={indx === 0 ? classNames(cls["common_input-div-list-item-title"]) : ""}
                 >
                     {value}
                 </div>

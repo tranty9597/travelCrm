@@ -1,6 +1,22 @@
 import React, { PureComponent } from 'react';
 
-import { CommonSideBar } from '../../common';
+import { SideBar } from '../../common';
+
+
+const menuLinks = [
+    {
+        text: "Appointments"
+    },
+    {
+        text: "Customers"
+    },
+    {
+        text: "Technicians"
+    },
+    {
+        text: "System Settings"
+    },
+]
 
 class Dashboard extends PureComponent {
     constructor(props) {
@@ -9,7 +25,11 @@ class Dashboard extends PureComponent {
     }
     render() {
         return (
-            <CommonSideBar />
+            <SideBar
+                listMenu={menuLinks}
+                title="MENU"
+            />
+
         );
     }
 }

@@ -1,13 +1,16 @@
-import CommonInput from "./commonInput";
-import CommonForm from "./commonForm";
-import CommonFooter from "./commonFooter";
+import Input from "./Input";
+import Form from "./Form";
+import Footer from "./Footer";
 import FormModal from "./FormModal";
-import CommonSideBar from "./commonSideBar";
+import SideBar from "./SideBar";
+
+import Table from "./Table"
 
 export {
-    CommonInput,
-    CommonForm,
-    CommonFooter,
+    Input,
+    Form,
+    Footer,
     FormModal,
-    CommonSideBar
+    SideBar,
+    Table
 }

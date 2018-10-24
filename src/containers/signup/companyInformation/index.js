@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import {
-    CommonInput,
-    CommonForm,
-    CommonFooter
+    Input,
+    Form
 } from "../../../common";
 
+import classnames from 'classnames';
 import {
     PATH
 } from "../../../constant";
@@ -55,55 +55,57 @@ class CompanyInformation extends Component {
 
 
         return (
-            <div>
-                <CommonForm
-                    formTitle="Company Information"
-                    buttonTitle="Next"
-                    onSubmit={this.onSubmit}
-                    disabled={disabled}
-                >
+            <Form
+                footer
+                formTitle="Company Information"
+                buttonTitle="Next"
+                onSubmit={this.onSubmit}
+                disabled={disabled}
+            >
 
-                    <div className="form-group">
-                        <CommonInput
-                            onChange={(value) => { this.setState({ cName: value }) }}
-                            label="Company Name"
+                <div className={classnames("form-group")}>
+                    <Input
+                        onChange={(value) => { this.setState({ cName: value }) }}
+                        label="Company Name"
+                    />
+                </div>
+                <div className={classnames("form-group")}>
+                    <Input
+                        onChange={(value) => { this.setState({ address: value }) }}
+                        label="Offical Address"
+                    />
+                </div>
+                <div className={classnames("form-group")}>
+                    <Input
+                        label="Address 2"
+                        onChange={(value) => { this.setState({ address2: value }) }}
+                    />
+                </div>
+                <div className={classnames(
+                    "form-group",
+                    "row"
+                )}
+                >
+                    <div className={classnames("col")}>
+                        <Input
+                            onChange={(value) => { this.setState({ city: value }) }}
+                            label="City"
                         />
                     </div>
-                    <div className="form-group">
-                        <CommonInput
-                            onChange={(value) => { this.setState({ address: value }) }}
-                            label="Offical Address"
+                    <div className={classnames("col")}>
+                        <Input
+                            onChange={(value) => { this.setState({ state: value }) }}
+                            label="State"
                         />
                     </div>
-                    <div className="form-group">
-                        <CommonInput
-                            label="Address 2"
-                            onChange={(value) => { this.setState({ address2: value }) }}
+                    <div className={classnames("col")}>
+                        <Input
+                            onChange={(value) => { this.setState({ zCode: value }) }}
+                            label="Zip Code"
                         />
                     </div>
-                    <div className="form-group row">
-                        <div className="col">
-                            <CommonInput
-                                onChange={(value) => { this.setState({ city: value }) }}
-                                label="City"
-                            />
-                        </div>
-                        <div className="col">
-                            <CommonInput
-                                onChange={(value) => { this.setState({ state: value }) }}
-                                label="State"
-                            />
-                        </div>
-                        <div className="col">
-                            <CommonInput
-                                onChange={(value) => { this.setState({ zCode: value }) }}
-                                label="Zip Code"
-                            />
-                        </div>
-                    </div>
-                </CommonForm>
-                <CommonFooter />
-            </div>
+                </div>
+            </Form>
         )
     }
 }

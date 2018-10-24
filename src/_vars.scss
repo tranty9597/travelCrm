@@ -26,6 +26,7 @@ $error: $red;
 //----------
 $lightBlue: lightblue;
 $hover: $lightBlue;
+$liBackground: #F6F9FD;
 // base color pairs
 $colorPairs: (green, #38B249),
 (blue, #1665D8),
@@ -59,3 +60,12 @@ $colorPairs: (green, #38B249),
 
 // others
 $boxShadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+
+
+.appTransition{
+  transition: ease-in-out all 0.2s;
+}
+
+.appContainer{
+  height: inherit;
+}

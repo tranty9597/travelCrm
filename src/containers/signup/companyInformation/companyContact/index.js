@@ -1,10 +1,22 @@
+<<<<<<< HEAD
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+=======
+import React, {
+    Component
+} from 'react';
+import {
+    Link
+} from 'react-router-dom';
+import {
+    connect
+} from "react-redux";
+>>>>>>> d0c18871ee30f63ae5b338240635647da551ea60
 
 import {
-    CommonInput,
-    CommonForm,
-    CommonFooter
+    Input,
+    Form,
+    Footer
 } from "../../../../common";
 
 import {
@@ -50,14 +62,14 @@ class ConpanyContact extends Component {
 
         return (
             <div>
-                <CommonForm
+                <Form
                     formTitle="Company Contact"
                     buttonTitle="Next"
                     onSubmit={this.onSubmit}
                     disabled={disabled}
                 >
                     <div className="form-group">
-                        <CommonInput
+                        <Input
                             onChange={
                                 (value) => {
                                     this.setState({
@@ -68,7 +80,7 @@ class ConpanyContact extends Component {
                             label="Company Contact" />
                     </div>
                     <div className="form-group" >
-                        <CommonInput
+                        <Input
                             onChange={
                                 (value) => {
                                     this.setState({
@@ -80,7 +92,7 @@ class ConpanyContact extends Component {
                         />
                     </div>
                     <div className="form-group" >
-                        <CommonInput
+                        <Input
                             onChange={
                                 (value) => {
                                     this.setState({
@@ -91,8 +103,8 @@ class ConpanyContact extends Component {
                             label="Company Email Address"
                         />
                     </div>
-                </CommonForm >
-                <CommonFooter />
+                </Form >
+                <Footer />
             </div>
         )
     }
