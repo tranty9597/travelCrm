@@ -1,6 +1,7 @@
 const DASH_BOARD = "/";
 //------------------
 const LOG_IN = "/login";
+const ADMIN_LOG_IN = "/adminlogin"
 //------------------
 const SIGN_UP = "/signup";
 const COMPANY_INFORMATION = "/companyInformation";
@@ -12,6 +13,7 @@ const CREDIT_CARD_PAYMENT = PAYMENT + "/cc_payment";
 const PATH = {
     DASH_BOARD,
     LOG_IN,
+    ADMIN_LOG_IN,
     SIGN_UP,
     COMPANY_INFORMATION,
     COMPANY_CONTACT,

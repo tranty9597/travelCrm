@@ -13,6 +13,7 @@ class CommonForm extends PureComponent {
         let {
             disabled,
             children,
+            skip,
             formTitle,
             buttonTitle,
             isLoading,
@@ -36,6 +37,7 @@ class CommonForm extends PureComponent {
                         >
                             {buttonTitle}
                         </UikButton>
+                        {skip}
                     </div>
                 </ div>
                 {afterButton}

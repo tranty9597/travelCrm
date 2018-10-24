@@ -1,13 +1,5 @@
-import React, {
-    Component
-} from 'react';
-import {
-    Redirect,
-    Link
-} from 'react-router-dom';
-import {
-    connect
-} from "react-redux";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import {
     CommonInput,
@@ -106,6 +98,4 @@ class ConpanyContact extends Component {
     }
 }
 
-export default connect(
-
-)(ConpanyContact)
+export default (ConpanyContact)
