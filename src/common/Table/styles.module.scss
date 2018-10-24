@@ -1,0 +1,16 @@
+@import '../../vars'; 
+.overflowTable{
+    overflow-x: auto;
+}
+.pagination{
+    justify-content: flex-end;
+    padding: 25px;
+    margin: 0;
+
+    .active>a{
+        color: $textMain
+    }
+    li{
+        padding: 0 5px 0 5px
+    }
+}

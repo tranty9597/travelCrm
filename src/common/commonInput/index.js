@@ -10,7 +10,7 @@ class CommonInput extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            value: "",
+            value: this.props.value,
             focused: false,
         };
     }
