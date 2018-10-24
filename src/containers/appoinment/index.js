@@ -2,7 +2,7 @@ import React from "react"
 
 import {  Input, Table } from "../../common"
 
-import { UikButton } from "../../UikLayout"
+import { UikButton, UikContainerVertical } from "../../UikLayout"
 
 import { Row, Col } from "react-bootstrap"
 import { ProcessLayout } from "../../layout";
@@ -58,7 +58,8 @@ class Appoinment extends React.Component {
     render() {
         let { isEditForm, showModal } = this.state
         return (
-            <div className='container '>
+            <div className='container-fluid '>
+           
                 <ApptFormModal
                     isVisible={showModal}
                     isEditForm={isEditForm}
@@ -66,7 +67,6 @@ class Appoinment extends React.Component {
                 />
 
                 <ProcessLayout>
-
                     {this.renderToolbar()}
                     <Table type={1} onEdit={this.showEditForm} />
                 </ProcessLayout>
