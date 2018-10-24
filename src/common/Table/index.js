@@ -11,6 +11,10 @@ import { UikWidgetTable, UikWidget } from "../../UikLayout"
 import { AppointmentRow, CustomerRow } from "./Row"
 const DEFAULT_COLUMN_SIZE = 100
 
+const ALL_TYPE_CASE = {
+    APPT: 0,
+    CUST: 1
+}
 
 const APPOINTMENT_HEADER = [
     { name: "", size: DEFAULT_COLUMN_SIZE },
@@ -47,7 +51,45 @@ function RenderHeader({ headers }) {
     )
 }
 
-class Table extends React.Component {
+function RenderBody({ dataSource, onEdit, type }) {
+
+    switch (type) {
+        case ALL_TYPE_CASE.APPT:
+            return (
+                <tbody>
+                    {dataSource.map((item, index) => {
+                        return (
+                            <React.Fragment key={index}>
+                                <AppointmentRow onEdit={onEdit} item={item} index={index} />
+                            </React.Fragment>
+                        )
+                    })}
+                </tbody>
+            )
+        case ALL_TYPE_CASE.CUST:
+            return (
+                <tbody>
+                    {dataSource.map((item, index) => {
+                        return (
+                            <React.Fragment key={index}>
+                                <CustomerRow onEdit={onEdit} item={item} index={index} />
+                            </React.Fragment>
+                        )
+                    })}
+                </tbody>
+            )
+        default:
+            return null
+    }
+
+
+}
+
+type TableProps = {
+    type?: ALL_TYPE_CASE.APPT | ALL_TYPE_CASE.CUST
+}
+
+class Table extends React.Component<TableProps> {
 
     render() {
         let { dataSource, onEdit, type } = this.props;
@@ -59,17 +101,13 @@ class Table extends React.Component {
                         <RenderHeader
                             headers={HEADERS[type]}
                         />
-                        <tbody>
-                            {dataSource.map((item, index) => {
-                                return (
-                                    <React.Fragment key={index}>
-                                        <CustomerRow onEdit={onEdit} item={item} index={index} />
-                                    </React.Fragment>
-                                )
-                            })}
-                        </tbody>
-
+                        <RenderBody
+                            type={type}
+                            dataSource={dataSource}
+                            onEdit={onEdit}
+                        />
                     </UikWidgetTable>
+
                     <ReactPaginate
                         previousLabel=""
                         nextLabel=""
@@ -94,7 +132,7 @@ class Table extends React.Component {
 }
 Table.defaultProps = {
     isAccordion: true,
-    type: 1,
+    type: 0,
     dataSource: [
         { name: "a van b", age: "10", phone: "1000000000", email: "ssss@gmail.com", test: "TEST", dataExpand: [{ name: "zz" }, { name: "zz" }, { name: "zz" }, { name: "zz" }] },
         { name: "a van b", age: "10", phone: "1000000000", email: "ssss@gmail.com", test: "TEST", dataExpand: [{ name: "zz" }] },

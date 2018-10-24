@@ -1,17 +1,35 @@
 import React from "react"
 
-import { Row, Col } from "react-bootstrap"
+import { SideBar } from "../../common";
+import { UikContainerHorizontal, UikContainerVertical } from "../../UikLayout";
+
+const menuLinks = [
+    {
+        text: "Appointments"
+    },
+    {
+        text: "Customers"
+    },
+    {
+        text: "Technicians"
+    },
+    {
+        text: "System Settings"
+    },
+]
 
 function ProcessLayout({ children, sidebar }) {
     return (
-        <Row>
-            <Col md={3}>
-                {sidebar}
-            </Col>
-            <Col xs={12} md={12} lg={9}>
+        <UikContainerHorizontal>
+            <SideBar
+                listMenu={menuLinks}
+                title="MENU"
+            />
+            <UikContainerVertical className='p-5'>
                 {children}
-            </Col>
-        </Row>
+
+            </UikContainerVertical>
+        </UikContainerHorizontal>
 
     )
 }

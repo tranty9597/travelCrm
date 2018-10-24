@@ -1,6 +1,7 @@
 @import '../../vars'; 
 .overflowTable{
     overflow-x: auto;
+    overflow-y: hidden;
 }
 .pagination{
     justify-content: flex-end;
