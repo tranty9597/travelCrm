@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 
 import { UikSelect } from "../../UikLayout";
-import Input, {HintItem} from '../Input';
+import { HintData } from "../Input/HintData" ;
 import cls from "./styles.module.scss";
 import classnames from 'classnames';
 

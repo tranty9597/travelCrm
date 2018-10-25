@@ -10,6 +10,8 @@ import {
     PATH
 } from "../../../../constant";
 
+import classnames from 'classnames';
+
 class ConpanyContact extends Component {
     constructor(props) {
         super(props);
@@ -55,7 +57,7 @@ class ConpanyContact extends Component {
                 onSubmit={this.onSubmit}
                 disabled={disabled}
             >
-                <div className="form-group">
+                <div className= {classnames("form-group")}>
                     <Input
                         onChange={
                             (value) => {
@@ -66,7 +68,7 @@ class ConpanyContact extends Component {
                         }
                         label="Company Contact" />
                 </div>
-                <div className="form-group" >
+                <div className={classnames("form-group")}>
                     <Input
                         onChange={
                             (value) => {
@@ -78,7 +80,7 @@ class ConpanyContact extends Component {
                         label="Company Phone"
                     />
                 </div>
-                <div className="form-group" >
+                <div className={classnames("form-group")} >
                     <Input
                         onChange={
                             (value) => {

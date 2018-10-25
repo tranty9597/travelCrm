@@ -2,7 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { Row, Col } from "react-bootstrap"
 
-import {  } from "../../UikLayout"
+import { } from "../../UikLayout"
 
 import { Link, withRouter } from "react-router-dom"
 
@@ -23,7 +23,7 @@ class NavBar extends React.PureComponent {
 
     render() {
         return (
-            <div>
+            <React.Fragment>
                 {this.isHidden(window.location.pathname) || <div className={classnames(cls.navbar)}>
                     <Row>
                         <Col xs={2} md={1} lg={1}>
@@ -39,7 +39,7 @@ class NavBar extends React.PureComponent {
                     </Row>
 
                 </div>}
-            </div>
+            </React.Fragment>
 
         )
     }

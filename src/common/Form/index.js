@@ -13,13 +13,13 @@ import classnames from 'classnames';
 import cls from "./styles.module.scss";
 
 type FormProps = {
-    formTitle: String;
-    buttonTitle: String;
-    isLoading: Boolean,
-    onSubmit: Function,
-    children: React.node,
-    afterButton: React.node,
-    footer: Boolean
+    formTitle?: String;
+    buttonTitle?: String;
+    isLoading?: Boolean,
+    onSubmit?: Function,
+    children?: React.node,
+    afterButton?: React.node,
+    footer?: Boolean
 }
 
 

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Row, Col } from "react-bootstrap"
-import { FormModal, Input, } from "../../../../common"
+import { FormModal, Input, } from "../../../../../common"
 
 
 type ApptFormModalProps = {

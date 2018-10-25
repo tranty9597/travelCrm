@@ -14,8 +14,8 @@ import cls from "./styles.module.scss";
 import Footer from '../Footer';
 
 type SideBarProps = {
-    listMenu: array,
-    title: string
+    listMenu?: array,
+    title?: string
 }
 
 class SideBar extends PureComponent<SideBarProps> {

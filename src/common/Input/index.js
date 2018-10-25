@@ -1,18 +1,18 @@
 import React, { PureComponent } from 'react';
 
-import { UikInput } from "../../UikLayout";
-
-import cls from "./styles.module.scss";
+import { UikInput } from '../../UikLayout';
+import { HintData } from '../../common';
+import cls from './styles.module.scss';
 import classNames from 'classnames';
 
 type InputProps = {
-    error: String,
-    label: String,
-    showHint: Boolean,
-    hintData: Array,
-    filterFieldName: Array,
-    type: String,
-    value: String
+    error?: String,
+    label?: String,
+    showHint?: Boolean,
+    hintData?: Array,
+    filterFieldName?: Array,
+    type?: String,
+    value?: String
 }
 
 const ONBLUR_DELAY_TIME = 220;
@@ -51,13 +51,7 @@ class Input extends PureComponent<InputProps> {
                         return false;
                     }
                     if (dt[f].toLowerCase().includes(value.toLowerCase())) {
-                        data.push(
-                            <HintItem
-                                key={indx}
-                                item={dt}
-                                className={hintData.length > 1 && classNames(cls["common_input-div-list-item"])}
-                                onClick={(value) => { this.onChange(value) }}
-                            />);
+                        data.push(dt)
                         flag = true;
                     }
                 });
@@ -107,9 +101,10 @@ class Input extends PureComponent<InputProps> {
                 />
                 {
                     focused && data.length > 0 && (
-                        <div className={classNames(cls["common_input-div-list-container"])}>
-                            {data}
-                        </div>
+                        <HintData
+                            data={data}
+                            onClick={(value) => this.onChange(value)}
+                        />
                     )
                 }
                 <div className={classNames(cls["common_input-div-error"])}>
@@ -132,46 +127,4 @@ Input.defaultProps = {
 
 export default Input;
 
-
-//===================== HintItem ====================//
-export class HintItem extends PureComponent {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
-    render() {
-        let {
-            item,
-            className
-        } = this.props;
-        let renderData = [];
-        let title = "";
-        Object.values(item).forEach((value, indx) => {
-            title = indx === 0 ? value : title;
-            renderData.push(
-                <div
-                    key={indx}
-                    className={indx === 0 ? classNames(cls["common_input-div-list-item-title"]) : ""}
-                >
-                    {value}
-                </div>
-            )
-        });
-
-        return (
-            <div>
-                <li className={className}
-                    onClick={() => this.props.onClick(title)}
-                >
-                    {item && renderData}
-                </li>
-            </div>
-        );
-    }
-}
-
-HintItem.defaultProps = {
-    onClick: () => { },
-    item: {},
-}
 
