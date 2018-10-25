@@ -18,7 +18,7 @@ import {
   CompanyContact,
   Appoinment,
   Dashboard,
-  MobieAccess
+  Payment
 } from './containers'
 
 import {
@@ -42,7 +42,7 @@ const Router = () => (
     <Route exact path="/appoinment" component={Appoinment} />
     <Route exact path={PATH.COMPANY_INFORMATION} component={CompanyInformation} />
     <Route exact path={PATH.COMPANY_CONTACT} component={CompanyContact} />
-    <Route exect path={PATH.PAYMENT} component={MobieAccess} />
+    <Route exect path={PATH.PAYMENT} component={Payment} />
   </Switch>
 )
 

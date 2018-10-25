@@ -2,14 +2,27 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import {
-    CommonInput,
-    CommonForm,
-    CommonFooter
+    Input,
+    Select,
+    Form
 } from "../../common";
+
+
+import classnames from 'classnames';
+import cls from './styles.module.scss';
 
 import { PATH } from "../../constant";
 
-const dataTest = []
+const dataTest = [
+    {
+        value: 1,
+        label: "SOS Heating and Cooling, LLC"
+    },
+    {
+        value: 2,
+        label: "SOS Constractor"
+    }
+]
 
 class AdminLogIn extends Component {
     constructor(props) {
@@ -38,50 +51,49 @@ class AdminLogIn extends Component {
             HVACCompany,
             isLoading
         } = this.state;
-        let disabled = user === "" || 
-        pass === "" || HVACCompany === "";
+        let disabled = user === "" ||
+            pass === "" || HVACCompany === "";
         // if (this.props.AdminLogIn.) {
         //     return <Redirect to={PATH.DASH_BOARD} />
         // }
         return (
-            <div>
-                <CommonForm
-                    formTitle="Log In"
-                    buttonTitle="Log In"
-                    onSubmit={this.onSubmit}
-                    disabled={disabled}
-                    isLoading={isLoading}
-                    afterButton={
-                        <div className="text-center">
-                            Don't hava an account? <Link to={PATH.SIGN_UP} /> <b> Sign up now</b>
-                        </div>
-                    }
-                >
-                    <div className="form-group">
-                        <CommonInput
-                            onChange={(value) => { this.setState({ user: value }) }}
-                            label="Username"
-                            showHint
-                            hintData={dataTest}
-                        />
+            <Form
+                formTitle="Log In"
+                buttonTitle="Log In"
+                onSubmit={this.onSubmit}
+                footer
+                disabled={disabled}
+                isLoading={isLoading}
+                afterButton={
+                    <div className={classnames("text-center")}>
+                        Don't have an account? <Link to={PATH.SIGN_UP}><b>Sign up now</b></Link>
                     </div>
-                    <div className="form-group">
-                        <CommonInput
-                            label="Password"
-                            type="password"
-                            onChange={(value) => { this.setState({ pass: value }) }}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <CommonInput
-                            label="HVAC Company"
-                            type="text"
-                            onChange={(value) => { this.setState({ HVACCompany: value }) }}
-                        />
-                    </div>
-                </CommonForm>
-                <CommonFooter />
-            </div>
+                }
+            >
+                <div className={classnames("form-group")}>
+                    <Input
+                        onChange={(value) => { this.setState({ user: value }) }}
+                        label="Username"
+                        showHint
+                        hintData={dataTest}
+                    />
+                </div>
+                <div className={classnames("form-group")}>
+                    <Input
+                        label="Password"
+                        type="password"
+                        onChange={(value) => { this.setState({ pass: value }) }}
+                    />
+                </div>
+                <div className="form-group">
+                    <Select
+                        className={cls.form_select}
+                        label="HVAC Company"
+                        options={dataTest}
+                        onChange={(value) => { this.setState({ HVACCompany: value }) }}
+                    />
+                </div>
+            </Form>
         );
     }
 }

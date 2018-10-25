@@ -1,22 +1,9 @@
-<<<<<<< HEAD
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-=======
-import React, {
-    Component
-} from 'react';
-import {
-    Link
-} from 'react-router-dom';
-import {
-    connect
-} from "react-redux";
->>>>>>> d0c18871ee30f63ae5b338240635647da551ea60
 
 import {
     Input,
-    Form,
-    Footer
+    Form
 } from "../../../../common";
 
 import {
@@ -61,51 +48,49 @@ class ConpanyContact extends Component {
         }
 
         return (
-            <div>
-                <Form
-                    formTitle="Company Contact"
-                    buttonTitle="Next"
-                    onSubmit={this.onSubmit}
-                    disabled={disabled}
-                >
-                    <div className="form-group">
-                        <Input
-                            onChange={
-                                (value) => {
-                                    this.setState({
-                                        cContact: value
-                                    })
-                                }
+            <Form
+                formTitle="Company Contact"
+                buttonTitle="Next"
+                footer
+                onSubmit={this.onSubmit}
+                disabled={disabled}
+            >
+                <div className="form-group">
+                    <Input
+                        onChange={
+                            (value) => {
+                                this.setState({
+                                    cContact: value
+                                })
                             }
-                            label="Company Contact" />
-                    </div>
-                    <div className="form-group" >
-                        <Input
-                            onChange={
-                                (value) => {
-                                    this.setState({
-                                        cPhoneNumber: value
-                                    })
-                                }
+                        }
+                        label="Company Contact" />
+                </div>
+                <div className="form-group" >
+                    <Input
+                        onChange={
+                            (value) => {
+                                this.setState({
+                                    cPhoneNumber: value
+                                })
                             }
-                            label="Company Phone"
-                        />
-                    </div>
-                    <div className="form-group" >
-                        <Input
-                            onChange={
-                                (value) => {
-                                    this.setState({
-                                        cEmail: value
-                                    })
-                                }
+                        }
+                        label="Company Phone"
+                    />
+                </div>
+                <div className="form-group" >
+                    <Input
+                        onChange={
+                            (value) => {
+                                this.setState({
+                                    cEmail: value
+                                })
                             }
-                            label="Company Email Address"
-                        />
-                    </div>
-                </Form >
-                <Footer />
-            </div>
+                        }
+                        label="Company Email Address"
+                    />
+                </div>
+            </Form >
         )
     }
 }

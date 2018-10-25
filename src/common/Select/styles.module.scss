@@ -1,0 +1,12 @@
+@import "../../vars";
+.form_select{
+    width: 100%;
+}
+.selectLabel {
+    font-size: .75rem;
+    font-weight: 500;
+    color: $textSecondary;
+    margin-bottom: 7px;
+    display: block;
+    line-height: 1.125rem;
+  }

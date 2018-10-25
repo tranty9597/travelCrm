@@ -5,7 +5,7 @@ import Appoinment from "./appoinment";
 import Dashboard from './dashboard';
 import CompanyContact from "./signup/companyInformation/companyContact";
 import AdminLogIn from "./adminLogin";
-import MobieAccess from "./signup/companyInformation/companyContact/mobieAccess";
+import Payment from "./signup/companyInformation/companyContact/payment";
 
 
 export {
@@ -16,5 +16,5 @@ export {
     CompanyContact,
     Appoinment,
     Dashboard,
-    MobieAccess
+    Payment
 }
