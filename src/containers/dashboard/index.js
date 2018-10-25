@@ -7,8 +7,6 @@ import {
     UikContainerVertical
 } from "../../UikLayout";
 
-import { UikLayoutMain } from '../../UikLayout';
-
 import classnames from 'classnames';
 
 import cls from "./styles.module.scss"
@@ -43,9 +41,7 @@ class Dashboard extends PureComponent {
                 />
 
                 <UikContainerVertical className={classnames(cls.childrenWraper)} >
-                    <UikLayoutMain>
-                        {children}
-                    </UikLayoutMain>
+                    {children}
                 </UikContainerVertical>
             </UikContainerHorizontal>
 
