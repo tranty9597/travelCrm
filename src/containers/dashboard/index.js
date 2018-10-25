@@ -2,6 +2,16 @@ import React, { PureComponent } from 'react';
 
 import { SideBar } from '../../common';
 
+import {
+    UikContainerHorizontal,
+    UikContainerVertical
+} from "../../UikLayout";
+
+import { UikLayoutMain } from '../../UikLayout';
+
+import classnames from 'classnames';
+
+import cls from "./styles.module.scss"
 
 const menuLinks = [
     {
@@ -24,11 +34,20 @@ class Dashboard extends PureComponent {
         this.state = {};
     }
     render() {
+        let { children } = this.props;
         return (
-            <SideBar
-                listMenu={menuLinks}
-                title="MENU"
-            />
+            <UikContainerHorizontal>
+                <SideBar
+                    listMenu={menuLinks}
+                    title="MENU"
+                />
+
+                <UikContainerVertical className={classnames(cls.childrenWraper)} >
+                    <UikLayoutMain>
+                        {children}
+                    </UikLayoutMain>
+                </UikContainerVertical>
+            </UikContainerHorizontal>
 
         );
     }

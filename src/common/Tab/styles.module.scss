@@ -1,0 +1,18 @@
+@import "../../vars";
+.active {
+    color: $blue !important;
+}
+
+.container {
+    flex-direction: column;
+    width: 100%;
+}
+
+.tab_container {
+    padding: 0 !important;
+}
+
+.tab_div_item {
+    margin: 0px !important;
+    padding: 0 15px;
+}

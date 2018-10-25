@@ -13,13 +13,13 @@ import classnames from 'classnames';
 import "./styles.css";
 
 type FormProps = {
-    formTitle: String;
-    buttonTitle: String;
-    isLoading: Boolean,
-    onSubmit: Function,
-    children: React.node,
-    afterButton: React.node,
-    footer: Boolean
+    formTitle?: String;
+    buttonTitle?: String;
+    isLoading?: Boolean,
+    onSubmit?: Function,
+    children?: React.node,
+    afterButton?: React.node,
+    footer?: Boolean
 }
 
 

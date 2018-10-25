@@ -1,17 +1,17 @@
 import React from "react"
 
-import { Input, Table } from "../../common"
+import { Input, Table } from "../../../common"
 
-import { UikButton } from "../../UikLayout"
+import { UikButton } from "../../../UikLayout"
 
 import { Row, Col } from "react-bootstrap"
-import { ProcessLayout } from "../../layout";
+import { Dashboard } from "../../../containers";
 import { ApptFormModal } from "./components";
 
 
 
 
-class Appoinment extends React.Component {
+class Appointment extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -33,7 +33,7 @@ class Appoinment extends React.Component {
             <div className='container-fluid'>
                 <Row>
                     <Col md={6} lg={3}>
-                        <h5 style={{ lineHeight: '2.2rem' }}>Appoinment</h5>
+                        <h5 style={{ lineHeight: '2.2rem' }}>Appointment</h5>
                     </Col>
                     <Col md={6} lg={6}>
                         <Row>
@@ -47,7 +47,7 @@ class Appoinment extends React.Component {
                     </Col>
 
                     <Col md={12} lg={3} className='d-flex justify-content-end'>
-                        <UikButton onClick={this.showCreateForm} success>New Appoinment</UikButton>
+                        <UikButton onClick={this.showCreateForm} success>New Appointment</UikButton>
                     </Col>
                 </Row>
             </div>
@@ -66,10 +66,10 @@ class Appoinment extends React.Component {
                     onClose={this.toggleModal}
                 />
 
-                <ProcessLayout>
+                <Dashboard>
                     {this.renderToolbar()}
                     <Table type={1} onEdit={this.showEditForm} />
-                </ProcessLayout>
+                </Dashboard>
             </div>
         )
     }
@@ -79,4 +79,4 @@ class Appoinment extends React.Component {
     }
 }
 
-export default Appoinment;
+export default Appointment;

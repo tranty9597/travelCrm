@@ -15,12 +15,15 @@ import {
   SignUp,
   CompanyInformation,
   CompanyContact,
-  Appoinment,
-  Dashboard
+  Appointment,
+  Dashboard,
+  System
 } from './containers'
 
 import {
-  UikPageFade, UikContainerVertical, UikContainerHorizontal
+  UikPageFade, 
+  UikContainerVertical, 
+  UikContainerHorizontal
 } from './UikLayout'
 
 import { NavBar } from "./layout"
@@ -34,9 +37,10 @@ const store = configureStore();
 const Router = () => (
   <Switch>
     <Route exact path={PATH.DASH_BOARD} component={Dashboard} />
+    <Route exact path={PATH.SYSTEM} component={System} />
     <Route exact path={PATH.LOG_IN} component={LogIn} />
     <Route exact path={PATH.SIGN_UP} component={SignUp} />
-    <Route exact path="/appoinment" component={Appoinment} />
+    <Route exact path={PATH.APPOINTMENT} component={Appointment} />
     <Route exact path={PATH.COMPANY_INFORMATION} component={CompanyInformation} />
     <Route exact path={PATH.COMPANY_CONTACT} component={CompanyContact} />
   </Switch>

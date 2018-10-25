@@ -1,4 +1,6 @@
 const DASH_BOARD = "/";
+const APPOINTMENT = "/appointment";
+const SYSTEM = "/system";
 //------------------
 const LOG_IN = "/login";
 //------------------
@@ -11,6 +13,8 @@ const CREDIT_CARD_PAYMENT = PAYMENT + "/cc_payment";
 
 const PATH = {
     DASH_BOARD,
+    APPOINTMENT,
+    SYSTEM,
     LOG_IN,
     SIGN_UP,
     COMPANY_INFORMATION,
@@ -21,7 +25,7 @@ const PATH = {
 
 
 const LINK = {
-    TERMS: "google.com"
+    TERMS: "https//www.google.com"
 }
 
 export {
