@@ -1,11 +1,7 @@
 @import "../../../vars";
 .tab_content_container {
     width: inherit;
-    margin-top: 20px;
     padding-left: 25px;
-    @media screen and (max-width: $mobile) {
-        margin-top: 10px;
-    }
 }
 
 .tab_content_container:hover {
@@ -28,7 +24,12 @@
 }
 
 .icon_container {
-    font-size: 18pt;
+    font-size: 18pt !important;
+}
+
+.icon_container>* {
+    margin-left: 5px;
+    color: $textSecondary;
 }
 
 .tab_content_header {
@@ -41,6 +42,11 @@
         padding: 10px 0px;
         padding-right: 15px;
     }
+}
+
+.tab_no_header {
+    right: 0;
+    position: absolute;
 }
 
 .tab_content {

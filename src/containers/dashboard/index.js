@@ -40,7 +40,7 @@ class Dashboard extends PureComponent {
                     title="MENU"
                 />
 
-                <UikContainerVertical className={classnames(cls.childrenWraper)} >
+                <UikContainerVertical className={classnames(cls.childrenWraper, cls.responsive_container)} >
                     {children}
                 </UikContainerVertical>
             </UikContainerHorizontal>

@@ -1,5 +1,15 @@
 @import "../../vars";
 
 .childrenWraper{
-    padding: 15px 15px 0 15px;
+    padding: 15px;
+}
+
+.responsive_container {
+    @media screen and (max-width: $almostMobile) and (orientation: landscape), (orientation: portrait){
+        flex-direction: column;
+        height: fit-content;
+    }
+    @media screen and (min-width: $almostMobile){
+        flex-direction: row;
+    }
 }

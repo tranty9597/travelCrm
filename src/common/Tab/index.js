@@ -9,29 +9,33 @@ import cls from './styles.module.scss';
 import TabContent from './TabContent';
 
 type TabProps = {
-    tabLinks?: Array
+    tabLinks?: Array,
+    activeTab?: Number,
+    activeUnit?: Number,
+    onTabClick?: Function,
+    onUnitClick?: Function,
+    className?: String,
+    renderPart?: Boolean
 }
 
 class Tab extends PureComponent<TabProps> {
     constructor(props) {
         super(props);
         this.state = {
-            activeIndx: 0,
-            activeUnit: -1
         };
     }
 
-    onTabClick = (activeIndx) => {
-        this.setState({ activeIndx })
+    onTabClick = (activeTab) => {
+        this.props.onTabClick(activeTab)
     }
 
     onUnitClick = (activeUnit) => {
-        this.setState({ activeUnit })
+        this.props.onUnitClick(activeUnit)
     }
 
 
 
-    visualData = (data, activeUnit) => {
+    visualData = (data, activeUnit, renderPart) => {
 
         let unit = [];
         if (data) {
@@ -64,20 +68,25 @@ class Tab extends PureComponent<TabProps> {
                         id={indx}
                         key={indx}
                         active={activeUnit === indx}
-                        className={classnames("col-lg-10")}
                         onClick={(id) => this.onUnitClick(id)}
                     />
                 );
             });
         }
-        return unit;
+        return (
+            <div className={classnames(
+                renderPart ? 'col' : 'col-lg-10',
+                cls.tab_content
+            )}>
+                {unit}
+            </div>
+        )
     }
 
     render() {
-        let { tabLinks } = this.props;
-        let { activeIndx, activeUnit } = this.state;
+        let { tabLinks, activeTab, activeUnit, className, renderPart } = this.props;
         let units = [];
-        units = this.visualData(tabLinks[activeIndx].unit, activeUnit);
+        units = this.visualData(tabLinks[activeTab].unit, activeUnit, renderPart);
         let items = [];
         let activeClass = classnames(
             cls.active,
@@ -92,10 +101,10 @@ class Tab extends PureComponent<TabProps> {
                     text={element.text}
                     className={classnames(
                         cls.tab_div_item,
-                        "col-lg-4",
+                        "col",
                         "justify-content-center",
                         "text-center",
-                        activeIndx === indx && activeClass
+                        activeTab === indx && activeClass
                     )}
                     onClick={() => this.onTabClick(indx)}
                 />
@@ -104,23 +113,38 @@ class Tab extends PureComponent<TabProps> {
 
 
         return (
-            <div className={classnames(cls.container, "col-lg-5")}>
-                <UikTabContainer className={classnames(cls.tab_container)}>
+            <div className={classnames(
+                cls.container,
+                renderPart && cls.responsive_unit_tab_content,
+                className)}>
+                <UikTabContainer className={classnames(cls.tab_container, renderPart && 'col-lg-10')}>
                     {items}
                 </UikTabContainer>
 
                 {
-                    tabLinks[activeIndx].unit &&
-                    units
+                    tabLinks[activeTab].unit &&
+                    <UikTabContainer className={classnames(
+                        cls.tab_container,
+                        cls.tab_content,
+                    )}>
+                        {units}
+                    </UikTabContainer>
+
                 }
-            </div>
+            </div >
 
         );
     }
 }
 
 Tab.defaultProps = {
-    tabLinks: []
+    tabLinks: [],
+    activeTab: 0,
+    activeUnit: -1,
+    onTabClick: () => { },
+    onUnitClick: () => { },
+    className: "",
+    renderPart: false,
 }
 
 export default Tab;

@@ -5,7 +5,7 @@
     height: 100%;
     margin: auto;
     overflow: auto;
-    @media screen and (min-width: $mobile) and (max-width: $desktop) {
+    @media screen and (min-width: $mobile) {
         font-size: 80%;
         padding-left: 7.5%;
         padding-right: 7.5%;

@@ -26,35 +26,6 @@ class TabContent extends PureComponent<TabContentProps> {
         this.state = {};
     }
 
-    // visualData = (data) => {
-    //     let unit = [];
-    //     data.forEach((d, indx) => {
-    //         let content = [];
-    //         d.data.forEach((element, i) => {
-    //             content.push(
-    //                 <div
-    //                     key={`${indx + i}`}
-    //                     className={classnames(
-    //                         cls.tab_content_row_container,
-    //                         "d-flex"
-    //                     )}
-    //                 >
-    //                     <div className={classnames(
-    //                         cls.tab_content_label,
-    //                     )}>
-    //                         {element.label}
-    //                     </div>
-    //                     <div>
-    //                         {Object.values(element)[1]}
-    //                     </div>
-    //                 </div >
-    //             )
-    //         });
-    //         unit.push(this.createUnit(d.name, content, indx));
-    //     });
-    //     return unit;
-    // }
-
     createUnit = () => {
         let {
             id,
@@ -72,27 +43,35 @@ class TabContent extends PureComponent<TabContentProps> {
                 )}
                 onClick={() => this.props.onClick(id)}
             >
-                <UikWidgetHeader
-                    noDivider
-                    rightEl={(
-                        <div className={classnames(cls.icon_container)}>
-                            <Uikon className="col-lg-6">
-                                image_picture
-                                </Uikon>
-                            <Uikon>
-                                edit
-                                </Uikon>
-                        </div>
-                    )}
-                    className={classnames(
-                        cls.tab_content_header,
-                        "text-center",
-                        "strong"
-                    )}
-                >
-                    {name}
-                </UikWidgetHeader>
-                <UikDivider className={classnames(cls.divider)} />
+                {name ?
+                    <UikWidgetHeader
+                        noDivider
+                        rightEl={(
+                            <div className={classnames(cls.icon_container)}>
+                                <Uikon>
+                                    image_picture
+                            </Uikon>
+                                <Uikon>
+                                    edit
+                            </Uikon>
+                            </div>
+                        )}
+                        className={classnames(
+                            cls.tab_content_header,
+                            "text-center",
+                            "strong"
+                        )}
+                    >
+                        {name}
+                    </UikWidgetHeader> :
+                    <div className={classnames(cls.icon_container)}>
+                        <Uikon className={classnames(cls.tab_no_header, cls.tab_content_header)}>
+                        edit
+                    </Uikon>
+                    </div>
+                    
+                }
+               {name && <UikDivider className={classnames(cls.divider)} />}
                 <UikWidgetContent className={classnames(
                     cls.tab_content,
                     "flex-column"

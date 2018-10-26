@@ -42,7 +42,6 @@ class SideBar extends PureComponent<SideBarProps> {
         let { activeIndex, clicked } = this.state;
 
         return (
-
             <UikNavPanel className={classnames(
                 "d-flex",
                 "flex-column",
@@ -114,7 +113,6 @@ class SideBar extends PureComponent<SideBarProps> {
                 <Footer menu/>
 
             </UikNavPanel>
-
         );
     }
 }
