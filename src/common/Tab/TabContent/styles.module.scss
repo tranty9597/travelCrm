@@ -1,0 +1,63 @@
+@import "../../../vars";
+.tab_content_container {
+    width: inherit;
+    padding-left: 25px;
+}
+
+.tab_content_container:hover {
+    cursor: pointer;
+}
+
+.active {
+    &:before {
+        content: '';
+        border-radius: inherit;
+        display: block;
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        border-left: 5px solid $blue;
+    }
+}
+
+.icon_container {
+    font-size: 18pt !important;
+}
+
+.icon_container>* {
+    margin-left: 5px;
+    color: $textSecondary;
+}
+
+.tab_content_header {
+    font-size: inherit;
+    @media screen and (max-width: $mobile) {
+        padding: 5px 0px;
+        padding-right: 10px;
+    }
+    @media screen and (min-width: $mobile) {
+        padding: 10px 0px;
+        padding-right: 15px;
+    }
+}
+
+.tab_no_header {
+    right: 0;
+    position: absolute;
+}
+
+.tab_content {
+    padding-left: 0px;
+    padding-right: 0px;
+    @media screen and (max-width: $tablet) {
+        padding: 20px 0px;
+    }
+}
+
+.divider {
+    position: absolute;
+    left: 0;
+}

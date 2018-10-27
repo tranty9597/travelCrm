@@ -6,13 +6,49 @@
 .container {
     flex-direction: column;
     width: 100%;
+    padding: 0px !important;
 }
 
 .tab_container {
+    margin: auto;
+    margin-top: 20px;
     padding: 0 !important;
+    border-bottom: 1px solid $borderColor;
+    @media screen and (max-width: $mobile) {
+        margin-top: 10px;
+    }
 }
 
 .tab_div_item {
     margin: 0px !important;
     padding: 0 15px;
+    @media screen and (max-width: $mobile) {
+        height: 40px;
+    }
+}
+
+.tab_content {
+    padding: 0;
+    border: none;
+}
+
+.tab_content_label {
+    color: $textSecondary;
+    position: relative;
+    width: 40%;
+    max-width: 300px;
+    flex-basis: 40%;
+    @media screen and (min-width: $tablet) {
+        flex-basis: 50%
+    }
+}
+
+.tab_content_row_container {
+    padding: 5px 0px;
+}
+
+.responsive_unit_tab_content {
+    @media screen and (min-width: $mobile) {
+        margin-top: 70px;
+    }
 }
