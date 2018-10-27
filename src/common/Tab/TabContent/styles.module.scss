@@ -2,6 +2,8 @@
 .tab_content_container {
     width: inherit;
     padding-left: 25px;
+    margin-bottom: 10px;
+    transition: all .2s;
 }
 
 .tab_content_container:hover {
@@ -9,18 +11,10 @@
 }
 
 .active {
-    &:before {
-        content: '';
-        border-radius: inherit;
-        display: block;
-        position: absolute;
-        z-index: 1;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        border-left: 5px solid $blue;
-    }
+    border-left: 5px solid $blue;
+    position: relative;
+    z-index: 1;
+    transform: translateX(1);
 }
 
 .icon_container {

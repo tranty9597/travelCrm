@@ -17,7 +17,9 @@ type TabContentProps = {
     className?: String,
     data?: Array,
     active?: Boolean,
-    onClick?: Function
+    onClick?: Function,
+    onImageClick?: Function,
+    onEditClick?: Function
 }
 
 class TabContent extends PureComponent<TabContentProps> {
@@ -34,6 +36,14 @@ class TabContent extends PureComponent<TabContentProps> {
             active,
             className
         } = this.props;
+        let imgIcon =
+            <Uikon onClick={() => this.props.onImageClick()}>
+                image_picture
+            </Uikon>;
+        let editIcon =
+            <Uikon onClick={() => this.props.onEditClick()}>
+                edit
+            </Uikon>;
         return (
             <UikWidget
                 className={classnames(
@@ -41,19 +51,15 @@ class TabContent extends PureComponent<TabContentProps> {
                     className,
                     active && cls.active
                 )}
-                onClick={() => this.props.onClick(id)}
+                onClick={(e) => this.props.onClick(e, id)}
             >
                 {name ?
                     <UikWidgetHeader
                         noDivider
                         rightEl={(
                             <div className={classnames(cls.icon_container)}>
-                                <Uikon>
-                                    image_picture
-                            </Uikon>
-                                <Uikon>
-                                    edit
-                            </Uikon>
+                                {imgIcon}
+                                {editIcon}
                             </div>
                         )}
                         className={classnames(
@@ -64,14 +70,16 @@ class TabContent extends PureComponent<TabContentProps> {
                     >
                         {name}
                     </UikWidgetHeader> :
-                    <div className={classnames(cls.icon_container)}>
-                        <Uikon className={classnames(cls.tab_no_header, cls.tab_content_header)}>
-                        edit
-                    </Uikon>
+                    <div className={classnames(
+                        cls.icon_container,
+                        cls.tab_no_header,
+                        cls.tab_content_header
+                    )}>
+                        {editIcon}
                     </div>
-                    
+
                 }
-               {name && <UikDivider className={classnames(cls.divider)} />}
+                {name && <UikDivider className={classnames(cls.divider)} />}
                 <UikWidgetContent className={classnames(
                     cls.tab_content,
                     "flex-column"
@@ -97,7 +105,9 @@ TabContent.defaultProps = {
     className: "",
     data: [],
     active: false,
-    onClick: () => { }
+    onClick: () => { },
+    onImageClick: () => { },
+    onEditClick: () => { },
 }
 
 export default TabContent;

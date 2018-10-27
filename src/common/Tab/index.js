@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import ReactDOM from 'react-dom';
 import {
     UikTabContainer,
     UikTabItem,
@@ -14,26 +15,54 @@ type TabProps = {
     activeUnit?: Number,
     onTabClick?: Function,
     onUnitClick?: Function,
+    onUnitOutSideClick?: Function,
     className?: String,
-    renderPart?: Boolean
+    renderPart?: Boolean,
+    editClick?: Function,
+    imageClick?: Function
 }
 
 class Tab extends PureComponent<TabProps> {
     constructor(props) {
         super(props);
         this.state = {
+
         };
+        this.tabContent = [];
+        this.tabUnitContainer = null;
+    }
+
+    componentWillMount() {
+        document.addEventListener('mousedown', this.onUnitOutSideClick, false);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.onUnitOutSideClick, false);
     }
 
     onTabClick = (activeTab) => {
         this.props.onTabClick(activeTab)
     }
 
-    onUnitClick = (activeUnit) => {
-        this.props.onUnitClick(activeUnit)
+    onUnitOutSideClick = (e) => {
+        let { activeUnit } = this.props;
+        if (activeUnit !== -1 && this.tabContent[activeUnit]) {
+            if (
+                !this.tabContent[activeUnit].contains(e.target) &&
+                !this.tabUnitContainer.contains(e.target)
+            ) {
+                this.props.onUnitOutSideClick(e.target);
+            }
+        }
+
     }
 
-
+    onUnitClick = (e, activeUnit) => {
+        let domNode = ReactDOM.findDOMNode(this.tabContent[activeUnit]);
+        if (domNode.contains(e.target)) {
+            this.props.onUnitClick(activeUnit)
+        }
+    }
 
     visualData = (data, activeUnit, renderPart) => {
 
@@ -61,15 +90,22 @@ class Tab extends PureComponent<TabProps> {
                         </div >
                     )
                 });
+                this.tabContent.push();
                 unit.push(
-                    <TabContent
-                        name={d.name}
-                        content={content}
-                        id={indx}
+                    <div
+                        ref={(inst) => this.tabContent[indx] = inst}
                         key={indx}
-                        active={activeUnit === indx}
-                        onClick={(id) => this.onUnitClick(id)}
-                    />
+                    >
+                        <TabContent
+                            name={d.name}
+                            content={content}
+                            id={indx}
+                            active={activeUnit === indx}
+                            onClick={(e, id) => { this.onUnitClick(e, id) }}
+                            onImageClick={() => this.props.onImageClick()}
+                            onEditClick={() => this.props.onEditClick()}
+                        />
+                    </div>
                 );
             });
         }
@@ -110,13 +146,13 @@ class Tab extends PureComponent<TabProps> {
                 />
             );
         })
-
-
         return (
-            <div className={classnames(
-                cls.container,
-                renderPart && cls.responsive_unit_tab_content,
-                className)}>
+            <div
+                ref={(inst) => renderPart ? this.props.domRef(inst) : (this.tabUnitContainer = inst)}
+                className={classnames(
+                    cls.container,
+                    renderPart && cls.responsive_unit_tab_content,
+                    className)}>
                 <UikTabContainer className={classnames(cls.tab_container, renderPart && 'col-lg-10')}>
                     {items}
                 </UikTabContainer>
@@ -143,6 +179,9 @@ Tab.defaultProps = {
     activeUnit: -1,
     onTabClick: () => { },
     onUnitClick: () => { },
+    onUnitOutSideClick: () => { },
+    imageClick: () => { },
+    editClick: () => { },
     className: "",
     renderPart: false,
 }
