@@ -15,14 +15,14 @@ import { PATH } from "../../constant";
 
 const dataTest = [
     {
-        value: 1,
-        label: "SOS Heating and Cooling, LLC"
+      name: "SOS Heating and Cooling, LLC",
+      address: "32415 Abshire Rapid, South Nicklaushaven DE 04850-8005"
     },
     {
-        value: 2,
-        label: "SOS Constractor"
+      name: "SOS Constractor",
+      address: "79685 Reed Ranch Suite 989, West Odellside, VT 54065-4909"
     }
-]
+  ]
 
 class AdminLogIn extends Component {
     constructor(props) {
@@ -89,7 +89,7 @@ class AdminLogIn extends Component {
                     <Select
                         className={cls.form_select}
                         label="HVAC Company"
-                        options={dataTest}
+                        rawOptions={dataTest}
                         onChange={(value) => { this.setState({ HVACCompany: value }) }}
                     />
                 </div>

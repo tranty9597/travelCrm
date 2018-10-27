@@ -16,7 +16,6 @@ import {
   SignUp,
   CompanyInformation,
   CompanyContact,
-
   Dashboard,
   Payment,
   Appointment,

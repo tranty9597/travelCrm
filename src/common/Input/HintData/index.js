@@ -38,8 +38,6 @@ class HintData extends PureComponent<HintDataProps> {
                     >
                         {value}
                     </div>
-
-
                 )
             });
             renderData.push(
