@@ -1,3 +1,4 @@
+import "@babel/polyfill";
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux'
@@ -21,8 +22,8 @@ import {
 } from './containers'
 
 import {
-  UikPageFade, 
-  UikContainerVertical, 
+  UikPageFade,
+  UikContainerVertical,
   UikContainerHorizontal
 } from './UikLayout'
 
@@ -33,7 +34,7 @@ import { PATH } from './constant';
 import cls from './App.module.scss'
 
 const store = configureStore();
-
+export default store;
 const Router = () => (
   <Switch>
     <Route exact path={PATH.DASH_BOARD} component={Dashboard} />

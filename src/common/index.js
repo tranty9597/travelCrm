@@ -5,6 +5,7 @@ import Footer from "./Footer";
 import FormModal from "./FormModal";
 import SideBar from "./SideBar";
 import Tab from "./Tab";
+import TimeLine from "./TimeLine";
 
 import Table from "./Table"
 
@@ -16,5 +17,6 @@ export {
     FormModal,
     SideBar,
     Tab,
+    TimeLine,
     Table
 }

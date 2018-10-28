@@ -3,8 +3,8 @@ import {
   Redirect,
   Link
 } from 'react-router-dom';
-import { connect } from "react-redux";
-import { loginAction } from "../../actions/authentication"
+import { connect } from 'react-redux';
+import { loginAction } from '../../actions/authentication';
 
 import {
   Input,
@@ -37,14 +37,7 @@ class LogIn extends Component {
   }
 
   onSubmit = () => {
-    this.setState({ isLoading: true })
-    setTimeout(
-      () => {
-        this.props.loginAction(this.state.user, this.state.pass);
-        this.setState({ isLoading: false })
-
-      }, 2000
-    )
+    this.props.dispatch(loginAction(this.state.user, this.state.pass));
   }
 
   render() {
@@ -98,14 +91,11 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    loginAction: (user, pass) => {
-      dispatch(loginAction(user, pass))
-    }
-  }
-};
+// const mapDispatchToProps = {
+//   ...loginAction
+// };
 
 export default connect(
-  mapStateToProps, mapDispatchToProps
+  mapStateToProps,
+  // mapDispatchToProps
 )(LogIn);

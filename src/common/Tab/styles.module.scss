@@ -5,8 +5,9 @@
 
 .container {
     flex-direction: column;
-    width: 100%;
+    width: inherit;
     padding: 0px !important;
+    transition: all .2s;
 }
 
 .tab_container {
