@@ -7,8 +7,9 @@ import SideBar from "./SideBar";
 import Select from "./Select"
 import Tab from "./Tab";
 import TimeLine from "./TimeLine";
-
-import Table from "./Table"
+import NavBar from "./NavBar";
+import AddNewBox from './AddNewBox';
+import Table from "./Table";
 
 export {
     Select,
@@ -20,5 +21,7 @@ export {
     SideBar,
     Tab,
     TimeLine,
+    NavBar,
+    AddNewBox,
     Table
 }

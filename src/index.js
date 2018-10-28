@@ -29,7 +29,7 @@ import {
   UikContainerHorizontal
 } from './UikLayout'
 
-import { NavBar } from "./layout"
+import { NavBar } from "./common"
 
 import classnames from 'classnames';
 import { PATH } from './constant';

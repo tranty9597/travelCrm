@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 
 import {
     UikContainerVertical,
@@ -19,7 +19,7 @@ type TimeLineProps = {
     className?: String
 }
 
-class TimeLine extends PureComponent {
+class TimeLine extends Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -69,6 +69,7 @@ class TimeLine extends PureComponent {
     }
 
     render() {
+
         let {
             data,
             className

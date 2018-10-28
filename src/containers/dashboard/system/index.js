@@ -1,8 +1,9 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 
 import {
     Tab,
-    TimeLine
+    TimeLine,
+    AddNewBox
 } from '../../../common';
 
 import { Dashboard } from '../../../containers';
@@ -210,13 +211,14 @@ const notes = [
     },
 ]
 
-class System extends PureComponent {
+class System extends Component {
     constructor(props) {
         super(props);
         this.state = {
             activeTab: 0,
             activeUnit: -1,
-            activeUnitTab: 0
+            activeUnitTab: 0,
+            test: false
         };
         this.tabPartContainer = null;
     }
@@ -228,12 +230,24 @@ class System extends PureComponent {
     }
 
     showImage = () => {
-        alert('abc')
+        alert('image clicked');
     }
 
     edit = () => {
-        alert('def')
+        alert('edit clicked');
 
+    }
+
+    onAddNote = (value) => {
+        notes.push(
+            {
+                label: "",
+                subLabel: "09/10/2018 08:00 AM",
+                content: value,
+                images:[]
+            }
+        )
+        this.setState({test: !this.state.test});
     }
 
     render() {
@@ -245,12 +259,12 @@ class System extends PureComponent {
         return (
 
             <Dashboard>
-
                 <UikContainerVertical className={classnames(
                     clsTab.container,
                     'col-lg-6')
                 }>
                     <Tab
+                        className={classnames(cls.tab_style)}
                         tabLinks={tabs}
                         activeTab={activeTab}
                         activeUnit={activeUnit}
@@ -262,10 +276,14 @@ class System extends PureComponent {
                     />
 
                     {activeTab === 2 &&
-                        <div styles={{height: 'auto'}}>
+                        <div className={classnames(cls.timeline_container)}>
                             <TimeLine
                                 className={classnames(clsTabContent.tab_content_header, cls.responsive_timeline)}
                                 data={notes}
+                            />
+                            <AddNewBox
+                                label='New Note'
+                                onClick={(value) => this.onAddNote(value)}
                             />
                         </div>
                     }

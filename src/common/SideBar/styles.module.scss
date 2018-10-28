@@ -2,6 +2,7 @@
 .nav_panel {
     min-height: 100%;
     flex-basis: auto;
+    height: 100vw;
     @media screen and (max-width: 1200px) {
         width: 15%;
         -webkit-transition: .4s;
@@ -11,18 +12,18 @@
 }
 
 .nav_panel.show {
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: $mobile) {
         width: 25%;
         max-width: 300px;
     }
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: $almostMobile) {
         width: 35%;
         max-width: 300px;
     }
 }
 
 .nav_section_title {
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: $almostMobile) {
         display: none;
     }
 }
@@ -55,7 +56,7 @@
 }
 
 .responsive_button {
-    @media screen and (min-width: 767px) {
+    @media screen and (min-width: $almostMobile) {
         display: none;
     }
     width: 100%;
@@ -152,7 +153,7 @@
         -o-transition: .4s;
         transition: .4s;
     }
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: $mobile) {
         a {
             font-size: inherit;
         }

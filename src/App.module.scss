@@ -6,12 +6,12 @@
     margin: auto;
     overflow: auto;
     @media screen and (min-width: $mobile) {
-        font-size: 80%;
+        font-size: 80%!important;
         padding-left: 7.5%;
         padding-right: 7.5%;
     }
     @media screen and (max-width: $mobile) {
-        font-size: 60%;
+        font-size: 60%!important;
     }
 }
 

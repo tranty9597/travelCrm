@@ -1,0 +1,41 @@
+@import '../../vars';
+.box_textarea {
+    border: 1px solid $borderColor;
+}
+
+.textarea {
+    resize: none; // line-height: 36px;
+    border: 1px solid $borderColor;
+    border-radius: 4px;
+    display: block;
+    width: 100%;
+    background: white;
+    padding: 10px 15px;
+    transition: .2s all;
+    outline: none;
+}
+
+.textarea:focus {
+    border-color: $primary !important;
+}
+
+.label {
+    margin: 10px 0px;
+    color: $textSecondary;
+    @media screen and (max-width: $almostMobile) {
+        margin: 5px 0px;
+    }
+}
+
+.button {
+    margin-top: 15px;
+    @media screen and (max-width: $almostMobile) {
+        margin-top: 10px;
+    }
+}
+
+.container {
+    @media screen and (max-width: $almostMobile) {
+        margin: 10px 0px;
+    }
+}

@@ -5,6 +5,8 @@
 }
 
 .responsive_container {
+    height: fit-content;
+
     @media screen and (max-width: $almostMobile) and (orientation: landscape), (orientation: portrait){
         flex-direction: column;
         height: fit-content;

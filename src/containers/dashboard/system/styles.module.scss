@@ -8,17 +8,24 @@
 .responsive_timeline {
     margin-top: 0;
     height: -webkit-fill-available;
+    height: auto;
  
     @media screen and (min-width: 812px) and (max-width: $almostTablet){
-        width: 70vw;
-        margin-top: 10px;
-        position: fixed;
+        max-width: 70vw;
     }
 
     @media screen and (min-width: $tablet){
         width: max-content;
         min-width: 40vw;
         max-width: 80vw;
-        margin-top: 15px;
     }
+}
+
+.tab_style {
+    min-height: fit-content;
+}
+
+.timeline_container {
+    height: fit-content;
+    width: fit-content;
 }
