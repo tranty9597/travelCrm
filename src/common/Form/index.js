@@ -10,7 +10,7 @@ import { Footer } from '../../common';
 
 import classnames from 'classnames';
 
-import "./styles.css";
+import cls from "./styles.module.scss";
 
 type FormProps = {
     formTitle?: String;
@@ -33,6 +33,7 @@ class Form extends PureComponent<FormProps> {
         let {
             disabled,
             children,
+            skip,
             formTitle,
             buttonTitle,
             isLoading,
@@ -45,7 +46,7 @@ class Form extends PureComponent<FormProps> {
                     "d-flex",
                     "flex-column",
                     "justify-content-between",
-                    "form_div_container"
+                    cls.form_div_container
                 )}
             >
                 <div>
@@ -56,13 +57,14 @@ class Form extends PureComponent<FormProps> {
                             "mb-5",
                             "bg-white",
                             "rounded",
-                            "form_div")}
+                            cls.form_div)}
                     >
                         <UikContent
                             contentCenter
-                            className={classnames("form-div-title")}
+                            className={classnames(cls.form_div_title)}
                         >
-                            <UikHeadline className={classnames("text-center ")}>
+                            <UikHeadline className={classnames("text-center ",
+                            cls.text_header)}>
                                 {formTitle}
                             </UikHeadline>
                         </UikContent>
@@ -71,7 +73,7 @@ class Form extends PureComponent<FormProps> {
 
                         <div className={classnames(
                             "form-group",
-                            "form_btn_submit")}
+                            cls.form_btn_submit)}
                         >
                             <UikButton
                                 className={classnames(!disabled ? "btn-block btn-primary" : "btn-block")}
@@ -82,6 +84,7 @@ class Form extends PureComponent<FormProps> {
                             >
                                 {buttonTitle}
                             </UikButton>
+                            {skip}
                         </div>
 
                     </UikContent>

@@ -13,11 +13,13 @@ import {
 
 import {
   LogIn,
+  AdminLogIn,
   SignUp,
   CompanyInformation,
   CompanyContact,
-  Appointment,
   Dashboard,
+  Payment,
+  Appointment,
   System
 } from './containers'
 
@@ -40,10 +42,12 @@ const Router = () => (
     <Route exact path={PATH.DASH_BOARD} component={Dashboard} />
     <Route exact path={PATH.SYSTEM} component={System} />
     <Route exact path={PATH.LOG_IN} component={LogIn} />
+    <Route exact path={PATH.ADMIN_LOG_IN} component={AdminLogIn} />
     <Route exact path={PATH.SIGN_UP} component={SignUp} />
     <Route exact path={PATH.APPOINTMENT} component={Appointment} />
     <Route exact path={PATH.COMPANY_INFORMATION} component={CompanyInformation} />
     <Route exact path={PATH.COMPANY_CONTACT} component={CompanyContact} />
+    <Route exect path={PATH.PAYMENT} component={Payment} />
   </Switch>
 )
 
