@@ -7,11 +7,11 @@
 .responsive_container {
     height: fit-content;
 
-    @media screen and (max-width: $almostMobile) and (orientation: landscape), (orientation: portrait){
+    @media screen and (max-width: 900px) and (orientation: landscape), (orientation: portrait){
         flex-direction: column;
         height: fit-content;
     }
-    @media screen and (min-width: $almostMobile){
+    @media screen and (min-width: 900px){
         flex-direction: row;
     }
 }

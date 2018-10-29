@@ -12,7 +12,7 @@ export const post = (url, body) => {
     }).then(
         res => {
             // return handleRespond(res)
-            // console.log(res.json())
+            console.log(res)
         },
     ).catch(err => { console.log(err) });
 }

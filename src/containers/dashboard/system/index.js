@@ -8,7 +8,12 @@ import {
 
 import { Dashboard } from '../../../containers';
 
-import { UikContainerVertical } from '../../../UikLayout';
+import {
+    UikContainerVertical,
+    UikContainerHorizontal
+} from '../../../UikLayout';
+
+import Repair from './repair';
 
 import classnames from 'classnames';
 
@@ -211,6 +216,44 @@ const notes = [
     },
 ]
 
+const services = [
+    {
+        type: 'Repair',
+        date: '09/08/2018',
+        data:
+        {
+            problem: 'fdsafdnjvncsakv nja  njva njvkdsa d nak',
+            solution: {
+                text: 'vnjvnj nv kj kn a jda nfdjkas nfdjska nf',
+                images: [
+                    "http://images.performgroup.com/di/library/GOAL/de/d/andres-iniesta-barcelona-2017-18_160zsl848fyxa1vmo7i4di25sr.jpg?t=2131581571&w=620&h=430",
+                    "http://wsbuzz.com/wp-content/uploads/2018/05/sport-preview-iniesta-sub-620x385.jpg",
+                    "https://i.pinimg.com/originals/bb/70/05/bb7005bf8aeec2bf5bf60cbeb067aa96.jpg",
+                    "https://d1u4oo4rb13yy8.cloudfront.net/article/70357-zmpxegghac-1507286767.jpg"
+                ]
+            },
+            comment: [
+                {
+                    text: 'dfaf af wf fdsafd fd af d fd sa s afsfd',
+                    date: '09/15/2018'
+                }
+            ]
+        }
+    },
+    {
+        type: 'Maintance',
+        date: '08/15/2018'
+    },
+    {
+        type: 'Maintance',
+        date: '07/15/2018'
+    },
+    {
+        type: 'Maintance',
+        date: '06/15/2018'
+    }
+]
+
 class System extends Component {
     constructor(props) {
         super(props);
@@ -218,14 +261,16 @@ class System extends Component {
             activeTab: 0,
             activeUnit: -1,
             activeUnitTab: 0,
+            activeService: 0,
             test: false
         };
         this.tabPartContainer = null;
     }
 
     onUnitOutSideClick = (node) => {
-        if (!this.tabPartContainer.contains(node)) {
-            this.setState({ activeUnit: -1 });
+        if (!this.tabPartContainer.contains(node) && !this.timeline.contains(node) && !this.service.contains(node)
+        ) {
+            this.setState({ activeUnit: -1, activeUnitTab: 0 });
         }
     }
 
@@ -244,10 +289,10 @@ class System extends Component {
                 label: "",
                 subLabel: "09/10/2018 08:00 AM",
                 content: value,
-                images:[]
+                images: []
             }
         )
-        this.setState({test: !this.state.test});
+        this.setState({ test: !this.state.test });
     }
 
     render() {
@@ -255,52 +300,93 @@ class System extends Component {
             activeTab,
             activeUnit,
             activeUnitTab,
+            activeService
         } = this.state;
+
+        let mainTab =
+            <Tab
+                className={classnames(cls.tab_style)}
+                tabLinks={tabs}
+                activeTab={activeTab}
+                activeUnit={activeUnit}
+                onTabClick={(activeTab) => this.setState({ activeTab })}
+                onUnitClick={(activeUnit) => { this.setState({ activeUnit }) }}
+                onUnitOutSideClick={(node) => this.onUnitOutSideClick(node)}
+                onImageClick={() => this.showImage()}
+                onEditClick={() => this.edit()}
+            />;
+
+        let subTab =
+            <Tab
+                className={classnames(cls.tab_style)}
+                domRef={(inst) => this.tabPartContainer = inst}
+                renderPart
+                tabLinks={units[activeUnit]}
+                activeTab={activeUnitTab}
+                onTabClick={(activeUnitTab) => this.setState({ activeUnitTab })}
+                onEditClick={() => this.edit()}
+            />;
+        let timeline =
+            <div
+                className={classnames(cls.timeline_container)}>
+                <TimeLine
+                    className={classnames(clsTabContent.tab_content_header, cls.responsive_timeline)}
+                    data={notes}
+                />
+                <AddNewBox
+                    label='New Note'
+                    onClick={(value) => this.onAddNote(value)}
+                />
+            </div>
+        let record =
+            <div
+                ref={(inst) => this.timeline = inst}
+                className={classnames(cls.timeline_container, (activeTab > 0 || activeUnitTab < 1 || activeUnit < 0) && cls.hidden)}
+            >
+                <TimeLine
+                    className={classnames(clsTabContent.tab_content_header)}
+                    data={notes}
+                />
+                <AddNewBox
+                    label='New Comment'
+                    onClick={(value) => this.onAddNote(value)}
+                />
+            </div>
         return (
 
             <Dashboard>
                 <UikContainerVertical className={classnames(
                     clsTab.container,
-                    'col-lg-6')
+                    'col-lg-5')
                 }>
-                    <Tab
-                        className={classnames(cls.tab_style)}
-                        tabLinks={tabs}
-                        activeTab={activeTab}
-                        activeUnit={activeUnit}
-                        onTabClick={(activeTab) => this.setState({ activeTab })}
-                        onUnitClick={(activeUnit) => { this.setState({ activeUnit }) }}
-                        onUnitOutSideClick={(node) => this.onUnitOutSideClick(node)}
-                        onImageClick={() => this.showImage()}
-                        onEditClick={() => this.edit()}
-                    />
-
-                    {activeTab === 2 &&
-                        <div className={classnames(cls.timeline_container)}>
-                            <TimeLine
-                                className={classnames(clsTabContent.tab_content_header, cls.responsive_timeline)}
-                                data={notes}
-                            />
-                            <AddNewBox
-                                label='New Note'
-                                onClick={(value) => this.onAddNote(value)}
-                            />
-                        </div>
-                    }
+                    {mainTab}
+                    {activeTab === 2 && timeline}
                 </UikContainerVertical>
-                <div className="col-sm-2">
-                </div>
-                {activeUnit !== -1 && activeTab === 0 &&
-                    <Tab
-                        className={classnames(cls.responsive_tab)}
-                        domRef={(inst) => this.tabPartContainer = inst}
-                        renderPart
-                        tabLinks={units[activeUnit]}
-                        activeTab={activeUnitTab}
-                        onTabClick={(activeUnitTab) => this.setState({ activeUnitTab })}
-                        onEditClick={() => this.edit()}
-                    />}
-            </Dashboard>
+                <UikContainerHorizontal>
+                    <div
+                        className={classnames(
+                            'col-sm-4',
+                            cls.responsive_repair,
+                            (activeUnitTab !== 1 || activeTab !== 0) && cls.responsive_hidden
+                        )}
+                >
+                        <Repair
+                        domRef={(inst) => this.service = inst}
+                        className={classnames(
+                            cls.repair_layout,
+                            (activeUnitTab !== 1 || activeTab !== 0) && cls.hidden)}
+                        data={services}
+                        onClick={(indx) => this.setState({ activeService: indx })}
+                        activeIndex={activeService}
+                    />
+                    </div>
+                <UikContainerVertical className={classnames(clsTab.container, cls.responsive_subTab_container)}>
+
+                    {activeUnit !== -1 && activeTab === 0 && subTab}
+                    {record}
+                </UikContainerVertical >
+                </UikContainerHorizontal>
+            </Dashboard >
         );
     }
 }

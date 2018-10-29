@@ -110,7 +110,7 @@ class SideBar extends PureComponent<SideBarProps> {
                         }
                     </UikNavSection>
                 </div >
-                <Footer menu/>
+                <Footer menu />
 
             </UikNavPanel>
         );

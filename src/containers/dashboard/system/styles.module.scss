@@ -1,20 +1,18 @@
 @import '../../../vars';
 .responsive_tab {
-    @media screen and (min-width: $mobile){
-        width: 40%;
-    }
+    // @media screen and (min-width: $mobile){
+    //     width: 40%;
+    // }
 }
 
 .responsive_timeline {
     margin-top: 0;
     height: -webkit-fill-available;
     height: auto;
- 
-    @media screen and (min-width: 812px) and (max-width: $almostTablet){
+    @media screen and (min-width: 812px) and (max-width: $almostTablet) {
         max-width: 70vw;
     }
-
-    @media screen and (min-width: $tablet){
+    @media screen and (min-width: $tablet) {
         width: max-content;
         min-width: 40vw;
         max-width: 80vw;
@@ -28,4 +26,53 @@
 .timeline_container {
     height: fit-content;
     width: fit-content;
+}
+
+.hidden {
+    display: none;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.responsive_hidden {
+    @media screen and (max-width: 900px) {
+        display: none;
+    }
+}
+
+.responsive_repair {
+    margin-right: 10px;
+    @media screen and (max-width: 900px) {
+        max-width: 40%;
+        flex: 0 0 40%;
+        margin: 0;
+        margin-top: 60px;
+        padding: 0;
+        padding-right: 10px;
+    }
+}
+
+.responsive_subTab_container {
+    @media screen and (max-width: 900px) {
+        // max-width: 60%
+    }
+}
+
+.repair_layout {
+    opacity: 1;
+    animation: fade-in .5s;
+    a {
+        font-size: inherit;
+    }
+    @media screen and (max-width: 900px) {
+        max-width: 100%;
+        width: auto;
+    }
 }

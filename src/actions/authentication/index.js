@@ -18,8 +18,11 @@ export const loginAction = (user, pass) => {
         })
         post(url, body).then(
             res => {
+                console.log(res)
             },
             rej => {
+                console.log(rej)
+
             }
         )
     }
