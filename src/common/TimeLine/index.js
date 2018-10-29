@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import {
-    UikContainerVertical,
     UikContent,
     UikContentItem,
     UikContainerHorizontal,
@@ -19,7 +18,7 @@ type TimeLineProps = {
     className?: String
 }
 
-class TimeLine extends Component {
+class TimeLine extends Component<TimeLineProps> {
     constructor(props) {
         super(props);
         this.state = {};
@@ -60,7 +59,6 @@ class TimeLine extends Component {
                     </UikContainerHorizontal>
                     <UikDivider />
                 </UikContent>
-
             )
         });
         return (

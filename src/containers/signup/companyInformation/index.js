@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import {
     Input,
@@ -16,43 +16,46 @@ class CompanyInformation extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            cName: "",
+            name: "",
             address: "",
             address2: "",
             city: "",
             state: "",
-            zCode: ""
+            zip: "",
+            redirect: false
         }
     };
 
+    onChange = (key, value) => {
+        let state = this.state;
+        state[key] = value;
+        this.setState({ state });
+    }
+
     onSubmit = () => {
         this.setState({
-            clicked: true
+            redirect: true
         })
     }
 
     render() {
         let {
-            cName,
+            name,
             address,
             city,
             state,
-            zCode,
-            clicked
+            zip,
+            redirect
         } = this.state;
         let disabled =
-            cName === "" ||
+            name === "" ||
             address === "" ||
             city === "" ||
             state === "" ||
-            zCode === "";
-        if (clicked) {
-            return <Link to={
-                PATH.COMPANY_CONTACT
-            }
-            />
+            zip === "";
+        if (redirect) {
+            return <Redirect to={PATH.COMPANY_CONTACT} />
         }
-
 
         return (
             <Form
@@ -65,20 +68,20 @@ class CompanyInformation extends Component {
 
                 <div className={classnames("form-group")}>
                     <Input
-                        onChange={(value) => { this.setState({ cName: value }) }}
+                        onChange={(value) =>  this.onChange("name", value)}
                         label="Company Name"
                     />
                 </div>
                 <div className={classnames("form-group")}>
                     <Input
-                        onChange={(value) => { this.setState({ address: value }) }}
+                        onChange={(value) => this.onChange("address", value)}
                         label="Offical Address"
                     />
                 </div>
                 <div className={classnames("form-group")}>
                     <Input
                         label="Address 2"
-                        onChange={(value) => { this.setState({ address2: value }) }}
+                        onChange={(value) => this.onChange("address2", value)}
                     />
                 </div>
                 <div className={classnames(
@@ -88,19 +91,19 @@ class CompanyInformation extends Component {
                 >
                     <div className={classnames("col")}>
                         <Input
-                            onChange={(value) => { this.setState({ city: value }) }}
+                            onChange={(value) => this.onChange("city", value)}
                             label="City"
                         />
                     </div>
                     <div className={classnames("col")}>
                         <Input
-                            onChange={(value) => { this.setState({ state: value }) }}
+                            onChange={(value) => this.onChange("state", value)}
                             label="State"
                         />
                     </div>
                     <div className={classnames("col")}>
                         <Input
-                            onChange={(value) => { this.setState({ zCode: value }) }}
+                            onChange={(value) => this.onChange("zip", value)}
                             label="Zip Code"
                         />
                     </div>

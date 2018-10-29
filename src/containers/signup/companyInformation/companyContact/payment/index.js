@@ -12,27 +12,17 @@ class Payment extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            clicked: false
         }
     }
 
     onSubmit = () => {
-        this.setState({
-            clicked: true
-        })
+
     }
 
     render() {
         let {
-            clicked
         } = this.state
 
-        if (clicked) {
-            return <Link to={
-                PATH.SIGN_UP
-            }
-            />
-        }
         return (
             <Form
                 footer
@@ -46,7 +36,7 @@ class Payment extends Component {
                         "flex-column",
                         "justify-content-between",
                         cls.text_skip)}
-                        >
+                    >
                         <Link to={PATH.DASH_BOARD}><b>Skip</b></Link>
                     </div>
                 }

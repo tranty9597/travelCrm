@@ -11,12 +11,12 @@ a.base:hover {
   user-select: none;
   height: 36px;
   padding: 0 18px;
-  background: white;
+  // background: white;
   border-radius: 4px;
 
   border: 1px solid $borderColorDarker;
   transition: all 0.3s ease-in-out 0s;
-  color: $textMain;
+  // color: $textMain;
   font-size: 0.875rem;
   font-weight: 400;
   position: relative;
@@ -81,12 +81,12 @@ a.base:hover {
     cursor: pointer;
   }
   &:hover {
-    background: lighten($borderColorDarker, 10%);
+    // background: lighten($borderColorDarker, 10%);
   }
   &:focus {
     outline: none;
     box-shadow: none;
-    background: lighten($borderColorDarker, 20%);
+    // background: lighten($borderColorDarker, 20%);
   }
 
   &.transparent {

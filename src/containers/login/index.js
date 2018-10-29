@@ -4,7 +4,10 @@ import {
   Link
 } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { loginAction } from '../../actions/authentication';
+import {
+  loginAct,
+  checkUserAct
+} from '../../actions/authentication';
 
 import {
   Input,
@@ -13,7 +16,7 @@ import {
 
 import classnames from 'classnames';
 
-import { PATH } from '../../constant';
+import { PATH, STATUS } from '../../constant';
 
 const dataTest = [
   {
@@ -30,24 +33,34 @@ class LogIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: "",
-      pass: "",
-      isLoading: false
+      username: "",
+      password: ""
     }
   }
 
   onSubmit = () => {
-    this.props.dispatch(loginAction(this.state.user, this.state.pass));
+    this.props.loginAct(
+      this.state.username,
+      this.state.password
+    );
   }
 
   render() {
     let {
-      user,
-      pass,
-      isLoading
+      username,
+      password
     } = this.state;
-    let disabled = user === "" || pass === "";
-    if (this.props.login.user) {
+
+    let {
+      user,
+      loginError,
+      loginStatus
+    } = this.props.login;
+
+    let disabled = username === "" || password === "";
+    let isLoading = loginStatus === STATUS.loading;
+
+    if (user) {
       return <Redirect to={PATH.DASH_BOARD} />
     }
     return (
@@ -66,17 +79,16 @@ class LogIn extends Component {
       >
         <div className={classnames("form-group")}>
           <Input
-            onChange={(value) => { this.setState({ user: value }) }}
+            onChange={(value) => { this.setState({ username: value }) }}
             label="Username"
-            showHint
-            hintData={dataTest}
+            error={loginError}
           />
         </div>
         <div className={classnames("form-group")}>
           <Input
             label="Password"
             type="password"
-            onChange={(value) => { this.setState({ pass: value }) }}
+            onChange={(value) => { this.setState({ password: value }) }}
           />
         </div>
       </Form>
@@ -91,11 +103,16 @@ const mapStateToProps = state => {
   };
 };
 
-// const mapDispatchToProps = {
-//   ...loginAction
-// };
+const mapDispatchToProps = dispatch => {
+  return {
+    loginAct: (user, pass) => {
+      dispatch(loginAct(user, pass))
+    }
+  }
+
+};
 
 export default connect(
   mapStateToProps,
-  // mapDispatchToProps
+  mapDispatchToProps
 )(LogIn);

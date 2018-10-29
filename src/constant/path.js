@@ -27,7 +27,7 @@ const PATH = {
 
 
 const LINK = {
-    TERMS: "https//www.google.com"
+    TERMS: "http://partondemand.com/terms/"
 }
 
 export {

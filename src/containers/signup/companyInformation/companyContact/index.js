@@ -19,14 +19,11 @@ class ConpanyContact extends Component {
             cContact: "",
             cPhoneNumber: '',
             cEmail: "",
-            clicked: false
         }
     }
 
     onSubmit = () => {
-        this.setState({
-            clicked: true
-        })
+        this.props.history.push(PATH.PAYMENT)
     }
 
     render() {
@@ -34,20 +31,12 @@ class ConpanyContact extends Component {
             cContact,
             cPhoneNumber,
             cEmail,
-            clicked
         } = this.state;
 
         let disabled =
             cContact === "" ||
             cPhoneNumber === '' ||
             cEmail === "";
-
-        if (clicked) {
-            return <Link to={
-                PATH.COMPANY_CONTACT
-            }
-            />
-        }
 
         return (
             <Form
