@@ -20,7 +20,8 @@ import {
   CompanyContact,
   Dashboard,
   Payment,
-  CCPayment
+  CCPayment,
+  UserProfile
 } from './containers'
 
 import {
@@ -81,6 +82,7 @@ const Router = () => (
     <Route exact path={PATH.COMPANY_CONTACT} component={CompanyContact} />
     <Route exact path={PATH.CC_PAYMENT} component={CCPayment} />
     <Route exact path={PATH.PAYMENT} component={Payment} />
+    <Route exact path={PATH.USER_PROFILE} component={UserProfile} />
   </Switch>
 )
 

@@ -8,6 +8,7 @@ import AdminLogIn from "./adminLogin";
 import Payment from "./signup/companyInformation/companyContact/payment";
 import CCPayment from "./signup/companyInformation/companyContact/payment/ccPayment";
 import System from './dashboard/system';
+import UserProfile from "./userProfile";
 
 export {
     LogIn,
@@ -19,5 +20,6 @@ export {
     Dashboard,
     System,
     CCPayment,
-    Appointment
+    Appointment,
+    UserProfile
 }
