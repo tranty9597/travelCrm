@@ -2,12 +2,18 @@ import React from "react"
 
 import { Select, Table } from "../../../common"
 
-import { UikButton, UikTopBar, UikWidgetHeader, UikTopBarSection, UikTopBarTitle, UikContainerHorizontal } from "../../../UikLayout"
+import {
+    UikButton,
+    UikTopBarTitle,
+    UikContainerHorizontal
+} from "../../../UikLayout"
 import { connect } from 'react-redux';
-import { Row, Col } from "react-bootstrap"
 import { Dashboard } from "../../../containers";
 import { ApptFormModal } from "./components";
-import { setActiveSideBarTab } from '../../../actions/dashboard';
+import {
+    setActiveSideBarTab,
+    getAppointments
+} from '../../../actions/dashboard';
 import classnames from 'classnames';
 import cls from './styles.module.scss';
 
@@ -60,7 +66,8 @@ class Appointment extends React.Component {
     }
 
     componentDidMount() {
-        this.props.setActiveSideBarTab(0)
+        this.props.setActiveSideBarTab(0);
+        this.props.getAppointments(1, 5);
     }
     showCreateForm = () => {
         this.setState({ activeItem: {}, showModal: true, isEditForm: false })
@@ -109,7 +116,6 @@ class Appointment extends React.Component {
         let { isEditForm, showModal } = this.state
         return (
             <div>
-
                 <ApptFormModal
                     isVisible={showModal}
                     isEditForm={isEditForm}
@@ -125,6 +131,7 @@ class Appointment extends React.Component {
             </div>
         )
     }
+
     toggleModal = () => {
         let { showModal } = this.state;
         this.setState({ showModal: !showModal })
@@ -140,6 +147,9 @@ const mapDispatchToProps = dispatch => {
     return {
         setActiveSideBarTab: (tab) => {
             dispatch(setActiveSideBarTab(tab))
+        },
+        getAppointments: (pageIndex, pageCount) => {
+            dispatch(getAppointments(pageIndex, pageCount))
         }
     }
 }

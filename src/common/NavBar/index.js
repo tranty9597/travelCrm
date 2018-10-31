@@ -22,31 +22,44 @@ class NavBar extends React.PureComponent {
     isHidden(pathname) {
 
         pathname.toLowerCase()
-        return pathname === PATH.LOG_IN.toLowerCase()
+        return pathname.includes(PATH.LOG_IN.toLowerCase())
             || pathname.includes(PATH.SIGN_UP.toLowerCase())
     }
 
     render() {
         let { user } = this.props.login;
+        let { serviceCompanyName } = this.props.dashboard
         return (
-            this.isHidden(window.location.pathname) ||
-            <UikTopBar className={classnames(cls.navbar)}>
-                <UikTopBarSection>
-                    <UikTopBarTitle>
-                        <Img
-                            src='https://icon.cat/img/icon_loop.png'
-                            className={classnames(cls.image)}
-                        />
-                    </UikTopBarTitle>
-                    <UikTopBarTitle>
-                        SOS Heating and Cooling, LLC
-                    </UikTopBarTitle>
+            this.isHidden(window.location.pathname) ?
+                <div className={classnames(
+                    cls.logo_container,
+                    "d-flex",
+                    "justify-content-center",
+                    "align-items-center"
+                )}>
+                    <Img
+                        src='https://icon.cat/img/icon_loop.png'
+                        className={classnames(cls.logo)}
+                    />
+                </div> :
+                <UikTopBar className={classnames(cls.navbar)}>
+                    <UikTopBarSection>
+                        <UikTopBarTitle>
+                            <Img
+                                src='https://icon.cat/img/icon_loop.png'
+                                className={classnames(cls.image)}
+                            />
+                        </UikTopBarTitle>
+                        <UikTopBarTitle>
+                            {serviceCompanyName}
+                        </UikTopBarTitle>
 
-                </UikTopBarSection>
-                <UikTopBarSection>
-                    <Link to={PATH.DASH_BOARD} >{user}</Link>
-                </UikTopBarSection>
-            </UikTopBar>
+                    </UikTopBarSection>
+                    <UikTopBarSection>
+                        <Link to={PATH.DASH_BOARD} >{user}</Link>
+                    </UikTopBarSection>
+                </UikTopBar>
+
 
         )
     }
@@ -54,7 +67,8 @@ class NavBar extends React.PureComponent {
 
 const mapStateToProps = state => {
     return {
-        login: state.login
+        login: state.login,
+        dashboard: state.dashboard
     }
 }
 

@@ -3,7 +3,6 @@ import axios from 'axios';
 
 export const post = (url, body) => {
     let accessToken = store.getState().login.accessToken;
-    console.log(accessToken)
     return axios(url, {
         method: "post",
         headers: {
@@ -12,6 +11,24 @@ export const post = (url, body) => {
             Authorization: "Bearer " + accessToken
         },
         data: JSON.stringify(body)
+    }).then(
+        res => {
+            return handleRespond(res);
+        },
+    ).catch(err => {
+        return handleRej(err);
+    });
+}
+
+export const get = (url) => {
+    let accessToken = store.getState().login.accessToken;
+    return axios(url, {
+        method: "get",
+        headers: {
+            'Accept': 'application/json',
+            "Content-type": "application/json",
+            Authorization: "Bearer " + accessToken
+        }
     }).then(
         res => {
             return handleRespond(res);
