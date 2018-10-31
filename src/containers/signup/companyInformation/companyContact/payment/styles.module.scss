@@ -4,6 +4,9 @@
     color: $textMain;
     font-size: 48pt;
     margin-bottom: 0.5em;
+    @media screen and (max-width: $almostMobile) {
+        font-size: 40pt
+    }
 }
 .text_form_center {
     margin-top: 15%;

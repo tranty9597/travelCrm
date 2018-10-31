@@ -56,7 +56,7 @@ class NavBar extends React.PureComponent {
 
                     </UikTopBarSection>
                     <UikTopBarSection>
-                        <Link to={PATH.DASH_BOARD} >{user}</Link>
+                        <Link to={PATH.USER_PROFILE} >Thang Nguyen</Link>
                     </UikTopBarSection>
                 </UikTopBar>
 

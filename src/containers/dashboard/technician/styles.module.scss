@@ -1,0 +1,16 @@
+@import '../../../vars';
+.form_container {
+    >div>div {
+        box-shadow: none !important;
+        width: fit-content;
+        padding: 15px !important;
+        white-space: nowrap;
+        :first-child {
+            display: flex;
+            justify-content: center;
+        }
+        @media screen and (min-width: $almostMobile) {
+            width: 40% !important;
+        }
+    }
+}

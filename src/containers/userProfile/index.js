@@ -7,7 +7,8 @@ import cls from './styles.module.scss';
 import { Dashboard } from "../../containers";
 
 import {
-    UikHeadline
+    UikHeadline,
+    UikContainerVertical
 } from '../../UikLayout';
 
 import {
@@ -40,53 +41,55 @@ class UserProfile extends Component {
         let { activeIndx } = this.state;
         return (
             <Dashboard history={this.props.history}>
-                <UikHeadline>
-                    Thang Nguyen
+                <UikContainerVertical>
+                    <UikHeadline>
+                        Thang Nguyen
             </UikHeadline>
-                <TabWidget
-                    tabs={tabs}
-                    buttonTitle='Save'
-                    activeIndx={activeIndx}
-                    onTabClick={(indx) => this.onTabClick(indx)}
-                >
-                    <div className={classnames("col-6", cls.input, activeIndx === 0 && cls.active)}>
-                        <Input
-                            label='Email Address'
-                            onChange={(value) => {
-                                this.setState({
-                                    email: value
-                                })
-                            }}
-                        />
-                    </div>
-                    <div className={classnames("col-6", cls.input, activeIndx === 1 && cls.active)}>
-                        <Input
-                            label='Current Password'
-                            onChange={(value) => {
-                                this.setState({
-                                    currentPass: value
-                                })
-                            }}
-                        />
-                        <Input
+                    <TabWidget
+                        tabs={tabs}
+                        buttonTitle='Save'
+                        activeIndx={activeIndx}
+                        onTabClick={(indx) => this.onTabClick(indx)}
+                    >
+                        <div className={classnames("col-6", cls.input, activeIndx === 0 && cls.active)}>
+                            <Input
+                                label='Email Address'
+                                onChange={(value) => {
+                                    this.setState({
+                                        email: value
+                                    })
+                                }}
+                            />
+                        </div>
+                        <div className={classnames("col-6", cls.input, activeIndx === 1 && cls.active)}>
+                            <Input
+                                label='Current Password'
+                                onChange={(value) => {
+                                    this.setState({
+                                        currentPass: value
+                                    })
+                                }}
+                            />
+                            <Input
 
-                            label='New Password'
-                            onChange={(value) => {
-                                this.setState({
-                                    newPass: value
-                                })
-                            }}
-                        />
-                        <Input
-                            label='Confirm Password'
-                            onChange={(value) => {
-                                this.setState({
-                                    confirmPass: value
-                                })
-                            }}
-                        />
-                    </div>
-                </TabWidget>
+                                label='New Password'
+                                onChange={(value) => {
+                                    this.setState({
+                                        newPass: value
+                                    })
+                                }}
+                            />
+                            <Input
+                                label='Confirm Password'
+                                onChange={(value) => {
+                                    this.setState({
+                                        confirmPass: value
+                                    })
+                                }}
+                            />
+                        </div>
+                    </TabWidget>
+                </UikContainerVertical>
             </Dashboard>
         )
     }

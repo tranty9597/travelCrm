@@ -59,6 +59,7 @@ class Dashboard extends PureComponent {
                 this.props.history.push(PATH.SYSTEM)
                 break;
             case 2:
+                this.props.history.push(PATH.TECHNICIAN)
                 break;
             case 3:
                 break;
@@ -69,12 +70,12 @@ class Dashboard extends PureComponent {
         let { children } = this.props;
         let { user } = this.props.login;
         let { sideBarActiveTab } = this.props.dashboard;
-        
-        if(window.location.pathname === PATH.DASH_BOARD){
+
+        if (window.location.pathname === PATH.DASH_BOARD) {
             return <Redirect to={PATH.APPOINTMENT} />
         }
         return (
-            
+
             <UikContainerHorizontal>
                 <SideBar
                     listMenu={menuLinks}

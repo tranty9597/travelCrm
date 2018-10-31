@@ -21,7 +21,8 @@ import {
   Dashboard,
   Payment,
   CCPayment,
-  UserProfile
+  UserProfile,
+  Technician
 } from './containers'
 
 import {
@@ -73,8 +74,10 @@ const System = Loadable({
 const Router = () => (
   <Switch>
     <Route exact path={PATH.DASH_BOARD} component={Dashboard} />
-    <Route exact path={PATH.SYSTEM} component={System} />
+    <Route exact path={PATH.USER_PROFILE} component={UserProfile} />
     <Route exact path={PATH.APPOINTMENT} component={Appointment} />
+    <Route exact path={PATH.SYSTEM} component={System} />
+    <Route exact path={PATH.Technician} component={Technician} />
     <Route exact path={PATH.LOG_IN} component={LogIn} />
     <Route exact path={PATH.ADMIN_LOG_IN} component={AdminLogIn} />
     <Route exact path={PATH.SIGN_UP} component={SignUp} />
@@ -82,7 +85,6 @@ const Router = () => (
     <Route exact path={PATH.COMPANY_CONTACT} component={CompanyContact} />
     <Route exact path={PATH.CC_PAYMENT} component={CCPayment} />
     <Route exact path={PATH.PAYMENT} component={Payment} />
-    <Route exact path={PATH.USER_PROFILE} component={UserProfile} />
   </Switch>
 )
 

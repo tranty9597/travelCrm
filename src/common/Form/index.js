@@ -22,7 +22,8 @@ type FormProps = {
     onSecondButtonClick?: Function,
     children?: React.node,
     afterButton?: React.node,
-    footer?: Boolean
+    footer?: Boolean,
+    className?: String
 }
 
 
@@ -48,7 +49,8 @@ class Form extends PureComponent<FormProps> {
             isLoading,
             isSecondButtonLoading,
             afterButton,
-            footer
+            footer,
+            className
         } = this.props;
         return (
             <form
@@ -57,7 +59,8 @@ class Form extends PureComponent<FormProps> {
                     "d-flex",
                     "flex-column",
                     "justify-content-between",
-                    cls.form_div_container
+                    cls.form_div_container,
+                    className
                 )}
             >
                 <div>
@@ -127,7 +130,8 @@ Form.defaultProps = {
     children: null,
     afterButton: null,
     footer: false,
-    secondButtonTitle: ""
+    secondButtonTitle: "",
+    className: ""
 }
 
 export default Form;

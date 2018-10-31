@@ -4,7 +4,6 @@ import {
     Tab,
     TimeLine,
     AddNewBox,
-    TabWidget
 } from '../../../common';
 
 import { Dashboard } from '../../../containers';
