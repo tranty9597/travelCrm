@@ -3,6 +3,7 @@ import SignUp from "./signup";
 import CompanyInformation from "./signup/companyInformation";
 import Appointment from "./dashboard/appointment";
 import Dashboard from './dashboard';
+import Technician from './dashboard/technician';
 import CompanyContact from "./signup/companyInformation/companyContact";
 import AdminLogIn from "./adminLogin";
 import Payment from "./signup/companyInformation/companyContact/payment";
@@ -19,5 +20,6 @@ export {
     Dashboard,
     System,
     CCPayment,
-    Appointment
+    Appointment,
+    Technician
 }
