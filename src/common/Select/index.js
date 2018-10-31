@@ -8,7 +8,7 @@ import classnames from 'classnames';
 type SelectProps = {
     error?: String,
     label?: String,
-    rawOptions?: Array,
+    options?: Array,
     disabled?: Boolean,
     value?: String,
     className?: String

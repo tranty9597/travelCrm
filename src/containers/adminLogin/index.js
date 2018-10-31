@@ -7,7 +7,7 @@ import {
     Form
 } from "../../common";
 
-
+import { UikSelectOptionValueType, UikSelectOptionType } from "../../UikLayout/UikSelect/flowTypes";
 import classnames from 'classnames';
 import cls from './styles.module.scss';
 
@@ -15,14 +15,15 @@ import { PATH } from "../../constant";
 
 const dataTest = [
     {
-      name: "SOS Heating and Cooling, LLC",
-      address: "32415 Abshire Rapid, South Nicklaushaven DE 04850-8005"
+        name: "SOS Heating and Cooling, LLC",
+        address: "32415 Abshire Rapid, South Nicklaushaven DE 04850-8005"
     },
     {
-      name: "SOS Constractor",
-      address: "79685 Reed Ranch Suite 989, West Odellside, VT 54065-4909"
+        name: "SOS Constractor",
+        address: "79685 Reed Ranch Suite 989, West Odellside, VT 54065-4909"
     }
-  ]
+]
+
 
 class AdminLogIn extends Component {
     constructor(props) {
@@ -35,6 +36,35 @@ class AdminLogIn extends Component {
         }
     }
 
+    getOptions = () => {
+        let data =  dataTest;
+        let options = [];
+        let title = "";
+
+        data.forEach((d, i) => {
+            let temp = [];
+            Object.values(d).forEach((value, indx) => {
+                title = indx === 0 ? value : title;
+                temp.push(
+
+                    <div
+                        key={`${indx + i}`}
+                        className={indx === 0 ? classnames(cls["common_input-div-list-item-title"]) : ""}
+                    >
+                        {value}
+                    </div>
+                )
+            });
+            options.push(
+                {
+                    value:i,
+                    label: temp
+                }
+            );
+            
+        });
+        return options
+    }
 
     onSubmit = () => {
         this.setState({ isLoading: true })
@@ -53,6 +83,7 @@ class AdminLogIn extends Component {
         } = this.state;
         let disabled = user === "" ||
             pass === "" || HVACCompany === "";
+        let optionsTest = this.getOptions();
         // if (this.props.AdminLogIn.) {
         //     return <Redirect to={PATH.DASH_BOARD} />
         // }
@@ -89,7 +120,7 @@ class AdminLogIn extends Component {
                     <Select
                         className={cls.form_select}
                         label="HVAC Company"
-                        rawOptions={dataTest}
+                        options={optionsTest}
                         onChange={(value) => { this.setState({ HVACCompany: value }) }}
                     />
                 </div>
