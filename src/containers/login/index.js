@@ -6,7 +6,9 @@ import {
 import { connect } from 'react-redux';
 import {
   loginAct,
-  checkUserAct
+  setUserName,
+  setPassword,
+  clearLogIn
 } from '../../actions/authentication';
 
 import {
@@ -33,62 +35,84 @@ class LogIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      password: ""
     }
   }
 
-  onSubmit = () => {
+  onSubmit = (username, password) => {
     this.props.loginAct(
-      this.state.username,
-      this.state.password
+      username,
+      password,
+      () => this.props.history.replace(PATH.DASH_BOARD)
     );
+  }
+
+  validate = (username, password) => {
+    if (!username) {
+      this.setUserName(username, "Required");
+    }
+    if (!password) {
+      this.setUserName(password, "Required");
+    }
+    if (username && password) {
+      this.onSubmit(username, password);
+    }
+  }
+
+  onChange = (key, value) => {
+    this.props[key](value, "");
+  }
+
+  toSignUp = (e) => {
+    e.preventDefault();
+    this.props.clearLogIn();
+    this.props.history.push(PATH.SIGN_UP);
   }
 
   render() {
     let {
-      username,
-      password
-    } = this.state;
-
-    let {
       user,
-      loginError,
-      loginStatus
+      username,
+      password,
+      loginStatus,
+      usernameError,
+      passwordError
     } = this.props.login;
 
     let disabled = username === "" || password === "";
     let isLoading = loginStatus === STATUS.loading;
 
-    if (user) {
-      return <Redirect to={PATH.DASH_BOARD} />
-    }
+    // const { from } = this.props.location.state || { from: { pathname: PATH.DASH_BOARD } }
+
+    // if (user) {
+    //   return <Redirect to={from} />
+    // }
     return (
       <Form
         footer
         formTitle="Log In"
         buttonTitle="Log In"
-        onSubmit={this.onSubmit}
+        onSubmit={() => this.validate(username, password)}
         disabled={disabled}
         isLoading={isLoading}
         afterButton={
           <div className={classnames("text-center")}>
-            Don't have an account? <Link to={PATH.SIGN_UP}><b>Sign up now</b></Link>
+            Don't have an account? <a href="" onClick={(e) => this.toSignUp(e)}><b>Sign up now</b></a>
           </div>
         }
       >
         <div className={classnames("form-group")}>
           <Input
-            onChange={(value) => { this.setState({ username: value }) }}
+            onChange={(value) => this.onChange('setUserName', value)}
             label="Username"
-            error={loginError}
+            error={usernameError}
           />
         </div>
         <div className={classnames("form-group")}>
           <Input
             label="Password"
             type="password"
-            onChange={(value) => { this.setState({ password: value }) }}
+            onChange={(value) => this.onChange('setPassword', value)}
+            error={passwordError}
           />
         </div>
       </Form>
@@ -105,8 +129,17 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loginAct: (user, pass) => {
-      dispatch(loginAct(user, pass))
+    loginAct: (user, pass, callBackSuccess) => {
+      dispatch(loginAct(user, pass, callBackSuccess))
+    },
+    setUserName: (username, error) => {
+      dispatch(setUserName(username, error))
+    },
+    setPassword: (password, error) => {
+      dispatch(setPassword(password, error))
+    },
+    clearLogIn: () => {
+      dispatch(clearLogIn())
     }
   }
 

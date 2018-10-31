@@ -8,7 +8,8 @@ import configureStore from './configureStore'
 import {
   BrowserRouter,
   Switch,
-  Route
+  Route,
+  Redirect
 } from 'react-router-dom';
 
 import {
@@ -20,7 +21,8 @@ import {
   Dashboard,
   Payment,
   Appointment,
-  System
+  System,
+  CCPayment
 } from './containers'
 
 import {
@@ -37,17 +39,30 @@ import cls from './App.module.scss'
 
 const store = configureStore();
 export default store;
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={(props) => (
+    store.getState().login.user?
+     <Component {...props} />
+      : <Redirect to={{
+        pathname: PATH.LOG_IN,
+        state: { from: props.location }
+      }} />
+  )} />
+)
+
 const Router = () => (
   <Switch>
     <Route exact path={PATH.DASH_BOARD} component={Dashboard} />
     <Route exact path={PATH.SYSTEM} component={System} />
+    <Route exact path={PATH.APPOINTMENT} component={Appointment} />
     <Route exact path={PATH.LOG_IN} component={LogIn} />
     <Route exact path={PATH.ADMIN_LOG_IN} component={AdminLogIn} />
     <Route exact path={PATH.SIGN_UP} component={SignUp} />
-    <Route exact path={PATH.APPOINTMENT} component={Appointment} />
     <Route exact path={PATH.COMPANY_INFORMATION} component={CompanyInformation} />
     <Route exact path={PATH.COMPANY_CONTACT} component={CompanyContact} />
-    <Route exect path={PATH.PAYMENT} component={Payment} />
+    <Route exact path={PATH.CC_PAYMENT} component={CCPayment} />
+    <Route exact path={PATH.PAYMENT} component={Payment} />
   </Switch>
 )
 

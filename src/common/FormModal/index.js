@@ -67,7 +67,6 @@ class FormModal extends PureComponent<FormModalProps> {
                                 <UikButton
                                     isLoading={loading}
                                     onClick={isEditForm ? onSave : onCreate}
-                                    className='col-3'
                                     success
                                 >
                                     {isEditForm ? "Save" : "Create"}

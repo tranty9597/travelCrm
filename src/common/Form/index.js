@@ -13,10 +13,13 @@ import classnames from 'classnames';
 import cls from "./styles.module.scss";
 
 type FormProps = {
-    formTitle?: String;
-    buttonTitle?: String;
+    formTitle?: String,
+    buttonTitle?: String,
+    secondButtonTitle?: String,
     isLoading?: Boolean,
+    isSecondButtonLoading?: Boolean,
     onSubmit?: Function,
+    onSecondButtonClick?: Function,
     children?: React.node,
     afterButton?: React.node,
     footer?: Boolean
@@ -25,23 +28,31 @@ type FormProps = {
 
 class Form extends PureComponent<FormProps> {
 
-    onSubmit = () => {
+    onSubmit = (e) => {
         this.props.onSubmit();
+        e.preventDefault();
+    }
+
+    onSecondButtonClick = (e) => {
+        this.props.onSecondButtonClick();
+        e.preventDefault();
     }
 
     render() {
         let {
             disabled,
             children,
-            skip,
+            secondButtonTitle,
             formTitle,
             buttonTitle,
             isLoading,
+            isSecondButtonLoading,
             afterButton,
             footer
         } = this.props;
         return (
-            <div
+            <form
+                onSubmit={(e) => this.onSubmit(e)}
                 className={classnames(
                     "d-flex",
                     "flex-column",
@@ -63,8 +74,8 @@ class Form extends PureComponent<FormProps> {
                             contentCenter
                             className={classnames(cls.form_div_title)}
                         >
-                            <UikHeadline className={classnames("text-center ",
-                            cls.text_header)}>
+                            <UikHeadline className={classnames("text-center",
+                                cls.text_header)}>
                                 {formTitle}
                             </UikHeadline>
                         </UikContent>
@@ -76,22 +87,32 @@ class Form extends PureComponent<FormProps> {
                             cls.form_btn_submit)}
                         >
                             <UikButton
+                                type='submit'
                                 className={classnames(!disabled ? "btn-block btn-primary" : "btn-block")}
                                 contentClassName={classnames("justify-content-center")}
-                                onClick={this.onSubmit}
                                 disabled={disabled}
                                 isLoading={isLoading}
                             >
                                 {buttonTitle}
                             </UikButton>
-                            {skip}
+                            {secondButtonTitle && <div className={classnames(
+                                cls.second_button)}
+                            >
+                                <UikButton
+                                    isLoading={isSecondButtonLoading}
+                                    onClick={(e) => this.onSecondButtonClick(e)}
+                                >
+                                    {secondButtonTitle}
+                                </UikButton>
+
+                            </div>}
                         </div>
 
                     </UikContent>
                     {afterButton}
                 </div>
                 {footer && <Footer />}
-            </div>
+            </form>
         );
     }
 }
@@ -100,10 +121,13 @@ Form.defaultProps = {
     formTitle: "",
     buttonTitle: "",
     isLoading: false,
+    isSecondButtonLoading: false,
     onSubmit: () => { },
+    onSecondButtonClick: () => { },
     children: null,
     afterButton: null,
-    footer: false
+    footer: false,
+    secondButtonTitle: ""
 }
 
 export default Form;

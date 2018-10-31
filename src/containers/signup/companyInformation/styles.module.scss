@@ -1,0 +1,10 @@
+@import '../../../vars';
+
+.responsive_row {
+    @media screen and (max-width: $almostMobile){
+        display: inherit;
+        >*{
+            padding-bottom: 8px;
+        }
+    }
+}

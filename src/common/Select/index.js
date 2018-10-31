@@ -1,59 +1,58 @@
 import React, { PureComponent } from 'react';
 
 import { UikSelect } from "../../UikLayout";
-import Input, { HintItem } from '../Input';
 import cls from "./styles.module.scss";
+import clsInput from "../Input/styles.module.scss";
 import classnames from 'classnames';
 
 type SelectProps = {
     error?: String,
     label?: String,
-    rawOptions?: Array,
-    disabled?: Boolean,
-    value?: String,
-    className?: String
-
-
+    options?: Array,
+    onChange?: Function,
+    className?: String,
+    defaultValue?: String
 }
 
 class Select extends PureComponent<SelectProps> {
-    constructor(props) {
-        super(props);
-        this.state = {
-            value: this.props.value,
-        };
-    }
 
     onChange = (value) => {
-                this.setState({ value });
-                this.props.onChange(value);
-            }
+        this.props.onChange(value);
+    }
 
     render() {
-                let{
-                    error,
-                    label,
-                    options,
-                    value,
-                    onChange,
-                    ...rest
-                } = this.props
+        let {
+            error,
+            label,
+            options,
+            defaultValue
+        } = this.props
 
-        return(
-            <div className = { classnames("form_group") } >
-                        <label className={cls.selectLabel}>{label}</label>
-                        <UikSelect
-                            //onChange={(e) => this.setState({ value: value })}
-                            value={value}
-                            options={options}
-                            className={cls.form_select}
-                            {...rest}
-                        />
+        return (
+            <div className={classnames(cls.select_container)} >
+                <label className={cls.selectLabel}>{label}</label>
+                <UikSelect
+                    defaultValue={defaultValue}
+                    className={classnames(cls.button)}
+                    options={options}
+                    onChange={(value) => this.onChange(value)}
+                />
+                <div className={classnames(clsInput["common_input-div-error"])}>
+                    {error}
+                </div>
             </div>
         )
 
     }
 
+}
+
+Select.defaultProps = {
+    options: [],
+    error: "",
+    label: "",
+    onChange: () => { },
+    defaultValue: ""
 }
 
 export default Select;

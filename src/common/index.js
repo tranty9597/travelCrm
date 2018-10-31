@@ -10,6 +10,7 @@ import TimeLine from "./TimeLine";
 import NavBar from "./NavBar";
 import AddNewBox from './AddNewBox';
 import Table from "./Table";
+import TextArea from "./TextArea";
 
 export {
     Select,
@@ -23,5 +24,6 @@ export {
     TimeLine,
     NavBar,
     AddNewBox,
-    Table
+    Table,
+    TextArea
 }
