@@ -20,8 +20,6 @@ import {
   CompanyContact,
   Dashboard,
   Payment,
-  Appointment,
-  System,
   CCPayment
 } from './containers'
 
@@ -32,7 +30,7 @@ import {
 } from './UikLayout'
 
 import { NavBar } from "./common"
-
+import Loadable from 'react-loadable';
 import classnames from 'classnames';
 import { PATH } from './constant';
 import cls from './App.module.scss'
@@ -42,15 +40,35 @@ export default store;
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={(props) => (
-    store.getState().login.user?
-     <Component {...props} />
+    store.getState().login.user ?
+      <Component {...props} />
       : <Redirect to={{
         pathname: PATH.LOG_IN,
         state: { from: props.location }
       }} />
   )} />
 )
+function Loading({ error, pastDelay }) {
+  if (error) {
+    return <div>{error}</div>;
+  } else if (pastDelay) {
+    return <h3>Loading...</h3>;
+  } else {
+    return <h3>Loading...</h3>
+  }
+}
 
+const Appointment = Loadable({
+  loader: () => import('./containers/dashboard/appointment'),
+  loading: Loading,
+  delay: 300
+});
+const System = Loadable({
+  loader: () => import('./containers/dashboard/system'),
+  loading() {
+    return <div>Loading...</div>
+ }
+});
 const Router = () => (
   <Switch>
     <Route exact path={PATH.DASH_BOARD} component={Dashboard} />

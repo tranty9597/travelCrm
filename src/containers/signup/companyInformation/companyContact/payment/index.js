@@ -5,10 +5,12 @@ import {
 } from "../../../../../common"
 import {
     signUpServiceCompany,
-    clearSignUp
+    clearSignUp,
 } from '../../../../../actions/signUp';
 import { loginAct } from '../../../../../actions/authentication';
-import { setServiceCompanyID } from '../../../../../actions/dashboard';
+import {
+    setServiceCompany
+} from '../../../../../actions/dashboard';
 import { PATH, STATUS } from '../../../../../constant';
 import classnames from 'classnames';
 import cls from './styles.module.scss';
@@ -56,11 +58,11 @@ class Payment extends Component {
             zip.data,
             cName.data,
             (res) => {
-                this.props.setServiceCompanyID(res.serviceCompanyID);
                 this.props.loginAct(user.data, pass.data,
                     () => {
                         this.props.clearSignUp();
-                        this.props.history.replace(PATH.DASH_BOARD)
+                        this.props.setServiceCompany(res.serviceCompanyID, cName.data);
+                        this.props.history.replace(PATH.DASH_BOARD);
                     });
             })
     }
@@ -116,12 +118,12 @@ const mapDispatchToProps = dispatch => {
         loginAct: (username, password, callbackSuccess) => {
             dispatch(loginAct(username, password, callbackSuccess))
         },
-        setServiceCompanyID: (serviceCompanyID) => {
-            dispatch(setServiceCompanyID(serviceCompanyID))
+        setServiceCompany: (serviceCompanyID, serviceCompanyName) => {
+            dispatch(setServiceCompany(serviceCompanyID, serviceCompanyName))
         },
         clearSignUp: () => {
             dispatch(clearSignUp())
-        }
+        },
     }
 }
 

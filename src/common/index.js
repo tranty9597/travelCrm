@@ -11,6 +11,7 @@ import NavBar from "./NavBar";
 import AddNewBox from './AddNewBox';
 import Table from "./Table";
 import TextArea from "./TextArea";
+import TabWidget from './TabWidget';
 
 export {
     Select,
@@ -25,5 +26,6 @@ export {
     NavBar,
     AddNewBox,
     Table,
-    TextArea
+    TextArea,
+    TabWidget
 }
