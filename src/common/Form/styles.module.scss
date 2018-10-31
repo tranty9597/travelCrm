@@ -8,12 +8,52 @@
     max-width: 450px !important;
     padding: 30px !important;
     padding-top: 0px !important;
-    @media screen and (max-width: $mobileS){
+    @media screen and (max-width: $mobileS) {
         width: 80% !important;
-    } 
+    }
 }
 
 .form_div_container {
     min-height: 100%;
     flex-grow: 1;
+    max-width: inherit;
+}
+
+.second_button {
+    display: flex;
+    justify-content: center;
+    >button {
+        min-height: 100%;
+        margin-top: 15px;
+        width: fit-content;
+        background-color: inherit;
+        padding: 0;
+        border: none;
+        color: $blue;
+        font-weight: 500;
+        transition: all .1s;
+        &:hover {
+            font-weight: 550;
+            color: blue;
+        }
+        &:active {
+            border: none;
+        }
+        >div {
+            >div {
+                background-color: $blue
+            }
+        }
+        >div {
+            justify-content: center;
+        }
+    }
+}
+
+.text_header {
+    margin: 15px;
+    font-weight: 500;
+    @media screen and (max-width: $mobile) {
+        margin: 10px
+    }
 }

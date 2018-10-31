@@ -147,7 +147,9 @@ const mapStateToProps = (state, own) => {
         appt: state.appt
     }
 }
-const mapActionsToProps = {
+const mapDispatchToProps = dispatch => {
+    return {
 
+    }
 }
-export default connect(mapStateToProps, mapActionsToProps)(Table)
+export default connect(mapStateToProps, mapDispatchToProps)(Table)

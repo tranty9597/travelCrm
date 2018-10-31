@@ -1,7 +1,8 @@
 @import "../../vars";
-.form_select{
+.form_select {
     width: 100%;
 }
+
 .selectLabel {
     font-size: .75rem;
     font-weight: 500;
@@ -10,75 +11,24 @@
     display: block;
     line-height: 1.125rem;
 }
-.common_input-div-container {
-    position: relative;
-    height: 100%
+
+.select_container {
+    >* {
+        display: inherit;
+    }
 }
 
-.common_input-div-list-container {
-    width: 100%;
-    position: absolute;
-    z-index: 50;
-    background: white;
-    border: 1px solid $borderColorDarker;
-    border-radius: 4px;
-    list-style: none;
-    top: 100%;
-    margin-top: 4px;
-    right: 0;
-    min-width: 140px;
-    &>* {
-        &:first-child {
-            border-top-left-radius: 4px !important;
-            border-top-right-radius: 4px !important;
-        }
-        &:last-child {
-            border-bottom-left-radius: 4px !important;
-            border-bottom-right-radius: 4px !important;
+.button {
+    >button {
+        background-color: white;
+        border: 1px solid $borderColor;
+        +div {
+            >div button:hover {
+                background-color: $lightBlue!important;
+            }
         }
     }
-    &.bottomLeft {
-        left: 0;
+    >* {
         right: auto;
     }
-    &.topLeft,
-    &.topRight {
-        left: 0;
-        right: auto;
-        bottom: 100%;
-        margin-top: 0;
-        margin-bottom: 4px;
-    }
-    &.topRight {
-        left: auto;
-        right: 0;
-    }
-}
-
-.common_input-div-hint-data {
-    padding: 5px 15px 5px 15px;
-}
-
-.common_input-div-list-item {
-    border-bottom: 1px solid $borderColorDarker;
-    font-size: 10pt;
-}
-
-.common_input-div-list-item-title {
-    font-weight: bold;
-}
-
-li {
-    height: 100%;
-}
-
-div li:hover {
-    cursor: pointer;
-    background-color: $hover;
-}
-
-.common_input-div-error {
-    margin-top: 5px;
-    font-size: 10pt;
-    color: $error;
 }

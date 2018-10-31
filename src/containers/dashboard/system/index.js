@@ -7,11 +7,15 @@ import {
 } from '../../../common';
 
 import { Dashboard } from '../../../containers';
-
+import { connect } from 'react-redux'
 import {
     UikContainerVertical,
     UikContainerHorizontal
 } from '../../../UikLayout';
+
+import {
+    setActiveSideBarTab
+} from '../../../actions/dashboard';
 
 import Repair from './repair';
 
@@ -267,6 +271,10 @@ class System extends Component {
         this.tabPartContainer = null;
     }
 
+    componentDidMount() {
+        this.props.setActiveSideBarTab(1);
+    }
+
     onUnitOutSideClick = (node) => {
         if (!this.tabPartContainer.contains(node) && !this.timeline.contains(node) && !this.service.contains(node)
         ) {
@@ -354,7 +362,7 @@ class System extends Component {
             </div>
         return (
 
-            <Dashboard>
+            <Dashboard history={this.props.history}>
                 <UikContainerVertical className={classnames(
                     clsTab.container,
                     'col-lg-5')
@@ -369,26 +377,43 @@ class System extends Component {
                             cls.responsive_repair,
                             (activeUnitTab !== 1 || activeTab !== 0) && cls.responsive_hidden
                         )}
-                >
+                    >
                         <Repair
-                        domRef={(inst) => this.service = inst}
-                        className={classnames(
-                            cls.repair_layout,
-                            (activeUnitTab !== 1 || activeTab !== 0) && cls.hidden)}
-                        data={services}
-                        onClick={(indx) => this.setState({ activeService: indx })}
-                        activeIndex={activeService}
-                    />
+                            domRef={(inst) => this.service = inst}
+                            className={classnames(
+                                cls.repair_layout,
+                                (activeUnitTab !== 1 || activeTab !== 0) && cls.hidden)}
+                            data={services}
+                            onClick={(indx) => this.setState({ activeService: indx })}
+                            activeIndex={activeService}
+                        />
                     </div>
-                <UikContainerVertical className={classnames(clsTab.container, cls.responsive_subTab_container)}>
+                    <UikContainerVertical className={classnames(clsTab.container, cls.responsive_subTab_container)}>
 
-                    {activeUnit !== -1 && activeTab === 0 && subTab}
-                    {record}
-                </UikContainerVertical >
+                        {activeUnit !== -1 && activeTab === 0 && subTab}
+                        {record}
+                    </UikContainerVertical >
                 </UikContainerHorizontal>
             </Dashboard >
         );
     }
 }
 
-export default System;
+const mapStateToProps = state => {
+    return {
+
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setActiveSideBarTab: (tab) => {
+            dispatch(setActiveSideBarTab(tab))
+        }
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(System);

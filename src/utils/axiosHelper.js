@@ -2,8 +2,8 @@ import store from "..";
 import axios from 'axios';
 
 export const post = (url, body) => {
-    let accessToken = store.getState().login.user.accessToken;
-    console.log(url,body)
+    let accessToken = store.getState().login.accessToken;
+    console.log(accessToken)
     return axios(url, {
         method: "post",
         headers: {
@@ -24,9 +24,20 @@ export const post = (url, body) => {
 const handleRespond = (res) => {
     return new Promise((resolve, reject) => {
         switch (res.status) {
+            case 400:
+                console.log(res)
+                reject()
+                break;
             case 401:
                 reject()
-                // store.dispatch({ type: "AUTHEN/LOGGOUT" })
+                break;
+            case 415:
+                console.log(res)
+                reject()
+                break;
+            case 500:
+                console.log(res)
+                reject()
                 break;
             case 200:
                 resolve(res)

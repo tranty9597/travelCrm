@@ -14,7 +14,8 @@ import {
     setUserName,
     setPass,
     setConfirmPass,
-    checkUserAct
+    checkUserAct,
+    clearSignUp
 } from '../../actions/signUp';
 
 import classnames from 'classnames';
@@ -32,6 +33,7 @@ class SignUp extends Component {
     };
 
     onSubmit = () => {
+        this.props.setConfirmPass("", "");
         this.props.history.push(PATH.COMPANY_INFORMATION);
     }
 
@@ -39,10 +41,45 @@ class SignUp extends Component {
         this.props[key](value);
     }
 
-    validate = (email, user, pass, cfPass) => {
+    validate = (fName, lName, email, user, pass, cfPass) => {
+        if (!fName.data) {
+            this.props.setFirstName(fName.data, "Required")
+
+        } else if (fName.data.length > 30) {
+            this.props.setFirstName(fName.data, "Max length is 30")
+        }
+        if (!lName.data) {
+            this.props.setLastName(lName.data, "Required")
+
+        } else if (lName.length > 30) {
+            this.props.setLastName(lName.data, "Max length is 30")
+        }
         if (email.data) {
+            if (email.data.length > 50) {
+                this.props.setEmail(email.data, "Max length is 50")
+            }
             if (!email.data.match(EMAIL_REGEX)) {
-                this.props.setEmail("", "Invalid Email Address")
+                this.props.setEmail(email.data, "Invalid Email Address")
+            }
+        }
+        if (!user.data) {
+            this.props.setUserName(user.data, "Required")
+
+        } else if (user.length > 30) {
+            this.props.setUserName(user.data, "Max length is 30")
+        }
+        if (!pass.data) {
+            this.props.setPass(pass.data, "Required")
+
+        } else if (pass.length > 30) {
+            this.props.setPass(pass.data, "Max length is 30")
+        }
+        if (!cfPass.data) {
+            this.props.setConfirmPass(cfPass.data, "Required")
+        }
+        if (pass.data && cfPass.data) {
+            if (pass.data !== cfPass.data) {
+                this.props.setConfirmPass(cfPass.data, "Password not matched")
             }
         }
         if (user.data) {
@@ -54,11 +91,6 @@ class SignUp extends Component {
                         this.onSubmit();
                     }
                 });
-        }
-        if (pass.data && cfPass.data) {
-            if (pass.data !== cfPass.data) {
-                this.props.setConfirmPass("", "Password not matched")
-            }
         }
     }
 
@@ -72,6 +104,7 @@ class SignUp extends Component {
             cfPass,
             checkUserStatus
         } = this.props.signup;
+
         let disabled =
             fName.data === "" ||
             lName.data === "" ||
@@ -87,6 +120,8 @@ class SignUp extends Component {
                 formTitle="Sign Up"
                 buttonTitle="Let's Get Started"
                 onSubmit={() => this.validate(
+                    fName,
+                    lName,
                     email,
                     user,
                     pass,
@@ -104,6 +139,7 @@ class SignUp extends Component {
                             onChange={(value) => this.onChange('setFirstName', value)}
                             label="First Name"
                             error={fName.error}
+                            value={fName.data}
                         />
                     </div>
                     <div className={classnames("col")}>
@@ -111,6 +147,7 @@ class SignUp extends Component {
                             onChange={(value) => this.onChange('setLastName', value)}
                             label="Last Name"
                             error={lName.error}
+                            value={lName.data}
                         />
                     </div>
                 </div>
@@ -119,6 +156,7 @@ class SignUp extends Component {
                         onChange={(value) => this.onChange('setEmail', value)}
                         label="Work Email"
                         error={email.error}
+                        value={email.data}
                     />
                 </div>
                 <div className={classnames("form-group")}>
@@ -126,6 +164,7 @@ class SignUp extends Component {
                         onChange={(value) => this.onChange('setUserName', value)}
                         label="Username"
                         error={user.error}
+                        value={user.data}
                     />
                 </div>
                 <div className={classnames("form-group")}>
@@ -134,6 +173,7 @@ class SignUp extends Component {
                         type="password"
                         onChange={(value) => this.onChange('setPass', value)}
                         error={pass.error}
+                        value={pass.data}
                     />
                 </div>
                 <div className={classnames("form-group")}>
@@ -184,6 +224,9 @@ const mapDispatchToProps = dispatch => {
         setConfirmPass: (data, error) => {
             dispatch(setConfirmPass(data, error))
         },
+        clearSignUp: () => {
+            dispatch(clearSignUp())
+        }
     }
 };
 

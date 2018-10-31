@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Row, Col } from "react-bootstrap"
-import { FormModal, Input, } from "../../../../../common"
+import { FormModal, Input, TextArea } from "../../../../../common"
 
 
 type ApptFormModalProps = {
@@ -44,7 +44,7 @@ class ApptFormModal extends React.Component<ApptFormModalProps> {
 
 
                 <Input label="Technician" />
-                <Input type="textArea" label="Description" />
+                <TextArea rows={3} label="Description" />
 
             </FormModal >
         )

@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
-
+import { connect } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import {
     UikNavPanel,
     UikNavLink,
@@ -9,37 +10,36 @@ import {
 } from "../../UikLayout";
 
 import classnames from 'classnames';
-
+import { PATH } from '../../constant';
 import cls from "./styles.module.scss";
 import Footer from '../Footer';
 
 type SideBarProps = {
-    listMenu?: array,
-    title?: string
+    listMenu?: Array,
+    title?: String,
+    activeIndex?: Number,
+    onClick?: Function
 }
 
 class SideBar extends PureComponent<SideBarProps> {
     constructor(props) {
         super(props);
         this.state = {
-            activeIndex: 0,
             clicked: false
         };
     }
 
-    componentDidMount() {
-    }
-
-    onClick = (indx) => {
-        this.setState({ activeIndex: indx })
+    onClick = (menu) => {
+        this.props.onClick(menu)
     }
 
     render() {
         let {
             title,
-            listMenu
+            listMenu,
+            activeIndex
         } = this.props;
-        let { activeIndex, clicked } = this.state;
+        let { clicked } = this.state;
 
         return (
             <UikNavPanel className={classnames(
@@ -96,12 +96,12 @@ class SideBar extends PureComponent<SideBarProps> {
                             listMenu.map((menu, indx) => (
                                 <React.Fragment key={menu.text}>
                                     <UikNavLink
-                                        key={menu.text}
+                                        key={menu.id}
                                         className={classnames(
                                             cls.nav_link_responsive,
                                             activeIndex === indx && 'active')}
                                         highlighted
-                                        onClick={() => this.onClick(indx)}
+                                        onClick={() => this.onClick(menu)}
                                     >
                                         {menu.text}
                                     </UikNavLink>
@@ -119,7 +119,9 @@ class SideBar extends PureComponent<SideBarProps> {
 
 SideBar.defaultProps = {
     listMenu: [],
-    title: ""
+    title: "",
+    activeIndex: 0,
+    onClick: () => { }
 }
 
-export default SideBar;
+export default SideBar

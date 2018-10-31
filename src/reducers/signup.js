@@ -19,101 +19,112 @@ const initState = {
     contactEmail: { data: "", error: "" },
     contactPhone: { data: "", error: "" },
     checkUserStatus: STATUS.default,
+    signUpStatus: STATUS.default,
     checkUserError: ""
 }
 
-const login = (state = initState, action) => {
+const signup = (state = initState, action) => {
 
     switch (action.type) {
-        case 'SET_CHECK_USER_STATUS':
+        case 'SIGN_UP/SET_SIGN_UP_STATUS':
             return {
                 ...state,
-                checkUserStatus: action.status,
-                checkUserError: action.error
+                signUpStatus: action.status
             }
-        case 'SET_USER_NAME':
+        case 'SIGN_UP/SET_CHECK_USER_STATUS':
+            return {
+                ...state,
+                checkUserStatus: action.status
+            }
+        case 'SIGN_UP/SET_USER_NAME':
             return {
                 ...state,
                 user: action.user,
             }
-        case 'SET_PASS':
+        case 'SIGN_UP/SET_PASS':
             return {
                 ...state,
                 pass: action.pass,
             }
-        case 'SET_CONFIRM_PASS':
+        case 'SIGN_UP/SET_CONFIRM_PASS':
             return {
                 ...state,
                 cfPass: action.cfPass,
             }
-        case 'SET_EMAIL':
+        case 'SIGN_UP/SET_EMAIL':
             return {
                 ...state,
                 email: action.email,
             }
-        case 'SET_ADDRESS':
+        case 'SIGN_UP/SET_ADDRESS':
             return {
                 ...state,
                 address: action.address,
             }
-        case 'SET_ADDRESS_2':
+        case 'SIGN_UP/SET_ADDRESS_2':
             return {
                 ...state,
                 address2: action.address2,
             }
-        case 'SET_FIRST_NAME':
+        case 'SIGN_UP/SET_FIRST_NAME':
             return {
                 ...state,
                 fName: action.fName,
             }
-        case 'SET_LAST_NAME':
+        case 'SIGN_UP/SET_LAST_NAME':
             return {
                 ...state,
                 lName: action.lName,
             }
-        case 'SET_CITY':
+        case 'SIGN_UP/SET_CITY':
             return {
                 ...state,
                 city: action.city,
             }
-        case 'SET_STATE_ID':
+        case 'SIGN_UP/SET_STATE_ID':
             return {
                 ...state,
                 state: action.state,
             }
-        case 'SET_ZIP':
+        case 'SIGN_UP/SET_ZIP':
             return {
                 ...state,
                 zip: action.zip,
             }
-        case 'SET_PHONE':
+        case 'SIGN_UP/SET_PHONE':
             return {
                 ...state,
                 phone: action.phone,
             }
-        case 'SET_COMPANY_NAME':
+        case 'SIGN_UP/SET_COMPANY_NAME':
             return {
                 ...state,
                 cName: action.cName,
             }
-        case 'SET_CONTACT_NAME':
+        case 'SIGN_UP/SET_CONTACT_NAME':
             return {
                 ...state,
                 contactName: action.contactName,
             }
-        case 'SET_CONTACT_EMAIL':
+        case 'SIGN_UP/SET_CONTACT_EMAIL':
             return {
                 ...state,
                 contactEmail: action.contactEmail,
             }
-        case 'SET_CONTACT_PHONE':
+        case 'SIGN_UP/SET_CONTACT_PHONE':
             return {
                 ...state,
                 contactPhone: action.contactPhone,
+            }
+        case 'SIGN_UP/CLEAR_SIGN_UP':
+            state = initState;
+            console.log(state);
+            return {
+                ...state,
             }
         default:
             return state
     }
 }
 
-export default login
+export default signup
