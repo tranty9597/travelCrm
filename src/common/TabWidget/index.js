@@ -21,7 +21,7 @@ type TabWidgetProps = {
     activeIndx?: Number
 }
 
-class TabWidget extends PureComponent<TabWidgetProps> {
+class  TabWidget extends PureComponent<TabWidgetProps> {
     constructor(props) {
         super(props);
         this.state = {};
