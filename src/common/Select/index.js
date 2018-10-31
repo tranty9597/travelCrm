@@ -9,17 +9,9 @@ type SelectProps = {
     error?: String,
     label?: String,
     options?: Array,
-<<<<<<< HEAD
-    disabled?: Boolean,
-    value?: String,
-    className?: String
-
-
-=======
     onChange?: Function,
     className?: String,
     defaultValue?: String
->>>>>>> f88698875f041886f69357166e4c436148ebae4a
 }
 
 class Select extends PureComponent<SelectProps> {
