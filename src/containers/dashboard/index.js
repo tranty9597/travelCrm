@@ -62,6 +62,7 @@ class Dashboard extends PureComponent {
                 this.props.history.push(PATH.TECHNICIAN)
                 break;
             case 3:
+                this.props.history.push(PATH.SYSTEM_SETTING)
                 break;
         }
     }

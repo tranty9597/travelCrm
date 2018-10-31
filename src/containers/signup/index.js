@@ -182,6 +182,7 @@ class SignUp extends Component {
                         type="password"
                         onChange={(value) => this.onChange('setConfirmPass', value)}
                         error={cfPass.error}
+                        value={cfPass.data}
                     />
                 </div>
 

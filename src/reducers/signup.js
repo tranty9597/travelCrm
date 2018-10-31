@@ -118,7 +118,6 @@ const signup = (state = initState, action) => {
             }
         case 'SIGN_UP/CLEAR_SIGN_UP':
             state = initState;
-            console.log(state);
             return {
                 ...state,
             }

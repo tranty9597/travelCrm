@@ -21,11 +21,15 @@ class Input extends PureComponent<InputProps> {
     constructor(props) {
         super(props);
         this.state = {
-            value: this.props.value,
+            value: "",
             focused: false,
         };
     }
 
+    componentDidMount() {
+        let { value } = this.props;
+        this.setState({ value })
+    }
 
     getHintData = () => {
         let {
@@ -58,7 +62,7 @@ class Input extends PureComponent<InputProps> {
             });
         }
 
-        return data;
+        return data.length === 0 ? hintData : data;
     }
 
     handleToggleFocus = (isBlur) => {

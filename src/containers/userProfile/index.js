@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import { connect } from 'react-redux';
+
 import classnames from 'classnames';
 
 import cls from './styles.module.scss';
@@ -39,12 +41,13 @@ class UserProfile extends Component {
 
     render() {
         let { activeIndx } = this.state;
+        let { user } = this.props.login;
         return (
             <Dashboard history={this.props.history}>
                 <UikContainerVertical>
                     <UikHeadline>
-                        Thang Nguyen
-            </UikHeadline>
+                        {user}
+                    </UikHeadline>
                     <TabWidget
                         tabs={tabs}
                         buttonTitle='Save'
@@ -95,4 +98,23 @@ class UserProfile extends Component {
     }
 }
 
-export default UserProfile;
+UserProfile.defaultProps = {
+
+}
+
+const mapStateToProps = state => {
+    return {
+        login: state.login
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(UserProfile);

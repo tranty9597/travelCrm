@@ -38,7 +38,7 @@ class NavBar extends React.PureComponent {
                     "align-items-center"
                 )}>
                     <Img
-                        src='https://icon.cat/img/icon_loop.png'
+                        src={require('../../assets/logo/logo@3x.png')}
                         className={classnames(cls.logo)}
                     />
                 </div> :
@@ -46,17 +46,17 @@ class NavBar extends React.PureComponent {
                     <UikTopBarSection>
                         <UikTopBarTitle>
                             <Img
-                                src='https://icon.cat/img/icon_loop.png'
+                                src={require('../../assets/logo/logo@3x.png')}
                                 className={classnames(cls.image)}
                             />
                         </UikTopBarTitle>
                         <UikTopBarTitle>
-                            {serviceCompanyName}
+                            {serviceCompanyName.data}
                         </UikTopBarTitle>
 
                     </UikTopBarSection>
                     <UikTopBarSection>
-                        <Link to={PATH.USER_PROFILE} >Thang Nguyen</Link>
+                        <Link to={PATH.USER_PROFILE} >{user}</Link>
                     </UikTopBarSection>
                 </UikTopBar>
 

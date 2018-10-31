@@ -14,10 +14,14 @@
     padding: inherit;
     >span {
         height: inherit;
+        white-space: nowrap;
         margin: 0;
-        padding: 0;
         justify-content: center;
     }
+}
+
+.widget_content {
+    padding-top: 15px;
 }
 
 .content_container {

@@ -88,11 +88,11 @@ class CompanyInformation extends Component {
             zip,
         } = this.props.signup;
         let disabled =
-            cName.data === "" ||
-            address.data === "" ||
-            city.data === "" ||
-            state.data.label === "" ||
-            zip.data === "";
+            !cName.data ||
+            !address.data ||
+            !city.data ||
+            !state.data||
+            !zip.data;
 
         return (
 
@@ -152,7 +152,7 @@ class CompanyInformation extends Component {
                             onChange={(value) => this.onChange("setStateID", value)}
                             label="State"
                             error={state.error}
-                            defaultValue={state.data.value}
+                            defaultValue={state.data}
                         />
                     </div>
                     <div className={classnames("col")}>

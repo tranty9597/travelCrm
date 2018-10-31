@@ -1,8 +1,7 @@
 import "@babel/polyfill";
-import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux'
-
+import React from 'react';
 import * as serviceWorker from './serviceWorker';
 import configureStore from './configureStore'
 import {
@@ -13,16 +12,14 @@ import {
 } from 'react-router-dom';
 
 import {
-  LogIn,
   AdminLogIn,
   SignUp,
   CompanyInformation,
   CompanyContact,
-  Dashboard,
   Payment,
   CCPayment,
   UserProfile,
-  Technician
+  Technician,
 } from './containers'
 
 import {
@@ -50,34 +47,50 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
       }} />
   )} />
 )
-function Loading({ error, pastDelay }) {
-  if (error) {
-    return <div>{error}</div>;
-  } else if (pastDelay) {
-    return <h3>Loading...</h3>;
+const Loading = (props) => {
+  if (props.error) {
+    return <div>Error! <button onClick={props.retry}>Retry</button></div>;
+  } else if (props.pastDelay) {
+    return <div>Loading...</div>;
   } else {
-    return <h3>Loading...</h3>
+    return <div style={{
+      width: '100%',
+      height: '100%',
+      position: 'absolute',
+      backgroundColor: 'black',
+      top: 0
+    }}></div>;
   }
 }
 
 const Appointment = Loadable({
   loader: () => import('./containers/dashboard/appointment'),
-  loading: Loading,
-  delay: 300
+  loading: Loading
 });
 const System = Loadable({
   loader: () => import('./containers/dashboard/system'),
-  loading() {
-    return <div>Loading...</div>
- }
+  loading: Loading
 });
+const LogIn = Loadable({
+  loader: () => import('./containers/login'),
+  loading: Loading
+})
+const Dashboard = Loadable({
+  loader: () => import('./containers/dashboard'),
+  loading: Loading
+})
+const SystemSetting = Loadable({
+  loader: () => import('./containers/dashboard/systemSetting'),
+  loading: Loading,
+})
 const Router = () => (
   <Switch>
-    <Route exact path={PATH.DASH_BOARD} component={Dashboard} />
-    <Route exact path={PATH.USER_PROFILE} component={UserProfile} />
-    <Route exact path={PATH.APPOINTMENT} component={Appointment} />
-    <Route exact path={PATH.SYSTEM} component={System} />
-    <Route exact path={PATH.Technician} component={Technician} />
+    <PrivateRoute exact path={PATH.DASH_BOARD} component={Dashboard} />
+    <PrivateRoute exact path={PATH.USER_PROFILE} component={UserProfile} />
+    <PrivateRoute exact path={PATH.APPOINTMENT} component={Appointment} />
+    <PrivateRoute exact path={PATH.SYSTEM} component={System} />
+    <PrivateRoute exact path={PATH.SYSTEM_SETTING} component={SystemSetting} />
+    <PrivateRoute exact path={PATH.TECHNICIAN} component={Technician} />
     <Route exact path={PATH.LOG_IN} component={LogIn} />
     <Route exact path={PATH.ADMIN_LOG_IN} component={AdminLogIn} />
     <Route exact path={PATH.SIGN_UP} component={SignUp} />
@@ -87,7 +100,6 @@ const Router = () => (
     <Route exact path={PATH.PAYMENT} component={Payment} />
   </Switch>
 )
-
 const Root = ({ store }) => (
   <UikPageFade className={classnames(cls.app)}>
     <Provider store={store}>

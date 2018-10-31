@@ -7,10 +7,13 @@ import {
     signUpServiceCompany,
     clearSignUp,
 } from '../../../../../actions/signUp';
-import { loginAct } from '../../../../../actions/authentication';
+import { setUserName, setPassword } from '../../../../../actions/authentication';
 import {
-    setServiceCompany
+    setServiceCompany,
 } from '../../../../../actions/dashboard';
+import {
+    setServiceCompanyData
+} from '../../../../../actions/systemSetting';
 import { PATH, STATUS } from '../../../../../constant';
 import classnames from 'classnames';
 import cls from './styles.module.scss';
@@ -58,12 +61,10 @@ class Payment extends Component {
             zip.data,
             cName.data,
             (res) => {
-                this.props.loginAct(user.data, pass.data,
-                    () => {
-                        this.props.clearSignUp();
-                        this.props.setServiceCompany(res.serviceCompanyID, cName.data);
-                        this.props.history.replace(PATH.DASH_BOARD);
-                    });
+                this.props.clearSignUp();
+                this.props.setUserName(user.data, "");
+                this.props.setPassword(pass.data, "");
+                this.props.history.replace(PATH.LOG_IN);
             })
     }
 
@@ -115,8 +116,11 @@ const mapDispatchToProps = dispatch => {
                 contactEmail, contactName, contactPhone, address, address2, city, state, zip,
                 cName, callbackSuccess))
         },
-        loginAct: (username, password, callbackSuccess) => {
-            dispatch(loginAct(username, password, callbackSuccess))
+        setUserName: (data, error) => {
+            dispatch(setUserName(data, error))
+        },
+        setPassword: (data, error) => {
+            dispatch(setPassword(data, error))
         },
         setServiceCompany: (serviceCompanyID, serviceCompanyName) => {
             dispatch(setServiceCompany(serviceCompanyID, serviceCompanyName))
@@ -124,6 +128,25 @@ const mapDispatchToProps = dispatch => {
         clearSignUp: () => {
             dispatch(clearSignUp())
         },
+        setServiceCompanyData: (contactEmail,
+            contactName,
+            contactPhone,
+            address,
+            address2,
+            city,
+            state,
+            zip,
+            cName) => {
+            dispatch(setServiceCompanyData(contactEmail,
+                contactName,
+                contactPhone,
+                address,
+                address2,
+                city,
+                state,
+                zip,
+                cName))
+        }
     }
 }
 

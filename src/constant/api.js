@@ -5,6 +5,7 @@ const API = {
     LOG_IN: `${BACKEND_URL}/Auth/Login`,
     SIGN_UP: `${BACKEND_URL}/ServiceCompany/Create`,
     GET_APPOINTMENTS: `${BACKEND_URL}/Appointment/Search?pageIndex=#1&pageCount=#2`,
+    GET_CUSTOMERS: `${BACKEND_URL}/Customer/GetCustomerList`,
 }
 
 export { API }

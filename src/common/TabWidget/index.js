@@ -21,7 +21,7 @@ type TabWidgetProps = {
     activeIndx?: Number
 }
 
-class  TabWidget extends PureComponent<TabWidgetProps> {
+class TabWidget extends PureComponent<TabWidgetProps> {
     constructor(props) {
         super(props);
         this.state = {};
@@ -49,23 +49,22 @@ class  TabWidget extends PureComponent<TabWidgetProps> {
         });
         content = <div
             key={0}
-            className={classnames(
-                cls.tab_group,
-                'col-lg-4')}>
+            className={classnames('col',
+                cls.tab_group)}>
             {content}
         </div>
         content = [
             content,
-            <div className={classnames(
-                'd-flex',
-                'justify-content-center',
-                'align-items-center'
-            )}>
+            <div
+                key={1}
+                className={classnames(
+                    'd-flex',
+                    'justify-content-center',
+                    'align-items-center'
+                )}>
                 <UikButton
-                    key={1}
                     success
                     onClick={() => this.props.onButtonClick()}
-
                 >
                     {buttonTitle}
                 </UikButton>
@@ -90,7 +89,7 @@ class  TabWidget extends PureComponent<TabWidgetProps> {
                 <UikTabContainer className={classnames(cls.tab_container)}>
                     {tabItems}
                 </UikTabContainer>
-                <UikWidgetContent>
+                <UikWidgetContent className={classnames(cls.widget_content)}>
                     {children}
                 </UikWidgetContent>
             </UikWidget>

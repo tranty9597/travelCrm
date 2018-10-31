@@ -18,15 +18,16 @@ export const getAppointments = (pageIndex, pageCount) => {
     return dispatch => {
         dispatch(setGetAppointmentsStatus(STATUS.loading))
         let url = API.GET_APPOINTMENTS.replace("#1", pageIndex).replace("#2", pageCount);
+        alert(url)
         get(url).then(
             res => {
                 console.log(res)
                 dispatch(setGetAppointmentsStatus(STATUS.success))
-                // dispatch(setAppointments(res.data))
+                dispatch(setAppointments(res.data))
             },
             rej => {
                 dispatch(setGetAppointmentsStatus(STATUS.error))
-                alert('get appointment')
+                alert('get appointments')
                 console.log(rej)
             }
         )
@@ -41,5 +42,35 @@ export const setAppointments = (appointments) => ({
 export const setGetAppointmentsStatus = (status) => ({
     type: 'APPOINTMENT/SET_GET_APPOINTMENTS_STATUS',
     status
-})  
+})
+
+
+//---------------CUSTOMERS---------------------//
+export const setGetCustomersStatus = (status) => ({
+    type: 'DASHBOARD/SET_GET_CUSTOMERS_STATUS',
+    status
+})
+
+export const setCustomers = (customers) => ({
+    type: 'DASHBOARD/SET_CUSTOMERS',
+    customers
+})
+
+export const getCustomers = () => {
+    return dispatch => {
+        dispatch(setGetCustomersStatus(STATUS.loading))
+        get(API.GET_CUSTOMERS).then(
+            res => {
+                console.log(res)
+                dispatch(setGetCustomersStatus(STATUS.success))
+                dispatch(setCustomers(res.data))
+            },
+            rej => {
+                dispatch(setGetCustomersStatus(STATUS.error))
+                alert('get customers')
+                console.log(rej)
+            }
+        )
+    }
+}
 

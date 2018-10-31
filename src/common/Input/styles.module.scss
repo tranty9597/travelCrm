@@ -5,11 +5,11 @@
 }
 
 .common_input-div-list-container {
+    border: 1px solid $borderColorDarker;
     width: 100%;
     position: absolute;
     z-index: 50;
     background: white;
-    border: 1px solid $borderColorDarker;
     border-radius: 4px;
     list-style: none;
     top: 100%;
