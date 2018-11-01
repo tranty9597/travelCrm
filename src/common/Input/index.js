@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react';
 import { UikInput } from '../../UikLayout';
 import { HintData } from '../../common';
 import cls from './styles.module.scss';
-import classNames from 'classnames';
+import classnames from 'classnames';
 
 type InputProps = {
     error?: String,
@@ -12,7 +12,10 @@ type InputProps = {
     hintData?: Array,
     filterFieldName?: Array,
     type?: String,
-    value?: String
+    value?: String,
+    onButtonClick?: Function,
+    buttonLabel?: String,
+    onButtonClick?: Function
 }
 
 const ONBLUR_DELAY_TIME = 220;
@@ -79,6 +82,11 @@ class Input extends PureComponent<InputProps> {
         this.props.onChange(value);
     }
 
+    onClick = (e) => {
+        e.preventDefault();
+        this.props.onButtonClick();
+    }
+
     render() {
         let {
             error,
@@ -87,6 +95,8 @@ class Input extends PureComponent<InputProps> {
             showHint,
             value,
             onChange,
+            buttonLabel,
+            onButtonClick,
             ...rest
         } = this.props;
         let { focused } = this.state;
@@ -95,7 +105,8 @@ class Input extends PureComponent<InputProps> {
 
         return (
 
-            <div className={classNames(cls["common_input-div-container"])}>
+            <div className={classnames(cls["common_input-div-container"])}>
+
                 <UikInput
                     onChange={(e) => this.onChange(e.target.value)}
                     onFocus={this.handleToggleFocus.bind(this, false)}
@@ -103,6 +114,14 @@ class Input extends PureComponent<InputProps> {
                     value={value}
                     {...rest}
                 />
+                {buttonLabel &&
+                    <a
+                        href=""
+                        className={classnames(cls["common_input-div-button"])}
+                        onClick={(e) => this.onClick(e)}
+                    >
+                        {buttonLabel}
+                    </a>}
                 {
                     focused && data.length > 0 && (
                         <HintData
@@ -111,7 +130,7 @@ class Input extends PureComponent<InputProps> {
                         />
                     )
                 }
-                <div className={classNames(cls["common_input-div-error"])}>
+                <div className={classnames(cls["common_input-div-error"])}>
                     {error}
                 </div>
             </div>
@@ -126,7 +145,9 @@ Input.defaultProps = {
     hintData: [],
     filterFieldName: [],
     type: 'text',
-    value: ""
+    value: "",
+    buttonLabel: "",
+    onButtonClick: () => {}
 }
 
 export default Input;

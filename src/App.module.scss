@@ -6,12 +6,12 @@
     margin: auto;
     overflow: auto;
     @media screen and (min-width: $mobile) {
-        font-size: 80%!important;
+        font-size: 80% !important;
         padding-left: 7.5%;
         padding-right: 7.5%;
     }
     @media screen and (max-width: $mobile) {
-        font-size: 60%!important;
+        font-size: 60% !important;
     }
 }
 
@@ -96,12 +96,15 @@ body,
         font-weight: 600;
     }
     h2 {
-        font-weight: 500!important;
-        font-size: 1.375rem!important;
+        font-weight: 500 !important;
+        font-size: 1.375rem !important;
         line-height: 2rem;
     }
     h3 {
         font-size: 1.125rem;
+        @media screen and (max-width: $almostMobile) {
+            font-size: 1rem;
+        }
     }
     h4 {
         font-size: 1.1rem;

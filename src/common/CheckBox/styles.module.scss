@@ -1,0 +1,13 @@
+@import '../../vars';
+.success {
+    span {
+        font-size: inherit !important;
+    }
+    input:checked+span::before {
+        background-color: $success !important;
+        border-color: $success !important
+    }
+    input:checked+span {
+        color: inherit !important;
+    }
+}

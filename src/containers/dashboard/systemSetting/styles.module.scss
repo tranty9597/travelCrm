@@ -1,0 +1,11 @@
+@import '../../../vars';
+.title {
+    font-weight: 500 !important;
+}
+
+.container {
+    @media screen and (max-width: 900px) {
+        max-width: fit-content;
+        min-width: 70%;
+    }
+}

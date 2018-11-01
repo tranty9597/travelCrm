@@ -19,7 +19,6 @@ import {
   Payment,
   CCPayment,
   UserProfile,
-  Technician,
 } from './containers'
 
 import {
@@ -51,15 +50,9 @@ const Loading = (props) => {
   if (props.error) {
     return <div>Error! <button onClick={props.retry}>Retry</button></div>;
   } else if (props.pastDelay) {
-    return <div>Loading...</div>;
+    return <div>Loading.....</div>;
   } else {
-    return <div style={{
-      width: '100%',
-      height: '100%',
-      position: 'absolute',
-      backgroundColor: 'black',
-      top: 0
-    }}></div>;
+    return <div>Loading...</div>;
   }
 }
 
@@ -83,13 +76,17 @@ const SystemSetting = Loadable({
   loader: () => import('./containers/dashboard/systemSetting'),
   loading: Loading,
 })
+const Technician = Loadable({
+  loader: () => import('./containers/dashboard/technician'),
+  loading: Loading,
+})
 const Router = () => (
   <Switch>
     <PrivateRoute exact path={PATH.DASH_BOARD} component={Dashboard} />
     <PrivateRoute exact path={PATH.USER_PROFILE} component={UserProfile} />
     <PrivateRoute exact path={PATH.APPOINTMENT} component={Appointment} />
     <PrivateRoute exact path={PATH.SYSTEM} component={System} />
-    <PrivateRoute exact path={PATH.SYSTEM_SETTING} component={SystemSetting} />
+    <Route exact path={PATH.SYSTEM_SETTING} component={SystemSetting} />
     <PrivateRoute exact path={PATH.TECHNICIAN} component={Technician} />
     <Route exact path={PATH.LOG_IN} component={LogIn} />
     <Route exact path={PATH.ADMIN_LOG_IN} component={AdminLogIn} />

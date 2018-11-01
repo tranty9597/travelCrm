@@ -1,0 +1,39 @@
+@import '.././../../../vars';
+.inline {
+    max-width: 45%;
+    @media screen and (max-width: 900px) {
+        max-width: 100%;
+        display: flex;
+    }
+}
+
+.row {
+    justify-content: space-between;
+    display: flex;
+    @media screen and (max-width: 900px) {
+        display: block;
+    }
+}
+
+.button_group {
+    margin-top: 20px;
+    justify-content: space-between;
+    width: 50%;
+    display: flex;
+    float: right;
+}
+
+.button {
+    max-width: 45%;
+    >div {
+        justify-content: center;
+    }
+}
+
+.cancel {
+    background-color: white;
+}
+
+.invoice {
+    margin-top: 25px
+}

@@ -70,3 +70,12 @@ div li:hover {
     margin-top: 5px;
     color: $error;
 }
+
+.common_input-div-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    &:hover {
+        text-decoration: none;
+    }
+}

@@ -12,6 +12,7 @@ import AddNewBox from './AddNewBox';
 import Table from "./Table";
 import TextArea from "./TextArea";
 import TabWidget from './TabWidget';
+import CheckBox from './CheckBox';
 
 export {
     Select,
@@ -27,5 +28,6 @@ export {
     AddNewBox,
     Table,
     TextArea,
-    TabWidget
+    TabWidget,
+    CheckBox
 }

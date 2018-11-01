@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import { TabWidget } from '../../../common';
 
@@ -9,6 +9,10 @@ import classnames from 'classnames';
 import cls from './styles.module.scss';
 
 import CompanyProfile from './companyProfile';
+
+import Distributor from './distributor';
+
+import Billing from './billing';
 
 import { Dashboard } from '../../../containers';
 
@@ -40,8 +44,20 @@ class SystemSetting extends Component {
         this.setState({ activeIndx })
     }
 
+    getContent = (activeIndx) => {
+        switch (activeIndx) {
+            case 0:
+                return <CompanyProfile />
+            case 1:
+                return <Distributor />
+            case 2:
+                return <Billing />
+        }
+    }
+
     render() {
         let { activeIndx } = this.state;
+        let content = this.getContent(activeIndx);
         return (
             <Dashboard history={this.props.history}>
                 <UikContainerVertical>
@@ -54,7 +70,7 @@ class SystemSetting extends Component {
                         activeIndx={activeIndx}
                         onTabClick={(indx) => this.onTabClick(indx)}
                     >
-                        <CompanyProfile />
+                        {content}
                     </TabWidget>
                 </UikContainerVertical>
             </Dashboard>

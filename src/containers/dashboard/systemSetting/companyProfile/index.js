@@ -22,6 +22,7 @@ import { STATES } from '../../../../constant';
 
 import classnames from 'classnames';
 import cls from './styles.module.scss';
+import clsSystem from '../styles.module.scss';
 import clsCInfor from '../../../signup/companyInformation/styles.module.scss';
 
 class CompanyProfile extends PureComponent {
@@ -47,9 +48,9 @@ class CompanyProfile extends PureComponent {
             contactPhone
         } = this.props.systemSetting
         return (
-            <div className={classnames('col-sm-7 col-lg-7', cls.container)}>
+            <div className={classnames('col-sm-7 col-lg-7', clsSystem.container)}>
                 <div>
-                    <h3 className={classnames(cls.title)}>
+                    <h3 className={classnames(clsSystem.title)}>
                         Company Information
                     </h3>
                     <div className={classnames("form-group")}>

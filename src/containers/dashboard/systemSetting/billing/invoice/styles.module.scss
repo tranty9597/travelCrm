@@ -1,0 +1,43 @@
+@import '../.././../../../vars';
+.container {
+    padding-left: 10px
+}
+
+.col {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    text-align: center;
+    height: 70px
+}
+
+.inline_col {
+    flex-direction: column;
+}
+
+.sub {
+    font-size: 80%;
+    color: $textSecondary;
+    text-align: left;
+    line-height: 20px
+}
+
+.button {
+    justify-content: left;
+    padding: 0;
+    margin: auto;
+}
+
+.tag {
+    font-size: 90%;
+    padding: 5% 15%;
+    border-radius: 4px; 
+    background-color: $textSecondary;
+    color:white;
+    white-space: nowrap;
+    min-width: fit-content;
+}
+
+.paid {
+    background-color: green;
+}
