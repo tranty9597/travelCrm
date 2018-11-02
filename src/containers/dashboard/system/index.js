@@ -4,13 +4,16 @@ import {
     Tab,
     TimeLine,
     AddNewBox,
+    Table,
+    CheckBox
 } from '../../../common';
 
 import { Dashboard } from '../../../containers';
 import { connect } from 'react-redux'
 import {
     UikContainerVertical,
-    UikContainerHorizontal
+    UikContainerHorizontal,
+    UikTopBarTitle, UikButton
 } from '../../../UikLayout';
 
 import {
@@ -263,6 +266,68 @@ const test = [
     "Password"
 ]
 
+const customerSource = [
+    {
+        name: "Scott Technology Center",
+        address: "6825 Pine St, Omaha, NE 68106",
+        pName: "Maria Hill",
+        pPhone: "432-424-6787",
+        pEmail: "maria@avengers.com",
+        facility: [
+            {
+                name: "Mammal Hall",
+                address: "6825 Pine St, Omaha, NE 68106",
+                pName: "Phil Coulson",
+                pPhone: "435-324-2134",
+                pEmail: "phil@avengers.com",
+                sName: "Pepper Pott",
+                sPhone: "567-345-4565",
+                sEmail: "pepper@avengers.com",
+                systems: 5
+            },
+            {
+                name: "Baxter Arena",
+                address: "2425 S 67th St, Omaha, NE 68182",
+                pName: "Clint Barton",
+                pPhone: "142-432-5252",
+                pEmail: "clint@avengers.com",
+                systems: 6
+            }
+        ],
+
+
+    },
+    {
+        name: "Natasha Romannoff",
+        address: "16770 W Maple Rd, Omaha, NE 68116",
+        pName: "Natasha Romannoff",
+        pPhone: "560-738-3222",
+        pEmail: "natasha@gmail.com",
+        facility: [
+            {
+                name: "Home",
+                address: "16770 W Maple Rd, Omaha, NE 68116",
+                pName: "Natasha Romannoff",
+                pPhone: "560-738-3222",
+                pEmail: "natasha@gmail.com",
+                systems: 1
+            },
+            {
+                name: "Home 2",
+                address: "16770 W Maple Rd, Omaha, NE 68116",
+                pName: "Natasha Romannoff",
+                pPhone: "560-738-3222",
+                pEmail: "natasha@gmail.com",
+                systems: 0
+            }
+        ],
+
+
+    }
+]
+
+
+
 class System extends Component {
     constructor(props) {
         super(props);
@@ -291,9 +356,12 @@ class System extends Component {
         alert('image clicked');
     }
 
-    edit = () => {
-        alert('edit clicked');
+    onEdit = (item) => {
+        alert(item);
+    }
 
+    onAddFacility = (item) => {
+        alert(item)
     }
 
     onAddNote = (value) => {
@@ -308,6 +376,42 @@ class System extends Component {
         this.setState({ test: !this.state.test });
     }
 
+    onCheckBox = (isResidential) => {
+    }
+
+    renderToolbar = () => {
+        return (
+            <UikContainerHorizontal
+                className={classnames(cls.header_filter)}
+            >
+                <UikContainerHorizontal>
+                    <UikTopBarTitle>
+                        Customers
+                </UikTopBarTitle>
+                    <UikContainerHorizontal className={classnames('col-sm-6')}>
+                        <div className={classnames('col')}>
+                            <CheckBox
+                                label="Commercial"
+                                onClick={() => this.onCheckBox(false)}
+                            />
+                        </div>
+                        <div className={classnames('col')}>
+                            <CheckBox
+                                label="Residential"
+                                onClick={() => this.onCheckBox(true)}
+                            />
+                        </div>
+                    </UikContainerHorizontal>
+                </UikContainerHorizontal>
+                <UikTopBarTitle>
+                    <UikButton onClick={this.showCreateForm} success>
+                        New Customer
+                    </UikButton>
+                </UikTopBarTitle>
+
+            </UikContainerHorizontal>
+        )
+    }
     render() {
         let {
             activeTab,
@@ -368,7 +472,16 @@ class System extends Component {
         return (
 
             <Dashboard history={this.props.history}>
-                <UikContainerVertical className={classnames(
+                <div style={{ flexDirection: 'column', width: 'fit-content' }}>
+                    {this.renderToolbar()}
+                    <Table
+                        onEdit={(item) => this.onEdit(item)}
+                        type={1}
+                        dataSource={customerSource}
+                        onAddFacility={(item) => this.onAddFacility(item)}
+                    />
+                </div>
+                {/* <UikContainerVertical className={classnames(
                     clsTab.container,
                     'col-lg-5')
                 }>
@@ -398,7 +511,7 @@ class System extends Component {
                         {activeUnit !== -1 && activeTab === 0 && subTab}
                         {record}
                     </UikContainerVertical >
-                </UikContainerHorizontal>
+                </UikContainerHorizontal> */}
             </Dashboard >
         );
     }

@@ -66,11 +66,10 @@ class Distributor extends PureComponent {
             element.data.forEach((data, i) => {
                 content.push(
                     <div
-                        key={i}
+                        key={indx+" "+i}
                         className={classnames("form-group")}
                     >
                         <CheckBox
-                            success
                             defaultChecked={data.isCheck}
                             label={data.name}
                         />

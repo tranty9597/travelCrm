@@ -55,6 +55,11 @@ const FILTERS_DATE = [
     }
 ]
 
+const appointmentSource = [
+    { id: "10002", date: "Sun, Dec 31, 2017", time: "12:00 PM - 14:00 PM", pName: "Wanda Maximoff", sName: "Phil Coulson", address: "Mammel Hall", cName: "Scott Technology Center", pEmail: "wanda@avengers.com", pPhone: "353-456-3424", sPhone: "435-324-3124", sEmail: "phil@avengers.com", tName: "Tony Stark" },
+    { id: "10003", date: "Sun, Dec 31, 2017", time: "12:00 PM - 14:00 PM", pName: "Natasha Romanoff", sName: "Natasha Romanoff", address: "Home", cName: "Natasha Romanoff", pEmail: "bucky@avengers.com", pPhone: "586-353-5666", sPhone: "535-535-5335", sEmail: "natasha@gmail.com", tName: "Unassigned" },
+]
+
 class Appointment extends React.Component {
     constructor(props) {
         super(props);
@@ -69,14 +74,19 @@ class Appointment extends React.Component {
         this.props.setActiveSideBarTab(0);
         this.props.getAppointments(1, 5);
     }
+
     showCreateForm = () => {
         this.setState({ activeItem: {}, showModal: true, isEditForm: false })
     }
-    showEditForm = (activeItem) => {
 
+    showEditForm = (activeItem) => {
         this.setState({ activeItem, showModal: true, isEditForm: true })
+    }
+
+    onAddFacility = (item) => {
 
     }
+
     renderToolbar = () => {
         return (
             <UikContainerHorizontal
@@ -111,7 +121,6 @@ class Appointment extends React.Component {
         )
     }
 
-
     render() {
         let { isEditForm, showModal } = this.state
         return (
@@ -125,7 +134,10 @@ class Appointment extends React.Component {
                 <Dashboard history={this.props.history}>
                     <div style={{ flexDirection: 'column', width: 'fit-content' }}>
                         {this.renderToolbar()}
-                        <Table type={1} onEdit={this.showEditForm} />
+                        <Table
+                            onEdit={(item) => this.showEditForm(item)}
+                            dataSource={appointmentSource}
+                        />
                     </div>
                 </Dashboard>
             </div>

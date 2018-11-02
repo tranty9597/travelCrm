@@ -24,6 +24,10 @@
     color: $textSecondary;
     font-size: inherit;
     font-weight: inherit;
+    &:hover{
+        cursor: unset;
+        background-color: inherit;
+    }
 }
 
 .header_type {
@@ -36,6 +40,10 @@
 .header_date {
     padding-right: 5px;
     padding-left: 0;
+}
+
+.header_container {
+    min-height: 30px
 }
 
 .repair_item {

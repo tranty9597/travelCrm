@@ -17,21 +17,21 @@ const ALL_TYPE_CASE = {
 }
 
 const APPOINTMENT_HEADER = [
-    { name: "", size: DEFAULT_COLUMN_SIZE },
-    { name: "CUSTOMER", size: DEFAULT_COLUMN_SIZE * 1.5 },
-    { name: "PRIMARY CONTACT", size: DEFAULT_COLUMN_SIZE },
-    { name: "SECONDARY CONTACT", size: DEFAULT_COLUMN_SIZE },
-    { name: "TECHNICIAN", size: DEFAULT_COLUMN_SIZE },
-    { name: "", size: DEFAULT_COLUMN_SIZE }
+    { name: "", size: 18 },
+    { name: "CUSTOMER", size: 24 },
+    { name: "PRIMARY CONTACT", size: 18 },
+    { name: "SECONDARY CONTACT", size: 20 },
+    { name: "TECHNICIAN", size: 10 },
+    { name: "", size: 10 }
 ]
 
 const CUSTOMER_HEADER = [
-    { name: "", size: DEFAULT_COLUMN_SIZE * 0.2 },
-    { name: "NAME", size: DEFAULT_COLUMN_SIZE * 1.5 },
-    { name: "PRIMARY CONTACT", size: DEFAULT_COLUMN_SIZE },
-    { name: "SECONDARY CONTACT", size: DEFAULT_COLUMN_SIZE },
-    { name: "SYSTEMS", size: DEFAULT_COLUMN_SIZE },
-    { name: "FACILITY", size: DEFAULT_COLUMN_SIZE }
+    { name: "NAME", size: 36 },
+    { name: "PRIMARY CONTACT", size: 18 },
+    { name: "SECONDARY CONTACT", size: 20 },
+    { name: "SYSTEMS", size: 10 },
+    { name: "FACILITY", size: 10 },
+    { name: "", size: 6 }
 ]
 
 const HEADERS = [
@@ -39,19 +39,27 @@ const HEADERS = [
     CUSTOMER_HEADER
 ]
 
-function RenderHeader({ headers }) {
+function RenderHeader({ headers, expand, type }) {
     return (
-        <thead style={{ minWidth: 570 }}>
+        <thead>
             <tr>
                 {headers.map((item, index) => {
-                    return <th key={index} style={{ minWidth: item.size }}>{item.name}</th>
+                    return (
+                        <th
+                            key={index}
+                            style={{ width: `${headers[index].size}%`, opacity: (type == 1 && !expand && index !== 0 && index !== 1 && index !== 4) ? 0 : 1 }}
+
+                        >
+                            {item.name}
+                        </th>
+                    )
                 })}
             </tr>
         </thead>
     )
 }
 
-function RenderBody({ dataSource, onEdit, type }) {
+function RenderBody({ dataSource, onEdit, type, onExpand, onAddFacility }) {
 
     switch (type) {
         case ALL_TYPE_CASE.APPT:
@@ -59,8 +67,11 @@ function RenderBody({ dataSource, onEdit, type }) {
                 <tbody>
                     {dataSource.map((item, index) => {
                         return (
-                            <React.Fragment key={index}>
-                                <AppointmentRow onEdit={onEdit} item={item} index={index} />
+                            <React.Fragment key={index}
+                            >
+                                <AppointmentRow
+                                    colWidth={HEADERS[type]}
+                                    onEdit={() => onEdit(item)} item={item} index={index} />
                             </React.Fragment>
                         )
                     })}
@@ -72,7 +83,14 @@ function RenderBody({ dataSource, onEdit, type }) {
                     {dataSource.map((item, index) => {
                         return (
                             <React.Fragment key={index}>
-                                <CustomerRow onEdit={onEdit} item={item} index={index} />
+                                <CustomerRow
+                                    colWidth={CUSTOMER_HEADER}
+                                    onEdit={(item) => onEdit(item)}
+                                    item={item}
+                                    index={index}
+                                    onExpand={(expand) => onExpand(expand)}
+                                    onAddFacility={(item) => onAddFacility(item)}
+                                />
                             </React.Fragment>
                         )
                     })}
@@ -90,9 +108,14 @@ type TableProps = {
 }
 
 class Table extends React.Component<TableProps> {
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            expand: false
+        }
+    }
     render() {
-        let { dataSource, onEdit, type } = this.props;
+        let { dataSource, type } = this.props;
 
         return (
             <React.Fragment>
@@ -100,11 +123,15 @@ class Table extends React.Component<TableProps> {
                     <UikWidgetTable>
                         <RenderHeader
                             headers={HEADERS[type]}
+                            expand={this.state.expand}
+                            type={type}
                         />
                         <RenderBody
                             type={type}
                             dataSource={dataSource}
-                            onEdit={onEdit}
+                            onEdit={(item) => this.props.onEdit(item)}
+                            onExpand={(expand) => this.setState({ expand })}
+                            onAddFacility={(item) => this.props.onAddFacility(item)}
                         />
                     </UikWidgetTable>
 
@@ -133,14 +160,9 @@ class Table extends React.Component<TableProps> {
 Table.defaultProps = {
     isAccordion: true,
     type: 0,
-    dataSource: [
-        { name: "a van b", age: "10", phone: "1000000000", email: "ssss@gmail.com", test: "TEST", dataExpand: [{ name: "zz" }, { name: "zz" }, { name: "zz" }, { name: "zz" }] },
-        { name: "a van b", age: "10", phone: "1000000000", email: "ssss@gmail.com", test: "TEST", dataExpand: [{ name: "zz" }] },
-        { name: "a van b", age: "10", phone: "1000000000", email: "ssss@gmail.com", test: "TEST", dataExpand: [{ name: "zz" }] },
-        { name: "a van b", age: "10", phone: "1000000000", email: "ssss@gmail.com", test: "TEST", dataExpand: [{ name: "zz" }] },
-        { name: "a van b", age: "10", phone: "1000000000", email: "ssss@gmail.com", test: "TEST", dataExpand: [{ name: "zz" }] },
-        { name: "a van b", age: "10", phone: "1000000000", email: "ssss@gmail.com", test: "TEST", dataExpand: [{ name: "zz" }] }
-    ]
+    dataSource: [],
+    onAddFacility: () => {},
+    onEdit: () => {}
 }
 const mapStateToProps = (state, own) => {
     return {
@@ -152,4 +174,7 @@ const mapDispatchToProps = dispatch => {
 
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Table)
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Table)

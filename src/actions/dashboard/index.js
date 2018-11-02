@@ -17,7 +17,7 @@ export const setActiveSideBarTab = (sideBarActiveTab) => ({
 export const getAppointments = (pageIndex, pageCount) => {
     return dispatch => {
         dispatch(setGetAppointmentsStatus(STATUS.loading))
-        let url = API.GET_APPOINTMENTS.replace("#1", pageIndex).replace("#2", pageCount);
+        let url = API.GET_APPOINTMENTS.replace("#1", "null").replace("#2", "");
         alert(url)
         get(url).then(
             res => {
@@ -67,7 +67,7 @@ export const getCustomers = () => {
             },
             rej => {
                 dispatch(setGetCustomersStatus(STATUS.error))
-                alert('get customers')
+                // alert('get customers')
                 console.log(rej)
             }
         )

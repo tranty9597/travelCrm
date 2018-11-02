@@ -4,12 +4,13 @@ import classnames from 'classnames';
 
 import {
     UikNavLink,
-    UikContainerHorizontal,
+    UikContainerHorizontal
 } from '../../../../UikLayout';
-
 import clsSideBar from '../../../../common/SideBar/styles.module.scss';
 
 import cls from './styles.module.scss';
+
+
 
 class Repair extends PureComponent {
     constructor(props) {
@@ -19,6 +20,9 @@ class Repair extends PureComponent {
 
     onClick = (indx) => {
         this.props.onClick(indx);
+    }
+    onAddFacility = (item) => {
+
     }
 
     getRenderData = () => {
@@ -30,9 +34,9 @@ class Repair extends PureComponent {
 
         let renderData = [];
         renderData.push(
-            <UikNavLink
+            <div
                 key={-1}
-                className={classnames(cls.nav_item)}
+                className={classnames(cls.nav_item, cls.header_container)}
             >
                 <UikContainerHorizontal className={classnames(cls.header)}>
                     <div className={classnames('col-sm-6', cls.header_type)}>
@@ -42,7 +46,7 @@ class Repair extends PureComponent {
                         DATE/TIME
                     </div>
                 </UikContainerHorizontal>
-            </UikNavLink>
+            </div>
         )
         data.forEach((element, indx) => {
             renderData.push(

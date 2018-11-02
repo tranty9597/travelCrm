@@ -111,7 +111,7 @@ class CompanyProfile extends PureComponent {
                     </div>
                 </div>
                 <div>
-                    <h3 className={classnames(cls.title)}>
+                    <h3 className={classnames(clsSystem.title)}>
                         Company Contact
                     </h3>
                     <div className={classnames("form-group")}>

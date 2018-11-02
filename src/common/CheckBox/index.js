@@ -32,7 +32,7 @@ class CheckBox extends PureComponent<CheckBoxProps> {
 }
 
 CheckBox.defaultProps = {
-    success: false,
+    success: true,
     className: ""
 }
 

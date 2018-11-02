@@ -1,28 +1,33 @@
-@import '../../vars'; 
-.overflowTable{
+@import '../../vars';
+.overflowTable {
     overflow-x: auto;
     overflow-y: auto;
     tbody {
-        display:block;
-        height:500px;
-        overflow:auto;
+        display: block;
+        height: fit-content;
+        overflow: auto;
     }
-    thead, tbody tr {
-       
+    thead,
+    tbody tr {
+        >td{
+            padding-left: 15px;
+            padding-right: 0;
+        }
         width: 100%;
-        display:table;
-        table-layout:fixed;/* even columns width , fix width of table too*/
+        display: table;
+        table-layout: fixed;
+        /* even columns width , fix width of table too*/
     }
 }
-.pagination{
 
+.pagination {
     justify-content: flex-end;
     padding: 25px;
     margin: 0;
-    .active>a{
+    .active>a {
         color: $textMain
     }
-    li{
+    li {
         padding: 0 5px 0 5px
     }
 }

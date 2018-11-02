@@ -1,9 +1,8 @@
 @import '../../vars';
-
-.modalWrapper{
+.modalWrapper {
     position: fixed;
     top: 0;
-    left:0;
+    left: 0;
     right: 0;
     bottom: 0;
     z-index: 5000;
@@ -11,22 +10,58 @@
     padding-bottom: 5%;
     background-color: $shadow;
     overflow: auto;
-    .formModal{
-       
+    .formModal {
         margin: auto;
         width: 90%;
         max-width: 450px;
     }
-    .header{
+    .header {
         padding-top: 20px;
         padding-bottom: 20px;
     }
-    .child{
+    .child {
         padding: 25px;
     }
-    .footHeadontainer{
+    .footHeadontainer {
         margin: 0;
         padding: 25px;
         height: 60px;
     }
+    .footer {
+        justify-content: flex-end;
+        >div {
+            display: flex;
+            justify-content: space-between;
+            >button {
+                max-width: 45%;
+                justify-content: center;
+            }
+        }
+    }
+}
+
+.non_edit_btn{
+    max-width: 100%!important;
+}
+
+.icon {
+    color: $textSecondary;
+    font-size: 15pt;
+    top: -5px;
+    position: relative;
+    &:hover {
+        cursor: pointer;
+        color: $textMain;
+    }
+}
+
+.title {
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
 }

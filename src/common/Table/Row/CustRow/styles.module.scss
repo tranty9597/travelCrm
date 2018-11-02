@@ -1,9 +1,51 @@
 @import '../../../../vars';
-
-.wrapper{
+.wrapper {
     cursor: pointer;
 }
 
-.divider{
+.divider {
     border-left: 1px solid $borderColor
+}
+
+.title {
+    font-weight: 500;
+}
+
+.stroke {
+    height: 22px;
+    stroke: $textSecondary;
+}
+
+.col_appt {
+    display: table-cell;
+}
+
+.icon {
+    font-size: 15pt;
+    color: $textSecondary;
+    justify-content: center;
+    display: flex;
+}
+
+.expand {
+    border-left: 1px solid $borderColor;
+}
+
+.system {
+    text-align: center !important;
+    color: $blue !important;
+    font-weight: 500;
+}
+
+.show {
+    animation: show .2s;
+}
+
+@keyframes show {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }

@@ -4,7 +4,7 @@ import { UikButton, UikDivider } from "../../UikLayout"
 
 import classnames from 'classnames'
 
-import FontAwesome from "react-fontawesome"
+import { FaTimes } from "react-icons/fa";
 
 import cls from "./styles.module.scss";
 
@@ -38,12 +38,10 @@ class FormModal extends PureComponent<FormModalProps> {
                             className={classnames("shadow bg-white rounded", cls.formModal)}
                         >
                             <div className={classnames("container", cls.footHeadontainer, cls.header)}>
-                                <h5>{formTitle}</h5>
-                                <FontAwesome
-                                    name='rocket'
-                                    size='2x'
-                                    spin
-                                />
+                                <h5 className={classnames(cls.title)}>
+                                    {formTitle}
+                                </h5>
+                                <FaTimes onClick={onClose} className={classnames(cls.icon)} />
                             </div>
                             <UikDivider />
                             <div className={classnames('container', cls.child)}>
@@ -51,10 +49,11 @@ class FormModal extends PureComponent<FormModalProps> {
                             </div>
 
                             <UikDivider />
-                            <div className={classnames("container align-items-center row ", cls.footHeadontainer)}>
-                                <div className="col-9">
+                            <div className={classnames("container align-items-center row ", cls.footHeadontainer, cls.footer)}>
+                                <div style={isEditForm ?{width: 'inherit'}: null}>
                                     {
-                                        isEditForm && <UikButton
+                                        isEditForm &&
+                                        <UikButton
                                             isLoading={loading}
                                             onClick={onDelete}
                                             error
@@ -62,15 +61,16 @@ class FormModal extends PureComponent<FormModalProps> {
                                             Delete
                                         </UikButton>
                                     }
-                                </div>
 
-                                <UikButton
-                                    isLoading={loading}
-                                    onClick={isEditForm ? onSave : onCreate}
-                                    success
-                                >
-                                    {isEditForm ? "Save" : "Create"}
-                                </UikButton>
+                                    <UikButton
+                                        className={classnames(!isEditForm && cls.non_edit_btn)}
+                                        isLoading={loading}
+                                        onClick={isEditForm ? onSave : onCreate}
+                                        success
+                                    >
+                                        {isEditForm ? "Save" : "Create"}
+                                    </UikButton>
+                                </div>
                             </div>
 
                         </ div>
@@ -87,7 +87,7 @@ class FormModal extends PureComponent<FormModalProps> {
 }
 
 FormModal.defaultProps = {
-    isVisible: true,
+    isVisible: false,
     onClose: () => { },
     onCreate: () => { },
     onSave: () => { },
