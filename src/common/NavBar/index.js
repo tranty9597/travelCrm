@@ -27,7 +27,7 @@ class NavBar extends React.PureComponent {
     }
 
     render() {
-        let { user } = this.props.login;
+        let { username } = this.props.login;
         let { serviceCompanyName } = this.props.dashboard
         return (
             this.isHidden(window.location.pathname) ?
@@ -56,7 +56,7 @@ class NavBar extends React.PureComponent {
 
                     </UikTopBarSection>
                     <UikTopBarSection>
-                        <Link to={PATH.USER_PROFILE} >{user}</Link>
+                        <Link to={PATH.USER_PROFILE} >{username}</Link>
                     </UikTopBarSection>
                 </UikTopBar>
 

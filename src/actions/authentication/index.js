@@ -2,7 +2,7 @@ import { API, STATUS } from '../../constant';
 import { post } from '../../utils/axiosHelper';
 
 
-export const loginAct = (user, pass, callBackSuccess) => {
+export const loginAct = (user, pass, serviceCompanyID, serviceCompanyName, callBackSuccess) => {
     return dispatch => {
         let body = {
             UserName: user,
@@ -18,13 +18,19 @@ export const loginAct = (user, pass, callBackSuccess) => {
                     dispatch(setLoginStatus(STATUS.success))
                     callBackSuccess()
                     dispatch(clearLogIn())
-                    dispatch(setUser(res.data.data.displayName, res.data.data.accessToken))
+                    dispatch(setUser(
+                        user,
+                        res.data.data.displayName,
+                        res.data.data.accessToken,
+                        res.data.data.expiresInSec,
+                        serviceCompanyID,
+                        serviceCompanyName
+                    ))
                 }
             },
             rej => {
                 dispatch(setLoginStatus(STATUS.error))
-                alert('Login')
-                console.log(rej)
+                alert(rej)
             }
         )
     }
@@ -47,18 +53,17 @@ export const setPassword = (password, error = "") => ({
     error
 })
 
-export const setUser = (user, accessToken) => ({
+export const setUser = (user, username, accessToken, expiresInSec, serviceCompanyID, serviceCompanyName) => ({
     type: 'LOG_IN/SET_USER',
     user,
-    accessToken
+    username,
+    accessToken,
+    expiresInSec,
+    serviceCompanyID,
+    serviceCompanyName
 })
 
-export const clearLogIn = () => ({
-    type: 'LOG_IN/CLEAR_LOG_IN'
+export const clearLogIn = (user) => ({
+    type: 'LOG_IN/CLEAR_LOG_IN',
+    user
 })
-
-export const logoutAct = () => (
-    {
-        type: 'LOG_OUT',
-    }
-)

@@ -73,6 +73,8 @@ class SignUp extends Component {
 
         } else if (pass.length > 30) {
             this.props.setPass(pass.data, "Max length is 30")
+        } else if (cfPass.data.length < 8) {
+            this.props.setPass(pass.data, "Password must have at least 8 characters")
         }
         if (!cfPass.data) {
             this.props.setConfirmPass(cfPass.data, "Required")
@@ -86,8 +88,9 @@ class SignUp extends Component {
             this.props.checkUserAct(
                 user.data,
                 () => {
-                    let { email, user, cfPass } = this.props.signup;
-                    if (!email.error && !user.error && !cfPass.error) {
+                    let { email, user, cfPass, pass, fName, lName } = this.props.signup;
+                    if (!email.error && !user.error && !cfPass.error && !pass.error
+                        && !fName.error && !lName.error) {
                         this.onSubmit();
                     }
                 });

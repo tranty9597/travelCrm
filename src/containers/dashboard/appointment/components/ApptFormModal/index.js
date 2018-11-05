@@ -1,8 +1,10 @@
 import React from 'react'
 
-import { Row, Col } from "react-bootstrap"
-import { FormModal, Input, TextArea } from "../../../../../common"
+import { connect } from 'react-redux';
+import { getCustomers } from '../../../../../actions/dashboard';
 
+import { FormModal, Select, TextArea } from "../../../../../common"
+import classnames from 'classnames';
 
 type ApptFormModalProps = {
     isVisible: Boolean,
@@ -12,14 +14,19 @@ type ApptFormModalProps = {
 }
 
 class ApptFormModal extends React.Component<ApptFormModalProps> {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state ={
+        this.state = {
             activeItem: this.props.activeItem
         }
     }
+
+    componentDidMount() {
+    }
+
     render() {
-        let { isVisible, isEditForm, onClose, loading} = this.props
+        let { isVisible, isEditForm, onClose, loading } = this.props;
+        let { customers } = this.props.dashboard;
         return (
             <FormModal
                 loading={loading}
@@ -28,22 +35,42 @@ class ApptFormModal extends React.Component<ApptFormModalProps> {
                 formTitle={isEditForm ? "Edit Appoinment" : "New Appoinment"}
                 onClose={onClose}
             >
-                <Input label="Customer" />
-                <Input label="Facility" />
-                <Row>
-                    <Col lg={5}>
-                        <Input value={""} label="Date" />
-                    </Col>
-                    <Col lg={3}>
-                        <Input label="From" />
-                    </Col>
-                    <Col lg={3}>
-                        <Input label="To" />
-                    </Col>
-                </Row>
+                <Select
+                    options={[]}
+                    label="Customer"
+                />
+                <Select
+                    options={[]}
+                    label="Facility"
+                />
+                <div className={classnames('form-group row')}>
+                    <div className={classnames('col-sm-4')}>
+                        <Select
+
+                            options={[]}
+                            label="Date"
+                        />
+                    </div>
+                    <div className={classnames('col-sm-4')}>
+                        <Select
+                            options={[]}
+                            label="From"
+                        />
+                    </div>
+                    <div className={classnames('col-sm-4')}>
+                        <Select
+                            options={[]}
+                            label="To"
+                        />
+                    </div>
+                </div>
 
 
-                <Input label="Technician" />
+
+                <Select
+                    options={[]}
+                    label="Technician"
+                />
                 <TextArea rows={3} label="Description" />
 
             </FormModal >
@@ -51,4 +78,19 @@ class ApptFormModal extends React.Component<ApptFormModalProps> {
     }
 }
 
-export default ApptFormModal
+
+const mapStateToProps = state => {
+    return {
+        dashboard: state.dashboard
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ApptFormModal)

@@ -55,8 +55,7 @@ export const signUpServiceCompany = (
             },
             rej => {
                 dispatch(setSignUpStatus(STATUS.error));
-                alert('sign up')
-                console.log(rej)
+                alert(rej)
             }
         )
     }
@@ -81,9 +80,7 @@ export const checkUserAct = (user, callBackSuccess) => {
             },
             rej => {
                 dispatch(setCheckUserStatus(STATUS.error));
-                dispatch(setUserName(user, 'rejected'));
-                alert('checkUserAct')
-                console.log(rej)
+                dispatch(setUserName(user, rej.message));
             }
         )
     }

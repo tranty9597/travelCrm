@@ -6,6 +6,8 @@ import classnames from 'classnames';
 
 import cls from './styles.module.scss';
 
+import { setActiveSideBarTab } from '../../actions/dashboard';
+
 import { Dashboard } from "../../containers";
 
 import {
@@ -33,6 +35,10 @@ class UserProfile extends Component {
             confirmPass: "",
             activeIndx: 0
         };
+    }
+
+    componentDidMount() {
+        this.props.setActiveSideBarTab(-1);
     }
 
     onTabClick = (activeIndx) => {
@@ -110,7 +116,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-
+        setActiveSideBarTab: (tab) => {
+            dispatch(setActiveSideBarTab(tab))
+        }
     }
 }
 

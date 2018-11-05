@@ -104,7 +104,12 @@ function RenderBody({ dataSource, onEdit, type, onExpand, onAddFacility }) {
 }
 
 type TableProps = {
-    type?: ALL_TYPE_CASE.APPT | ALL_TYPE_CASE.CUST
+    type?: ALL_TYPE_CASE.APPT | ALL_TYPE_CASE.CUST,
+    onPageClick?: Function,
+    isAccordion?: Boolean,
+    dataSource?: Array,
+    onAddFacility?: Function,
+    onEdit?: Function
 }
 
 class Table extends React.Component<TableProps> {
@@ -154,19 +159,19 @@ class Table extends React.Component<TableProps> {
         )
     }
     handlePageClick = (pageIndex) => {
-        console.log()
+        this.props.onPageClick(pageIndex)
     }
 }
 Table.defaultProps = {
     isAccordion: true,
     type: 0,
     dataSource: [],
-    onAddFacility: () => {},
-    onEdit: () => {}
+    onAddFacility: () => { },
+    onEdit: () => { },
+    onPageClick: () => { }
 }
-const mapStateToProps = (state, own) => {
+const mapStateToProps = (state) => {
     return {
-        appt: state.appt
     }
 }
 const mapDispatchToProps = dispatch => {

@@ -18,12 +18,11 @@ import {
 
 import {
     PATH,
-    STATES
+    STATES,
+    REGEX
 } from "../../../constant";
 import classnames from 'classnames';
 import cls from './styles.module.scss';
-
-const NUMBER_REGEX = /^[0-9]*$/g;
 
 class CompanyInformation extends Component {
 
@@ -67,10 +66,11 @@ class CompanyInformation extends Component {
         }
         if (!zip.data) {
             this.props.setZip(zip.data, "Required");
-        } else if (!zip.data.match(NUMBER_REGEX)) {
-            this.props.setZip(zip.data, "Invalid Zip Code");
         } else if (zip.data.length > 5) {
             this.props.setZip(zip.data, "Max Length Is 5");
+        }
+        if (!zip.data.match(REGEX.NUMBER_REGEX)) {
+            this.props.setZip(zip.data, "Invalid Zip Code");
         }
         if (address2.data.length > 50) {
             this.props.setAddress2(zip.data, "Max Length Is 50");
@@ -91,7 +91,7 @@ class CompanyInformation extends Component {
             !cName.data ||
             !address.data ||
             !city.data ||
-            !state.data||
+            !state.data ||
             !zip.data;
 
         return (

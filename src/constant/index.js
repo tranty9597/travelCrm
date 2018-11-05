@@ -9,10 +9,13 @@ import { API } from './api';
 
 import { STATES } from './states';
 
+import { REGEX } from './regex';
+
 export {
     PATH,
     LINK,
     STATUS,
     API,
-    STATES
+    STATES,
+    REGEX
 }

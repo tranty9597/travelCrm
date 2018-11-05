@@ -1,6 +1,6 @@
 const DASH_BOARD = "/";
 const APPOINTMENT = "/appointment";
-const SYSTEM = "/system";
+const CUSTOMER = "/customer";
 const SYSTEM_SETTING = "/systemSetting";
 const USER_PROFILE = "/userprofile";
 const TECHNICIAN = "/technician";
@@ -18,7 +18,7 @@ const CC_PAYMENT = PAYMENT + "/cc_payment";
 const PATH = {
     DASH_BOARD,
     APPOINTMENT,
-    SYSTEM,
+    CUSTOMER,
     LOG_IN,
     ADMIN_LOG_IN,
     SIGN_UP,

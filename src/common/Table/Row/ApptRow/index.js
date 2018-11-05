@@ -11,10 +11,9 @@ class AppoinmentRow extends React.Component {
         return (
             <React.Fragment
                 key={index}
-                className={classnames(cls.wrapper)}
             >
                 <tr
-                    className={cls.show}
+                    className={classnames(cls.wrapper, cls.show)}
                     onClick={this.toggleExpand}
                 >
                     <td

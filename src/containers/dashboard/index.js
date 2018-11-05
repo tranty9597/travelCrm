@@ -11,7 +11,14 @@ import {
     UikContainerVertical
 } from "../../UikLayout";
 
-import { setActiveSideBarTab } from '../../actions/dashboard';
+import {
+    setActiveSideBarTab,
+    setServiceCompany
+} from '../../actions/dashboard';
+
+import {
+    setUser
+} from '../../actions/authentication';
 
 import { PATH } from '../../constant';
 
@@ -48,6 +55,19 @@ class Dashboard extends PureComponent {
 
     componentDidMount() {
         this.props.setActiveSideBarTab(0);
+        let user = localStorage.getItem('username');
+        let storage = JSON.parse(localStorage.getItem(user));
+        if (storage.user) {
+            this.props.setServiceCompany(storage.serviceCompanyID, storage.serviceCompanyName);
+            this.props.setUser(
+                storage.user,
+                storage.username,
+                storage.accessToken,
+                storage.expiresInSec,
+                storage.serviceCompanyID,
+                storage.serviceCompanyName,
+            );
+        }
     }
     onTabClick = (tab) => {
         this.props.setActiveSideBarTab(tab.id);
@@ -56,7 +76,7 @@ class Dashboard extends PureComponent {
                 this.props.history.push(PATH.APPOINTMENT)
                 break;
             case 1:
-                this.props.history.push(PATH.SYSTEM)
+                this.props.history.push(PATH.CUSTOMER)
                 break;
             case 2:
                 this.props.history.push(PATH.TECHNICIAN)
@@ -71,7 +91,6 @@ class Dashboard extends PureComponent {
         let { children } = this.props;
         let { user } = this.props.login;
         let { sideBarActiveTab } = this.props.dashboard;
-
         if (window.location.pathname === PATH.DASH_BOARD) {
             return <Redirect to={PATH.APPOINTMENT} />
         }
@@ -105,6 +124,12 @@ const mapDispatchToProps = dispatch => {
     return {
         setActiveSideBarTab: (sideBarActiveTab) => {
             dispatch(setActiveSideBarTab(sideBarActiveTab))
+        },
+        setServiceCompany: (serviceCompanyID, serviceCompanyName) => {
+            dispatch(setServiceCompany(serviceCompanyID, serviceCompanyName))
+        },
+        setUser: (user, username, accessToken, expiresInSec, serviceCompanyID, serviceCompanyName) => {
+            dispatch(setUser(user, username, accessToken, expiresInSec, serviceCompanyID, serviceCompanyName))
         }
     }
 }

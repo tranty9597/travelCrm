@@ -5,11 +5,12 @@ import {
     loginAct,
     setUserName,
     setPassword,
-    clearLogIn
+    clearLogIn,
 } from '../../actions/authentication';
 import {
     getCustomers,
-    setServiceCompany
+    setServiceCompany,
+    clearDashboard
 } from '../../actions/dashboard';
 import {
     Input,
@@ -41,13 +42,19 @@ class LogIn extends Component {
     }
 
     componentDidMount() {
-        this.props.getCustomers();
+        let { user } = this.props.login;
+        if (user) {
+            this.props.clearLogIn(user);
+            this.props.clearDashboard();
+        }
     }
 
-    onSubmit = (username, password) => {
+    onSubmit = (username, password, serviceCompanyID, serviceCompanyName) => {
         this.props.loginAct(
             username,
             password,
+            serviceCompanyID,
+            serviceCompanyName,
             () => {
                 this.props.history.replace(PATH.DASH_BOARD)
             }
@@ -65,7 +72,13 @@ class LogIn extends Component {
             this.props.setServiceCompany(1, { data: serviceCompanyName.data, error: 'Required' })
         }
         if (username && password && serviceCompanyName.data) {
-            this.onSubmit(username, password);
+            let { serviceCompanyID, serviceCompanyName } = this.props.dashboard;
+            this.onSubmit(
+                username,
+                password,
+                serviceCompanyID,
+                serviceCompanyName
+            );
         }
     }
 
@@ -94,11 +107,11 @@ class LogIn extends Component {
         let { customers, serviceCompanyName } = this.props.dashboard;
         let disabled = !username || !password || !serviceCompanyName.data;
         let isLoading = loginStatus === STATUS.loading;
-        const { from } = this.props.location.state || { from: { pathname: PATH.DASH_BOARD } }
-
-        if (user) {
-            return <Redirect to={from} />
-        }
+        const { from } = this.props.location.state || { from: { pathname: PATH.DASH_BOARD } };
+        // console.log(user)
+        // if (user) {
+        //     return <Redirect to={from} />
+        // }
         return (
             <Form
                 footer
@@ -155,8 +168,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        loginAct: (user, pass, callBackSuccess) => {
-            dispatch(loginAct(user, pass, callBackSuccess))
+        loginAct: (user, pass, serviceCompanyID, serviceCompanyName, callBackSuccess) => {
+            dispatch(loginAct(user, pass, serviceCompanyID, serviceCompanyName, callBackSuccess))
         },
         setUserName: (username, error) => {
             dispatch(setUserName(username, error))
@@ -164,14 +177,17 @@ const mapDispatchToProps = dispatch => {
         setPassword: (password, error) => {
             dispatch(setPassword(password, error))
         },
-        clearLogIn: () => {
-            dispatch(clearLogIn())
+        clearLogIn: (user) => {
+            dispatch(clearLogIn(user))
         },
         getCustomers: () => {
             dispatch(getCustomers())
         },
         setServiceCompany: (id, name) => {
             dispatch(setServiceCompany(id, name))
+        },
+        clearDashboard: () => {
+            dispatch(clearDashboard())
         }
     }
 

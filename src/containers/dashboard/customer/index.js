@@ -7,7 +7,7 @@ import {
     Table,
     CheckBox
 } from '../../../common';
-
+import CustomerForm from './customerForm';
 import { Dashboard } from '../../../containers';
 import { connect } from 'react-redux'
 import {
@@ -17,7 +17,9 @@ import {
 } from '../../../UikLayout';
 
 import {
-    setActiveSideBarTab
+    setActiveSideBarTab,
+    getCustomers,
+    setCurrentCustomerTypeID
 } from '../../../actions/dashboard';
 
 import Repair from './repair';
@@ -261,11 +263,6 @@ const services = [
     }
 ]
 
-const test = [
-    "Email",
-    "Password"
-]
-
 const customerSource = [
     {
         name: "Scott Technology Center",
@@ -328,7 +325,7 @@ const customerSource = [
 
 
 
-class System extends Component {
+class Customer extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -336,13 +333,24 @@ class System extends Component {
             activeUnit: -1,
             activeUnitTab: 0,
             activeService: 0,
-            test: false
+            test: false,
+            showModal: false,
+            isEditForm: false,
+            activeItem: {}
         };
         this.tabPartContainer = null;
     }
 
     componentDidMount() {
+        let { currentCustomerTypeID } = this.props.dashboard;
         this.props.setActiveSideBarTab(1);
+        this.props.getCustomers(1, null, currentCustomerTypeID);
+    }
+
+    getCustomers = (pageIndex) => {
+        this.setState({showModal: false})
+        let { currentCustomerTypeID } = this.props.dashboard;
+        this.props.getCustomers(pageIndex, null, currentCustomerTypeID);
     }
 
     onUnitOutSideClick = (node) => {
@@ -375,11 +383,24 @@ class System extends Component {
         )
         this.setState({ test: !this.state.test });
     }
+    showCreateForm = () => {
+        this.setState({ activeItem: {}, showModal: true, isEditForm: false })
+    }
 
-    onCheckBox = (isResidential) => {
+    showEditForm = (activeItem) => {
+        this.setState({ activeItem, showModal: true, isEditForm: true })
+    }
+    toggleModal = () => {
+        let { showModal } = this.state;
+        this.setState({ showModal: !showModal })
+    }
+
+    onCheckBox = (currentCustomerTypeID) => {
+        this.props.setCurrentCustomerTypeID(currentCustomerTypeID);
     }
 
     renderToolbar = () => {
+        let { currentCustomerTypeID } = this.props.dashboard;
         return (
             <UikContainerHorizontal
                 className={classnames(cls.header_filter)}
@@ -391,14 +412,16 @@ class System extends Component {
                     <UikContainerHorizontal className={classnames('col-sm-6')}>
                         <div className={classnames('col')}>
                             <CheckBox
+                                checked={currentCustomerTypeID === 1}
                                 label="Commercial"
-                                onClick={() => this.onCheckBox(false)}
+                                onChange={() => this.onCheckBox(1)}
                             />
                         </div>
                         <div className={classnames('col')}>
                             <CheckBox
+                                checked={currentCustomerTypeID === 2}
                                 label="Residential"
-                                onClick={() => this.onCheckBox(true)}
+                                onChange={() => this.onCheckBox(2)}
                             />
                         </div>
                     </UikContainerHorizontal>
@@ -417,7 +440,9 @@ class System extends Component {
             activeTab,
             activeUnit,
             activeUnitTab,
-            activeService
+            activeService,
+            showModal,
+            isEditForm
         } = this.state;
 
         let mainTab =
@@ -470,18 +495,27 @@ class System extends Component {
                 />
             </div>
         return (
+            <div>
+                <CustomerForm
+                    isVisible={showModal}
+                    isEditForm={isEditForm}
+                    onClose={this.toggleModal}
+                    onAddSuccess={() => this.getCustomers(1)}
+                />
+                <Dashboard history={this.props.history}>
 
-            <Dashboard history={this.props.history}>
-                <div style={{ flexDirection: 'column', width: 'fit-content' }}>
-                    {this.renderToolbar()}
-                    <Table
-                        onEdit={(item) => this.onEdit(item)}
-                        type={1}
-                        dataSource={customerSource}
-                        onAddFacility={(item) => this.onAddFacility(item)}
-                    />
-                </div>
-                {/* <UikContainerVertical className={classnames(
+
+                    <div style={{ flexDirection: 'column', width: 'fit-content' }}>
+                        {this.renderToolbar()}
+                        <Table
+                            onPageClick={(pageIndex) => this.getCustomers(pageIndex)}
+                            onEdit={(item) => this.onEdit(item)}
+                            type={1}
+                            dataSource={customerSource}
+                            onAddFacility={(item) => this.onAddFacility(item)}
+                        />
+                    </div>
+                    {/* <UikContainerVertical className={classnames(
                     clsTab.container,
                     'col-lg-5')
                 }>
@@ -512,14 +546,16 @@ class System extends Component {
                         {record}
                     </UikContainerVertical >
                 </UikContainerHorizontal> */}
-            </Dashboard >
+                </Dashboard >
+            </div>
+
         );
     }
 }
 
 const mapStateToProps = state => {
     return {
-
+        dashboard: state.dashboard
     }
 }
 
@@ -527,6 +563,12 @@ const mapDispatchToProps = dispatch => {
     return {
         setActiveSideBarTab: (tab) => {
             dispatch(setActiveSideBarTab(tab))
+        },
+        getCustomers: (pageIndex, pageCount, customerTypeID) => {
+            dispatch(getCustomers(pageIndex, pageCount, customerTypeID))
+        },
+        setCurrentCustomerTypeID: (currentCustomerTypeID) => {
+            dispatch(setCurrentCustomerTypeID(currentCustomerTypeID))
         }
     }
 }
@@ -534,4 +576,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(System);
+)(Customer);

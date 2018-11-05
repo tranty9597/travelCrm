@@ -13,7 +13,7 @@ import Table from "./Table";
 import TextArea from "./TextArea";
 import TabWidget from './TabWidget';
 import CheckBox from './CheckBox';
-
+import RadioButton from './RadioButton';
 export {
     Select,
     Input,
@@ -29,5 +29,6 @@ export {
     Table,
     TextArea,
     TabWidget,
-    CheckBox
+    CheckBox,
+    RadioButton
 }

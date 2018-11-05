@@ -63,7 +63,6 @@ const systemSetting = (state = initState, action) => {
             }
         case 'SYSTEM_SETTING/CLEAR_SYSTEM_SETTING':
             state = initState;
-            console.log(state);
             return {
                 ...state,
             }
