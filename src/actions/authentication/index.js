@@ -2,30 +2,24 @@ import { API, STATUS } from '../../constant';
 import { post } from '../../utils/axiosHelper';
 
 
-export const loginAct = (user, pass, serviceCompanyID, serviceCompanyName, callBackSuccess) => {
+export const loginAct = (user, pass, callBackSuccess) => {
     return dispatch => {
         let body = {
-            UserName: user,
-            Password: pass
+            username: user,
+            password: pass
         }
         dispatch(setLoginStatus(STATUS.loading))
         post(API.LOG_IN, body).then(
             res => {
-                if (res.data.isError) {
+                let { data } = res;
+
+                if (data.isError) {
                     dispatch(setLoginStatus(STATUS.error))
-                    dispatch(setUserName(user, res.data.message))
                 } else {
+                    console.log('s==========ß', data)
                     dispatch(setLoginStatus(STATUS.success))
                     callBackSuccess()
-                    dispatch(clearLogIn())
-                    dispatch(setUser(
-                        user,
-                        res.data.data.displayName,
-                        res.data.data.accessToken,
-                        res.data.data.expiresInSec,
-                        serviceCompanyID,
-                        serviceCompanyName
-                    ))
+                    dispatch(setUser(data.user))
                 }
             },
             rej => {
@@ -53,14 +47,9 @@ export const setPassword = (password, error = "") => ({
     error
 })
 
-export const setUser = (user, username, accessToken, expiresInSec, serviceCompanyID, serviceCompanyName) => ({
+export const setUser = (user) => ({
     type: 'LOG_IN/SET_USER',
-    user,
-    username,
-    accessToken,
-    expiresInSec,
-    serviceCompanyID,
-    serviceCompanyName
+    payload: user
 })
 
 export const clearLogIn = (user) => ({

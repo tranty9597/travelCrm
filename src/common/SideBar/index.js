@@ -1,6 +1,4 @@
 import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
 import {
     UikNavPanel,
     UikNavLink,
@@ -8,6 +6,8 @@ import {
     UikNavSection,
     UikButton,
 } from "../../UikLayout";
+
+import { Link } from 'react-router-dom'
 
 import classnames from 'classnames';
 import { PATH } from '../../constant';
@@ -96,6 +96,7 @@ class SideBar extends PureComponent<SideBarProps> {
                             listMenu.map((menu, indx) => (
                                 <React.Fragment key={menu.text}>
                                     <UikNavLink
+                                        Component='div'
                                         key={menu.id}
                                         className={classnames(
                                             cls.nav_link_responsive,

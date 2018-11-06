@@ -1,24 +1,13 @@
 import React, { PureComponent } from 'react';
 
-import { SideBar } from '../../common';
+import { SideBar, Table } from '../../common';
 
 import { connect } from 'react-redux';
 
-import { Redirect } from 'react-router-dom';
 
 import {
     UikContainerHorizontal,
-    UikContainerVertical
 } from "../../UikLayout";
-
-import {
-    setActiveSideBarTab,
-    setServiceCompany
-} from '../../actions/dashboard';
-
-import {
-    setUser
-} from '../../actions/authentication';
 
 import { PATH } from '../../constant';
 
@@ -29,7 +18,7 @@ import cls from "./styles.module.scss"
 const menuLinks = [
     {
         id: 0,
-        text: "Appointments"
+        text: "Travel"
     },
     {
         id: 1,
@@ -50,27 +39,12 @@ const menuLinks = [
 class Dashboard extends PureComponent {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = { activeTab: 0 };
     }
 
-    componentDidMount() {
-        this.props.setActiveSideBarTab(0);
-        let user = localStorage.getItem('username');
-        let storage = JSON.parse(localStorage.getItem(user));
-        if (storage.user) {
-            this.props.setServiceCompany(storage.serviceCompanyID, storage.serviceCompanyName);
-            this.props.setUser(
-                storage.user,
-                storage.username,
-                storage.accessToken,
-                storage.expiresInSec,
-                storage.serviceCompanyID,
-                storage.serviceCompanyName,
-            );
-        }
-    }
+
     onTabClick = (tab) => {
-        this.props.setActiveSideBarTab(tab.id);
+        this.setState({ activeTab: tab.id });
         switch (tab.id) {
             case 0:
                 this.props.history.push(PATH.APPOINTMENT)
@@ -84,29 +58,24 @@ class Dashboard extends PureComponent {
             case 3:
                 this.props.history.push(PATH.SYSTEM_SETTING)
                 break;
+            default:
+                break
         }
     }
 
     render() {
-        let { children } = this.props;
-        let { user } = this.props.login;
-        let { sideBarActiveTab } = this.props.dashboard;
-        if (window.location.pathname === PATH.DASH_BOARD) {
-            return <Redirect to={PATH.APPOINTMENT} />
-        }
+        let { activeTab } = this.state
+
         return (
 
             <UikContainerHorizontal>
                 <SideBar
+                    activeIndex={activeTab}
                     listMenu={menuLinks}
                     title="MENU"
-                    activeIndex={sideBarActiveTab && sideBarActiveTab}
                     onClick={(tab) => this.onTabClick(tab)}
                 />
-
-                <UikContainerVertical className={classnames(cls.childrenWraper, cls.responsive_container)} >
-                    {children}
-                </UikContainerVertical>
+                <Table />
             </UikContainerHorizontal>
 
         );
@@ -114,24 +83,11 @@ class Dashboard extends PureComponent {
 }
 
 const mapStateToProps = state => {
-    return {
-        login: state.login,
-        dashboard: state.dashboard
-    }
+
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-        setActiveSideBarTab: (sideBarActiveTab) => {
-            dispatch(setActiveSideBarTab(sideBarActiveTab))
-        },
-        setServiceCompany: (serviceCompanyID, serviceCompanyName) => {
-            dispatch(setServiceCompany(serviceCompanyID, serviceCompanyName))
-        },
-        setUser: (user, username, accessToken, expiresInSec, serviceCompanyID, serviceCompanyName) => {
-            dispatch(setUser(user, username, accessToken, expiresInSec, serviceCompanyID, serviceCompanyName))
-        }
-    }
+
 }
 
 export default connect(

@@ -1,1 +1,1 @@
-export const BACKEND_URL = "http://207.148.18.82/PodAdmin";
+export const BACKEND_URL = "http://localhost:4200/api/";

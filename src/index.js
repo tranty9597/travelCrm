@@ -98,7 +98,7 @@ const Router = () => {
 
   return (
     <Switch>
-      <PrivateRoute exact path={PATH.DASH_BOARD} component={Dashboard} />
+      <Route exact path={PATH.DASH_BOARD} component={Dashboard} />
       <Route exact path={PATH.USER_PROFILE} component={UserProfile} />
       <PrivateRoute exact path={PATH.APPOINTMENT} component={Appointment} />
       <Route exact path={PATH.CUSTOMER} component={Customer} />

@@ -23,19 +23,10 @@ const login = (state = initState, action) => {
                 loginError: action.error
             }
         case 'LOG_IN/SET_USER':
-            setStorage(
-                action.user,
-                action.username,
-                action.accessToken,
-                action.expiresInSec,
-                action.serviceCompanyID,
-                action.serviceCompanyName
-            );
+            sessionStorage.setItem('user', action.payload);
             return {
                 ...state,
-                user: action.user,
-                username: action.username,
-                accessToken: action.accessToken,
+                ...action.payload
             }
         case 'LOG_IN/SET_USER_NAME':
             return {
@@ -63,33 +54,6 @@ const login = (state = initState, action) => {
         default:
             return state
     }
-}
-
-const setStorage = (user, username, accessToken, expiresInSec, serviceCompanyID, serviceCompanyName) => {
-    let oldExpiresInSec = JSON.parse(localStorage.getItem(user)).expiresInSec;
-    let now = Math.round(new Date().getTime());
-    if (oldExpiresInSec) {
-        if (oldExpiresInSec < now) {
-            expiresInSec = now + expiresInSec;
-        }
-    } else {
-        expiresInSec = now + expiresInSec;
-    }
-    localStorage.setItem(
-        'user',
-        user
-    )
-    localStorage.setItem(
-        user,
-        JSON.stringify({
-            user,
-            username,
-            accessToken,
-            expiresInSec,
-            serviceCompanyID,
-            serviceCompanyName
-        })
-    )
 }
 
 const clearStorage = (user) => {
