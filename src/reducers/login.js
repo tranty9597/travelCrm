@@ -10,9 +10,9 @@ const initState = {
     loginError: "",
     checkUserError: "",
     usernameError: "",
-    passwordError: ""
+    passwordError: "",
+    ...JSON.parse(localStorage.getItem('user'))
 }
-
 const login = (state = initState, action) => {
 
     switch (action.type) {
@@ -23,7 +23,7 @@ const login = (state = initState, action) => {
                 loginError: action.error
             }
         case 'LOG_IN/SET_USER':
-            sessionStorage.setItem('user', action.payload);
+            localStorage.setItem('user', JSON.stringify(action.payload));
             return {
                 ...state,
                 ...action.payload

@@ -8,12 +8,16 @@ import ReactPaginate from 'react-paginate';
 import cls from "./styles.module.scss"
 import { UikWidgetTable, UikWidget } from "../../UikLayout"
 
-import { AppointmentRow, CustomerRow } from "./Row"
+import { AppointmentRow, CustomerRow, TravelRow } from "./Row"
+
+
+import travelActions from '../../actions/travel'
 const DEFAULT_COLUMN_SIZE = 100
 
 const ALL_TYPE_CASE = {
     APPT: 0,
-    CUST: 1
+    CUST: 1,
+    TRA: 2
 }
 
 const APPOINTMENT_HEADER = [
@@ -34,9 +38,19 @@ const CUSTOMER_HEADER = [
     { name: "", size: 6 }
 ]
 
+const TRAVEL_HEADER = [
+    { name: "NAME", size: 18 },
+    { name: "TRAVEL DESCRIPTION", size: 36 },
+    { name: "DATE CREATED", size: 20 },
+    { name: "USER", size: 10 },
+    { name: "TOTAL COST", size: 10 },
+    { name: "", size: 6 }
+]
+
 const HEADERS = [
     APPOINTMENT_HEADER,
-    CUSTOMER_HEADER
+    CUSTOMER_HEADER,
+    TRAVEL_HEADER
 ]
 
 function RenderHeader({ headers, expand, type }) {
@@ -60,7 +74,7 @@ function RenderHeader({ headers, expand, type }) {
 }
 
 function RenderBody({ dataSource, onEdit, type, onExpand, onAddFacility }) {
-
+    console.log("sss", dataSource)
     switch (type) {
         case ALL_TYPE_CASE.APPT:
             return (
@@ -96,6 +110,25 @@ function RenderBody({ dataSource, onEdit, type, onExpand, onAddFacility }) {
                     })}
                 </tbody>
             )
+        case ALL_TYPE_CASE.TRA:
+            return (
+                <tbody>
+                    {dataSource.map((item, index) => {
+                        return (
+                            <React.Fragment key={index}>
+                                <TravelRow
+                                    colWidth={CUSTOMER_HEADER}
+                                    onEdit={(item) => onEdit(item)}
+                                    item={item}
+                                    index={index}
+                                    onExpand={(expand) => onExpand(expand)}
+                                    onAddFacility={(item) => onAddFacility(item)}
+                                />
+                            </React.Fragment>
+                        )
+                    })}
+                </tbody>
+            )
         default:
             return null
     }
@@ -119,8 +152,11 @@ class Table extends React.Component<TableProps> {
             expand: false
         }
     }
+    componentDidMount() {
+        this.props.getTravels()
+    }
     render() {
-        let { dataSource, type } = this.props;
+        let { travel, type } = this.props;
 
         return (
             <React.Fragment>
@@ -133,7 +169,7 @@ class Table extends React.Component<TableProps> {
                         />
                         <RenderBody
                             type={type}
-                            dataSource={dataSource}
+                            dataSource={travel.list}
                             onEdit={(item) => this.props.onEdit(item)}
                             onExpand={(expand) => this.setState({ expand })}
                             onAddFacility={(item) => this.props.onAddFacility(item)}
@@ -164,7 +200,7 @@ class Table extends React.Component<TableProps> {
 }
 Table.defaultProps = {
     isAccordion: true,
-    type: 0,
+    type: 2,
     dataSource: [],
     onAddFacility: () => { },
     onEdit: () => { },
@@ -172,12 +208,11 @@ Table.defaultProps = {
 }
 const mapStateToProps = (state) => {
     return {
+        travel: state.travel
     }
 }
-const mapDispatchToProps = dispatch => {
-    return {
-
-    }
+const mapDispatchToProps = {
+    ...travelActions
 }
 export default connect(
     mapStateToProps,

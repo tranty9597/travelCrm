@@ -1,19 +1,6 @@
 @import '../../../../vars';
-.wrapper {
-    cursor: pointer;
-}
-
-.divider {
-    border-left: 1px solid $borderColor
-}
-
 .title {
     font-weight: 500;
-}
-
-.stroke {
-    height: 22px;
-    stroke: $textSecondary;
 }
 
 .col_appt {
@@ -23,18 +10,9 @@
 .icon {
     font-size: 15pt;
     color: $textSecondary;
-    justify-content: center;
-    display: flex;
-}
-
-.expand {
-    border-left: 1px solid $borderColor;
-}
-
-.system {
-    text-align: center !important;
-    color: $blue !important;
-    font-weight: 500;
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .show {
@@ -48,4 +26,8 @@
     100% {
         opacity: 1;
     }
+}
+
+.wrapper {
+    cursor: pointer;
 }
