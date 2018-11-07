@@ -1,23 +1,7 @@
 @import '../../vars';
 .overflowTable {
-    overflow-x: auto;
-    overflow-y: auto;
-    tbody {
-        display: block;
-        height: fit-content;
-        overflow: auto;
-    }
-    thead,
-    tbody tr {
-        >td{
-            padding-left: 15px;
-            padding-right: 0;
-        }
-        width: 100%;
-        display: table;
-        table-layout: fixed;
-        /* even columns width , fix width of table too*/
-    }
+    width: 100%;
+    margin-left: 20px;
 }
 
 .pagination {

@@ -38,6 +38,24 @@ export const get = (url) => {
     });
 }
 
+export const put = (url) => {
+    let accessToken = store.getState().login.accessToken;
+    return axios(url, {
+        method: "PUT",
+        headers: {
+            'Accept': 'application/json',
+            "Content-type": "application/json",
+            Authorization: "Bearer " + accessToken
+        }
+    }).then(
+        res => {
+            return handleRespond(res);
+        },
+    ).catch(err => {
+        return handleRej(err);
+    });
+}
+
 const handleRespond = (res) => {
     return new Promise((resolve, reject) => {
         switch (res.status) {

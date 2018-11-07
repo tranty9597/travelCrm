@@ -1,6 +1,6 @@
 import { TRAVEL_STATUS, TRAVEL_GET_TRAVELS } from '../../types'
 
-import { post, get } from '../../utils/axiosHelper'
+import { post, get, put } from '../../utils/axiosHelper'
 import { BACKEND_URL } from '../../AppConfig';
 import { STATUS } from '../../constant';
 
@@ -11,6 +11,17 @@ function getTravels() {
             let { data } = res;
             dispatch(actions.setTravelStatus(STATUS.success))
             dispatch(actions.setTravelList(data.data))
+        }).catch(err => {
+            dispatch(actions.setTravelStatus(STATUS.error))
+        })
+    }
+}
+function changeStatus(id, status) {
+    return dispatch => {
+        dispatch(actions.setTravelStatus(STATUS.loading))
+        put(`${BACKEND_URL}travel/changeStatus?ID=${id}&status=${status}`).then(res => {
+            let { data } = res;
+            dispatch(actions.getTravels())
         }).catch(err => {
             dispatch(actions.setTravelStatus(STATUS.error))
         })
@@ -31,7 +42,8 @@ const actions = {
             payload: list
         }
     },
-    getTravels
+    getTravels,
+    changeStatus
 }
 
 export default actions

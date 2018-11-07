@@ -39,12 +39,13 @@ const CUSTOMER_HEADER = [
 ]
 
 const TRAVEL_HEADER = [
-    { name: "NAME", size: 18 },
-    { name: "TRAVEL DESCRIPTION", size: 36 },
-    { name: "DATE CREATED", size: 20 },
-    { name: "USER", size: 10 },
-    { name: "TOTAL COST", size: 10 },
-    { name: "", size: 6 }
+    { name: "NAME", size: DEFAULT_COLUMN_SIZE },
+    { name: "TRAVEL DESCRIPTION", size: DEFAULT_COLUMN_SIZE },
+    { name: "DATE CREATED", size: DEFAULT_COLUMN_SIZE },
+    { name: "USER", size: DEFAULT_COLUMN_SIZE },
+    { name: "TOTAL COST", size: DEFAULT_COLUMN_SIZE },
+    { name: "STATUS", size: DEFAULT_COLUMN_SIZE },
+    { name: "UPDATE", size: DEFAULT_COLUMN_SIZE * 0.2 }
 ]
 
 const HEADERS = [
@@ -61,7 +62,7 @@ function RenderHeader({ headers, expand, type }) {
                     return (
                         <th
                             key={index}
-                            style={{ width: `${headers[index].size}%`, opacity: (type == 1 && !expand && index !== 0 && index !== 1 && index !== 4) ? 0 : 1 }}
+                            style={{ width: item.size }}
 
                         >
                             {item.name}
@@ -73,8 +74,8 @@ function RenderHeader({ headers, expand, type }) {
     )
 }
 
-function RenderBody({ dataSource, onEdit, type, onExpand, onAddFacility }) {
-    console.log("sss", dataSource)
+function RenderBody({ dataSource, onEdit, type, onExpand, onAddFacility, pro }) {
+    console.log("sss", pro)
     switch (type) {
         case ALL_TYPE_CASE.APPT:
             return (
@@ -121,8 +122,8 @@ function RenderBody({ dataSource, onEdit, type, onExpand, onAddFacility }) {
                                     onEdit={(item) => onEdit(item)}
                                     item={item}
                                     index={index}
-                                    onExpand={(expand) => onExpand(expand)}
-                                    onAddFacility={(item) => onAddFacility(item)}
+                                    onComp={(id) => pro.changeStatus(id, 3)}
+                                    onRej={(id) => pro.changeStatus(id, 4)}
                                 />
                             </React.Fragment>
                         )
@@ -168,6 +169,7 @@ class Table extends React.Component<TableProps> {
                             type={type}
                         />
                         <RenderBody
+                            pro={this.props}
                             type={type}
                             dataSource={travel.list}
                             onEdit={(item) => this.props.onEdit(item)}

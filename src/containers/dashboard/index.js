@@ -22,15 +22,15 @@ const menuLinks = [
     },
     {
         id: 1,
-        text: "Customers"
+        text: "Hotel"
     },
     {
         id: 2,
-        text: "Technicians"
+        text: "City"
     },
     {
         id: 3,
-        text: "System Settings"
+        text: "Tranportation"
     },
 ]
 
